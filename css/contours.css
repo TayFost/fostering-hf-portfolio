@@ -1,0 +1,16 @@
+/* Contour ground for every project (case-study) page, Taylor 2026-11-08. One shared file, so a page built from the
+   project-page shell (observer.html) gets the contours by keeping this link. Same layer as Grid View and Connect:
+   slate masked by img/bg_topo.svg, 15% dark / 14% light, fixed behind the page. A calm band follows the 640 px reading
+   column, so the lines thin to about a fifth behind body text and stay full in the margins (about half everywhere on phones). Off in forced colours and
+   high-contrast mode. Needs no markup: the layer is body::before. */
+html body{ background:transparent; }
+body::before{ content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; background:var(--slate); opacity:.15;
+  --calm:linear-gradient(to right, #000 0, #000 calc(50% - 400px), rgba(0,0,0,.22) calc(50% - 330px), rgba(0,0,0,.22) calc(50% + 330px), #000 calc(50% + 400px), #000 100%);
+  -webkit-mask-image:url(../img/bg_topo.svg),var(--calm); mask-image:url(../img/bg_topo.svg),var(--calm);
+  -webkit-mask-size:cover,100% 100%; mask-size:cover,100% 100%; -webkit-mask-position:center; mask-position:center;
+  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-composite:source-in; mask-composite:intersect; }
+html[data-theme="light"] body::before{ opacity:.14; }
+/* phones: the column fills the screen, so a fifth would hide the lines; they thin to about half instead */
+@media (max-width:760px){ body::before{ --calm:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)); } }
+@media (forced-colors:active){ body::before{ display:none; } }
+@media (prefers-contrast:more){ body::before{ display:none; } }

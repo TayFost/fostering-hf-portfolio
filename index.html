@@ -1,0 +1,1310 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}#home .lbl .eb2::before{ content:" \00B7  "; }
+@media (max-width:759px){ #home .lbl .eb2{ display:block; margin-top:4px; } #home .lbl .eb2::before{ content:none; } }
+</style><link rel="stylesheet" href="css/cardmore.css">
+</head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="stylesheet" href="css/homemark.css">   <!-- "Home" label that slides out from behind the corner mark (Taylor 2026-11-09) -->
+<link rel="stylesheet" href="css/toggle.css">   <!-- light and dark switch drawn as a toggle (Taylor 2026-11-09) -->
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="stylesheet" href="css/header.css">   <!-- header links on narrow phones (Taylor 2026-11-10) -->
+<link rel="stylesheet" href="css/light.css">   <!-- light mode accent: terracotta coral in place of amber (Taylor 2026-11-09); keep last in the head -->
+</head><body>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>(function(){ var t=null, m; try{ t=new URLSearchParams(location.search).get("theme"); }catch(e){} if(t!=="light" && t!=="dark"){ t=null; m=/(?:^|;)theme=(light|dark)(?:;|$)/.exec(window.name||""); if(m){ t=m[1]; } } if(t!=="light" && t!=="dark"){ t=null; try{ t=localStorage.getItem("theme"); }catch(e){} } else { try{ localStorage.setItem("theme",t); }catch(e){} } if(t==="light"){ document.documentElement.setAttribute("data-theme","light"); } })();</script>
+<title>Taylor Foster · Human Factors</title>
+<link rel="preload" href="fonts/Medium.otf" as="font" type="font/otf" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&display=swap">
+<style>
+/* Name wordmark face (HVNTER Medium). The untouched OTF is a deployment asset, not part of the public repository (see claude/medium_font_delivery.md). block: no fallback flash, the wordmark is much wider than the fallback. */
+@font-face{ font-family:'HVMedium'; src:url('fonts/Medium.otf') format('opentype'); font-weight:400; font-style:normal; font-display:block; }
+
+:root{
+  --bg:#0B0E14; --raised:#11151D; --hair:#262D3D; --slate:#6E7A93;
+  --text:#E6E9F0; --dim:#A3ADC2; --accent:#E8A15C;
+  --ease:cubic-bezier(.65,0,.35,1);
+  --out:cubic-bezier(.22,.8,.3,1);
+  box-sizing:border-box;
+  color-scheme:dark;            /* D11: dark scrollbars and form controls */
+  scroll-padding-top:88px;      /* D9: focus never lands under the 59px fixed header */
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B0E14; --raised:#11151D; --hair:#262D3D; --slate:#6E7A93;
+    --text:#E6E9F0; --dim:#A3ADC2; --accent:#E8A15C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B0E14; --raised:#11151D; --hair:#262D3D; --slate:#6E7A93;
+  --text:#E6E9F0; --dim:#A3ADC2; --accent:#E8A15C;
+}
+/* light mode (Taylor 2026-11-03): the amber stays the same; the ground runs parchment, off-white, white down the page; text that was near-white is near-black. Chosen with the header toggle, remembered per browser. */
+:root[data-theme="light"]{
+  --bg:#FAF7F0; --raised:#FFFFFF; --hair:#DDD5C4; --slate:#5A616F;
+  --text:#111318; --dim:#3F4552; --accent:#E8A15C;
+  --icon:#A8621A;   /* amber for icons and state marks in light mode: same hue (30deg), darker, 3.8:1 on the parchment (WCAG 1.4.11 asks 3:1); glows, band and hover lines keep --accent */
+  color-scheme:light;
+}
+:root[data-theme="light"] html, html[data-theme="light"]{ background:linear-gradient(180deg, #F1E6CC 0%, #F8F4EA 45%, #FFFFFF 100%) no-repeat; background-color:#FFFFFF; min-height:100%; }
+html[data-theme="light"] body{ background:transparent; }
+html[data-theme="light"] body.inner .top, html[data-theme="light"] body.compact.scrolled .top{ background:color-mix(in srgb, var(--bg) 90%, transparent); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+@media (prefers-contrast: more){ html:root:root[data-theme="light"]{ --hair:#8C8472; --slate:#4F5563; --dim:#2C313B; } }
+@media (prefers-reduced-transparency: reduce){ html[data-theme="light"] body.inner .top{ background:var(--bg); -webkit-backdrop-filter:none; backdrop-filter:none; } }
+html{ background:var(--bg); scrollbar-gutter:stable; }
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--bg); color:var(--text); font-family:'IBM Plex Sans',system-ui,sans-serif; overflow:hidden; height:100vh; }
+body.inner{ overflow-x:hidden; overflow-y:auto; height:auto; }
+a{ color:inherit; }
+a:focus-visible{ outline:2px solid var(--slate); outline-offset:3px; }
+.lbl{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; line-height:1.5; color:var(--dim); margin:0; }
+.disp{ font-family:'Michroma','IBM Plex Sans',system-ui,sans-serif; font-weight:400; letter-spacing:0; margin:0; }
+
+.top{ position:fixed; top:0; left:0; right:0; z-index:30; display:flex; justify-content:space-between; align-items:center; padding:max(20px,env(safe-area-inset-top,0px)) clamp(16px,4.5vw,64px) 16px; background:transparent; border-bottom:1px solid transparent; transition:background .3s, border-color .3s; }
+body.inner .top{ background:var(--bg); border-bottom-color:var(--hair); }
+/* header home mark and links (Taylor 2026-10-17): no corner name until the logo exists. Lucent-style wash on hover and keyboard focus, mirrored from the dock: anchored at the screen edge (top), clear toward the content, a bright lip at the top edge. The item you leave fades out once over 1.2 s; the arriving item rises in 0.22 s. */
+.top .home{ display:inline-flex; align-items:center; justify-content:center; align-self:stretch; width:44px; min-height:44px; margin:-11px 0 -11px calc(-13px - var(--home-shift,0px)); color:var(--dim); text-decoration:none; }
+.top .home svg{ display:block; }
+.top .theme{ display:inline-flex; align-items:center; justify-content:center; align-self:stretch; width:44px; min-height:44px; margin:-11px 0; padding:0; border:0; background:none; color:var(--dim); cursor:pointer; font:inherit; }
+.top .theme svg{ display:block; }
+.top .theme .moon{ display:none; }
+html[data-theme="light"] .top .theme .sun{ display:none; }
+html[data-theme="light"] .top .theme .moon{ display:block; }
+.top .links{ margin-right:-14px; align-self:stretch; display:flex; align-items:center; }
+.top .links a{ position:relative; display:inline-flex; align-items:center; align-self:stretch; min-height:44px; margin:-11px 0 !important; color:var(--dim); text-decoration:none; font-size:15px; padding:0 14px; margin-left:0; }
+.top .home, .top .theme, .top .links a{ position:relative; }
+.top .home::after, .top .theme::after, .top .links a::after{ content:''; position:absolute; left:0; right:0; top:calc(-1 * max(20px,env(safe-area-inset-top,0px))); bottom:-16px; pointer-events:none; z-index:-1;
+  background:linear-gradient(to top, rgba(232,161,92,0) 0%, rgba(232,161,92,.10) 42%, rgba(232,161,92,.30) calc(100% - 4px), rgba(255,224,188,.82) calc(100% - 1px));
+  opacity:0; transition:opacity 1.2s cubic-bezier(.2,.6,.2,1); }
+.top .home:focus-visible, .top .theme:focus-visible, .top .links a:focus-visible{ color:var(--text); outline:2px solid var(--slate); outline-offset:-4px; }
+.top .home:focus-visible::after, .top .theme:focus-visible::after, .top .links a:focus-visible::after{ opacity:1; transition:opacity .22s ease-out; }
+@media (hover:hover){ .top .home:hover, .top .theme:hover, .top .links a:hover{ color:var(--text); } .top .home:hover::after, .top .theme:hover::after, .top .links a:hover::after{ opacity:1; transition:opacity .22s ease-out; } }
+@media (min-width:761px){ .top{ --home-shift:min(24px, calc(clamp(16px,4.5vw,64px) - 16px)); } }   /* desktop: the home mark sits up to 24 px left of the page gutter, never closer than 16 px to the screen edge (Taylor 2026-10-17); phones keep the gutter */
+@media (prefers-reduced-motion: reduce){ .top .home::after, .top .theme::after, .top .links a::after{ transition:none !important; } }
+@media (forced-colors: active){ .top .home::after, .top .theme::after, .top .links a::after{ display:none; } }
+/* slanted amber band under the header (Taylor 2026-11-02; short bars doubled in length on desktop the same day, 12/28/52/88 px; phones and 400% zoom keep 6/10/18/30 px so the burst does not crowd narrow views (W3C COGA 'Help users focus'; reflow note that 320 CSS px is desktop at 400% zoom)): anchored to the home mark as part of the identity, short bars at the left that dim toward a long run fading out to the right; the brightest bar stays below the chip glow (--accent), every edge cut at the same slant */
+.top .band{ position:absolute; left:0; right:0; bottom:-8px; height:6px; display:flex; gap:5px;  overflow:hidden; pointer-events:none;
+  --b1:#3E2610; --b2:#6A4216; --b3:#8E5A1E; --b4:#B0742E; --b5:#C88A44; }
+.top .band i{ display:block; height:100%; transform:skewX(-40deg); }
+.top .band i:nth-child(1){ flex:0 0 calc(clamp(16px,4.5vw,64px) - var(--home-shift,0px) + 3px); margin-left:-8px; background:var(--b3); }   /* edge bar: runs off the left edge of the screen (Taylor 2026-11-02) */
+.top .band i:nth-child(2){ flex:0 0 12px; background:var(--b5); opacity:.6; }
+.top .band i:nth-child(3){ flex:0 0 28px; background:var(--b5); }
+.top .band i:nth-child(4){ flex:0 0 52px; background:var(--b4); }
+.top .band i:nth-child(5){ flex:0 0 88px; background:var(--b3); }
+.top .band i:nth-child(6){ flex:1 1 auto; margin-right:-8px; background:linear-gradient(90deg, var(--b2), var(--b1) 70%, transparent); }
+@media (max-width:760px){ .top .band{ bottom:-7px; height:5px; gap:4px; } .top .band i:nth-child(1){ flex-basis:calc(clamp(16px,4.5vw,64px) + 4px); } .top .band i:nth-child(2){ flex-basis:6px; } .top .band i:nth-child(3){ flex-basis:10px; } .top .band i:nth-child(4){ flex-basis:18px; } .top .band i:nth-child(5){ flex-basis:30px; } }
+@media (forced-colors: active){ .top .band{ display:none; } }
+
+#home{ position:fixed; inset:0; z-index:5; display:flex; flex-direction:column; align-items:center; text-align:center; padding:clamp(96px,15vh,140px) 24px 0; gap:18px; transition:opacity .3s var(--out); pointer-events:none; }
+#home > *{ pointer-events:auto; }
+#home h1{ font-size:clamp(26px,4.2vw,56px); line-height:1.15; }
+#home .role{ margin:0; max-width:880px; font-size:clamp(17px,1.6vw,22px); line-height:1.5; text-wrap:balance; }
+#home .ctas{ display:flex; gap:28px; }
+#home .ctas a{ font-size:17px; text-decoration:none; border-bottom:1px solid var(--slate); padding-bottom:2px; }
+#home .ctas a:hover{ border-bottom-color:var(--accent); }
+/* scroll cue: on home the words say "Scroll to explore" and the bar fills with scroll intent (the page commits at the threshold). The words are a signifier for the scroll gesture, and they stay on home for the whole visit (Taylor 2026-11-06: they persist after the first scroll); they never show inside the patterns. The bar stays on every view and there tracks scroll progress. Phone layout is held for Version 28. */
+.cue{ position:fixed; z-index:28; right:clamp(16px,4.5vw,64px); bottom:22px; display:flex; align-items:center; gap:12px; font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); pointer-events:none !important; transition:opacity .25s var(--out); }
+.cue.yield{ opacity:0; }   /* at the end of the scroll the contact links take this corner (v29), so the bar steps aside */
+.cue-bar{ position:relative; width:56px; height:2px; background:var(--hair); overflow:hidden; transition:height .15s var(--out); }
+.cue.act .cue-bar{ height:4px; }
+.cue-bar i{ position:absolute; inset:0; background:var(--accent); transform-origin:0 50%; transform:scaleX(0); }
+.cue-txt{ transition:opacity .4s var(--out), visibility 0s; }
+body.inner .cue-txt{ opacity:0; visibility:hidden; transition:opacity .4s var(--out), visibility 0s .4s; }
+@media (max-width:759px){ .cue{ display:none; } }
+body.inner #home{ opacity:0; visibility:hidden; transition:opacity .3s var(--out), visibility 0s .3s; }
+body.inner #home > *{ pointer-events:none; }
+
+#globeSvg{ position:fixed; left:0; top:0; width:900px; height:900px; z-index:24; pointer-events:none; overflow:visible; transform-origin:450px 450px; will-change:transform; }
+#scene{ position:fixed; inset:0; width:100%; height:100%; z-index:25; pointer-events:none; overflow:hidden; }
+#scene .node{ pointer-events:all; cursor:pointer; }
+#scene .node:focus-visible{ outline:none; }
+/* amber glow lives on the chip only (Taylor 2026-10-17: "Only the chip"); the node carries no glow. The chip you leave fades out once over 1.2 s, the arriving chip rises in 0.22 s. No loop. */
+#scene .node:focus-visible .ring{ stroke:var(--slate); }
+#sight{ opacity:0; transition:transform .35s var(--out), opacity .18s var(--out); }
+#sightLayer{ position:fixed; inset:0; width:100%; height:100%; z-index:40; pointer-events:none; overflow:hidden; }
+#leaders line{ stroke:var(--slate); stroke-width:1.25; opacity:0; transition:opacity .22s var(--out); }
+#leaders line.show{ opacity:.85; }
+
+.chip{ position:fixed; z-index:26; display:flex; align-items:baseline; gap:10px; padding:11px 18px; text-decoration:none; opacity:0; pointer-events:none; transition:opacity .22s var(--out); white-space:nowrap; }
+.chip.show{ opacity:1; pointer-events:auto; }
+.chip .bd{ position:absolute; left:0; top:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+.chip .bd polygon{ fill:var(--bg); stroke:var(--slate); stroke-width:1.5; transition:stroke .2s; }
+.chip.sel .bd polygon{ stroke:var(--icon,var(--accent)); }
+.chip .bd{ filter:drop-shadow(0 0 0 rgba(232,161,92,0)); transition:filter 1.2s cubic-bezier(.2,.6,.2,1); }
+.chip.cur .bd{ filter:drop-shadow(0 0 8px rgba(232,161,92,.30)); transition:filter .22s ease-out; }
+@media (forced-colors:active){ .chip .bd, .chip.cur .bd{ filter:none; } }
+.chip.compact{ white-space:normal; width:166px; padding:9px 14px; }
+.chip.compact .nm{ font-size:15px; line-height:1.25; }
+.chip .idx, .chip .nm{ position:relative; }
+.chip .idx{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:12px; color:var(--dim); }
+.chip .nm{ font-size:17px; font-weight:500; }
+
+#pages{ position:relative; display:block; opacity:0; visibility:hidden; z-index:1; transition:opacity .25s var(--out), visibility 0s .25s; }
+body.inner #pages{ opacity:1; visibility:visible; transition:opacity .35s var(--out); }
+.page{ min-height:100vh; display:flex; align-items:center; padding:120px clamp(20px,4.5vw,64px) 120px max(var(--gutter,clamp(24px,22vw,340px)), calc((100% - 640px) / 2)); }   /* Taylor 2026-10-17: the reading column centres in the window when there is room, clear of the corner globe; the gutter is the floor */
+.page-in{ width:100%; max-width:760px; will-change:opacity,transform; }
+.pchip .n{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:12px; letter-spacing:.08em; color:var(--dim); }
+.pchip{ display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border:1px solid var(--hair); border-radius:4px; background:var(--raised); font-size:15px; font-weight:500; }
+.page h2{ font-size:clamp(20px,3.2vw,34px); line-height:1.25; margin-top:24px; }
+.page .alt{ display:flex; flex-wrap:wrap; align-items:baseline; margin:16px 0 0; padding-top:12px; border-top:1px solid var(--hair); max-width:640px; }
+.page .alt .altx{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:14px; line-height:1.5; color:var(--text); }
+.page .gloss{ margin:16px 0 0; font-size:clamp(17px,1.6vw,20px); line-height:1.55; color:var(--dim); max-width:640px; text-wrap:pretty; }
+.cards{ margin-top:32px; display:flex; flex-direction:column; gap:16px; max-width:640px; }
+.card{ display:block; padding:20px; border:1px solid var(--hair); border-radius:4px; background:var(--raised); text-decoration:none; }
+.card:hover{ border-color:var(--slate); }
+.card .t{ font-size:18px; font-weight:500; margin:6px 0 0; }
+.card .s{ font-size:15px; color:var(--dim); margin:6px 0 0; line-height:1.5; }
+.card.ph{ border-style:dashed; color:var(--dim); }
+.page h2, .card .t{ text-wrap:balance; }
+.card .s{ text-wrap:pretty; }
+.card.multi:hover{ border-color:var(--hair); }
+.card .links{ display:flex; flex-wrap:wrap; gap:10px 24px; margin:16px 0 0; }
+.card .links a, .card .links .soon{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; line-height:1.5; padding-bottom:2px; }
+.card .links a{ color:var(--text); text-decoration:none; border-bottom:1px solid var(--slate); }
+.card .links a:hover{ border-bottom-color:var(--accent); }
+.card .links .soon{ color:var(--slate); border-bottom:1px dashed var(--hair); }
+/* honor cards (Taylor 2026-10-18): the issuer and association lines sit between the title and the write-up. .static is a card with no link, so it takes no hover border. */
+.card .m{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:12px; letter-spacing:.04em; line-height:1.5; color:var(--dim); margin:8px 0 0; }
+.card .m + .m{ margin-top:2px; }
+.card .m .nw{ white-space:nowrap; }   /* keeps the event name or the date with its separator when a line wraps */
+.card .m + .s{ margin-top:12px; }
+.card.static:hover{ border-color:var(--hair); }
+/* one image on a card, between the title and the write-up (Taylor 2026-10-27: the payload operator screen from slide 4, taken from Figma 69:15) */
+.card .hero{ display:block; width:100%; height:auto; margin:14px 0 0; border:1px solid var(--hair); border-radius:2px; background:var(--bg); }
+.card .hero + .s{ margin-top:14px; }
+
+/* contact links (Taylor 2026-10-18): email, LinkedIn, GitHub, symbols only, bottom right, after the last pattern page whatever order is shown. A 59 px band at the end of the document that mirrors the header; the Lucent wash is anchored at the bottom edge, as in the dock. Below 760 px the dock owns the bottom edge, so the band sits above it and takes no wash. */
+.contact{ position:relative; isolation:isolate; z-index:1; display:flex; justify-content:flex-end; align-items:center; height:59px; padding:0 clamp(16px,4.5vw,64px); opacity:0; visibility:hidden; transition:opacity .25s var(--out), visibility 0s .25s; }
+body.inner .contact{ opacity:1; visibility:visible; transition:opacity .35s var(--out); }
+.contact .row{ display:flex; align-items:center; align-self:stretch; margin-right:-11px; }   /* the last glyph, not its 44 px target, meets the page gutter */
+.contact a{ position:relative; display:inline-flex; align-items:center; justify-content:center; align-self:stretch; width:44px; color:var(--dim); text-decoration:none; }
+.contact a svg{ display:block; }
+.contact a::after{ content:''; position:absolute; left:0; right:0; top:0; bottom:0; pointer-events:none; z-index:-1;
+  background:linear-gradient(to bottom, rgba(232,161,92,0) 0%, rgba(232,161,92,.10) 42%, rgba(232,161,92,.30) calc(100% - 4px), rgba(255,224,188,.82) calc(100% - 1px));
+  opacity:0; transition:opacity 1.2s cubic-bezier(.2,.6,.2,1); }
+.contact a:focus-visible{ color:var(--text); outline:2px solid var(--slate); outline-offset:-4px; }
+.contact a:focus-visible::after{ opacity:1; transition:opacity .22s ease-out; }
+@media (hover:hover){ .contact a:hover{ color:var(--text); } .contact a:hover::after{ opacity:1; transition:opacity .22s ease-out; } }
+@media (forced-colors: active){ .contact a::after{ display:none; } }
+
+@media (max-width:760px){
+  .top .links a{ padding:0 10px; }   /* phones keep both header links, Case Studies and Connect (Taylor 2026-11-08, T-2026-10-14-189) */
+  .page{ padding-left:20px; padding-right:20px; padding-bottom:200px; }
+}
+@media (max-width:759px){
+  .page{ padding-bottom:calc(120px + 52px + env(safe-area-inset-bottom,0px)); }   /* clears the dock; the dock itself exists only at 759 and below */
+  .page:last-child{ padding-bottom:48px; }   /* the contact band after the last page carries the dock clearance */
+  .contact{ height:calc(59px + 52px + env(safe-area-inset-bottom,0px)); padding-bottom:calc(52px + env(safe-area-inset-bottom,0px)); }
+  .contact a::after{ display:none; }
+}
+@media (prefers-reduced-motion: reduce){
+  #home, #sight, .chip, #leaders line, #pages, .cue, .cue-bar, .cue-bar i, .cue-txt, .chip .bd, .contact, .contact a::after{ transition:none !important; }
+}
+@media (prefers-contrast: more){
+  html:root:root{ --hair:#5E6985; --slate:#97A3BD; --dim:#C9D0DF; }
+  .chip .bd polygon{ stroke-width:2; }
+}
+
+/* name wordmark: Medium throughout. D (one line) at >=760px, C2 (stacked) at <=759px. One h1, CSS-only switch. */
+#home h1.name{ font-family:'HVMedium','IBM Plex Sans',sans-serif; font-weight:400; font-size:clamp(26px,3.6vw,48px); line-height:1.1; letter-spacing:0; }
+#home h1.name .fn, #home h1.name .sn{ font-weight:400; }
+@media (max-width:759px){
+  #home h1.name{ font-size:inherit; line-height:1; display:flex; flex-direction:column; align-items:center; gap:6px; }
+  #home h1.name .fn{ display:block; font-size:clamp(16px,2vw,24px); letter-spacing:.06em; }
+  #home h1.name .sn{ display:block; font-size:clamp(40px,6.2vw,84px); line-height:1; }
+}
+
+/* phone pattern pages: the globe, nodes and chip leave and a bottom dock carries the five nodes. Below 760 px only; tablets and desktop keep the overlay. */
+#dock{ display:none; }
+@media (max-width:759px){
+  #dock{ display:flex; position:fixed; left:0; right:0; bottom:0; z-index:29; height:calc(52px + env(safe-area-inset-bottom,0px)); padding-bottom:env(safe-area-inset-bottom,0px); background:linear-gradient(to bottom, color-mix(in srgb, var(--bg) 38%, transparent) 0%, color-mix(in srgb, var(--bg) 62%, transparent) 40%, color-mix(in srgb, var(--bg) 94%, transparent) 100%); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); border-top:1px solid transparent; transform:translateY(100%); visibility:hidden; transition:transform .35s var(--out), visibility 0s .35s; }
+  body.inner #dock{ transform:none; visibility:visible; transition:transform .35s var(--out); }
+  #dock a{ position:relative; overflow:visible; flex:1 1 0; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; text-decoration:none; color:var(--dim); -webkit-tap-highlight-color:transparent; }
+  #dock a svg{ width:18px; height:18px; display:block; overflow:visible; }   /* Lucide marks, 24 grid, drawn at 18 px */
+  #dock a svg *{ fill:none; stroke:var(--icon,var(--accent)); stroke-width:1.5; }
+  #dock a[aria-current="true"]{ color:var(--text); }
+  /* Lucent-style wash under the current item (Taylor 2026-10-17): amber, clear at the top, 30% near the base, a bright lip at the base edge. The item you leave fades out once over 1.2 s (the afterglow); the arriving item rises in 0.22 s. */
+  #dock a::after{ content:''; position:absolute; left:0; right:0; top:0; bottom:calc(-1 * env(safe-area-inset-bottom,0px)); pointer-events:none; z-index:-1;
+    background:linear-gradient(to bottom, rgba(232,161,92,0) 0%, rgba(232,161,92,.10) 42%, rgba(232,161,92,.30) calc(100% - 4px), rgba(255,224,188,.82) calc(100% - 1px));
+    opacity:0; transition:opacity 1.2s cubic-bezier(.2,.6,.2,1); }
+  #dock a[aria-current="true"]::after{ opacity:1; transition:opacity .22s ease-out; }
+  #dock a:focus-visible{ outline:2px solid var(--slate); outline-offset:-4px; }
+  body.inner #scene, body.inner .chip{ visibility:hidden; transition:visibility 0s .7s; }
+}
+@media (prefers-reduced-motion: reduce){ #dock{ transition:none !important; } #dock a::after{ transition:none !important; } }
+@media (prefers-contrast: more){ #dock{ background:var(--bg); -webkit-backdrop-filter:none; backdrop-filter:none; border-top-color:var(--slate); } #dock a svg *{ stroke-width:2; } }
+@media (prefers-reduced-transparency: reduce){ #dock{ background:var(--bg); -webkit-backdrop-filter:none; backdrop-filter:none; } }
+@media (forced-colors: active){ #dock{ background:Canvas; -webkit-backdrop-filter:none; backdrop-filter:none; } #dock a::after{ display:none; } }
+
+/* phone pattern pages: a cropped fragment of the home globe sits in the page header. Static, no hit targets, outside the reading column. */
+.gfrag{ display:none; }
+#gdefs{ position:absolute; width:0; height:0; overflow:hidden; }
+#gdefs *{ vector-effect:non-scaling-stroke; }
+@media (max-width:759px){
+  .page-in{ position:relative; }
+  .gfrag{ display:block; position:absolute; top:-6px; right:-20px; width:170px; height:64px; pointer-events:none; -webkit-mask-image:linear-gradient(to left,#000 55%,transparent); mask-image:linear-gradient(to left,#000 55%,transparent); }
+}
+@media (max-width:340px){
+  .gfrag{ width:104px; height:44px; top:0; }
+}
+
+#stage{ display:contents; }
+/* compact-height phones: when the anchored home cannot keep 16px between the CTA row and the first chip even after a small globe shrink, the home becomes a normal scrolling page.
+   The scene elements swap from fixed to absolute so they move with the document; layout height H comes from metrics(). Swipe-to-enter is off in this mode (tap a chip to enter). */
+body.compact{ overflow-x:hidden; overflow-y:auto; height:var(--H); }
+body.compact #home, body.compact #globeSvg, body.compact .chip, body.compact #scene, body.compact #sightLayer{ position:absolute; }
+body.compact #stage{ display:block; position:absolute; left:0; top:0; width:100%; height:var(--H); overflow:hidden; pointer-events:none; }   /* clips the 900px globe box so it adds no scroll width or height */
+body.compact #pages, body.compact .contact{ display:none; }   /* hidden pages (and the contact band after them) must not add scroll height to the home; enterInner drops the compact class before it measures them */
+body.compact.scrolled .top{ background:var(--bg); border-bottom-color:var(--hair); }
+
+/* Commit sweep (Taylor 2026-11-04, Version 109): when a visitor commits to a pattern (click or Enter on a chip or a globe
+   node), two bars at the band's skew cross that chip behind its text in 1520 ms, as it arrives in its corner place on the pattern page.
+   Hover and focus keep only the amber glow (the Version 108 hover sweep is withdrawn). One gradient spans both bars: amber on the trailing edge, sea-glass leading,
+   so amber is what the sweep leaves. No sweep under reduced motion, forced colors, or when the chip is not on screen
+   (phones). Palette B and the shorter timings were compared and archived. */
+:root{ --sw0:#E8A15C; --sw1:#EBD3A0; --sw2:#EEE9E1; --sw3:#86C7B5; --sw-o:.5; }
+:root[data-theme="light"]{ --sw0:#B86E26; --sw1:#CFA963; --sw2:#E6E0EA; --sw3:#2F8F7C; --sw-o:.42; }
+@media print{ .chip .sweep{ display:none; } }
+
+/* theme preview slot (mock): reserved under the CTA so the layout makes room once and nothing moves on selection */
+#home .pv-slot{ margin:0; min-height:calc(2 * 1.4em); max-width:min(880px, calc(100vw - 48px)); font-size:14px; line-height:1.4; color:var(--dim); text-align:center; text-wrap:balance; pointer-events:none; }
+#home .pv-slot .pv-i{ display:inline-block; vertical-align:-2px; margin-right:6px; color:var(--icon,var(--accent)); }   /* pattern icon in place of the index number (Taylor 2026-11-06) */
+#home .pv-slot .pv-i svg{ display:block; width:14px; height:14px; }
+#home .pv-slot .pv-i svg *{ stroke:currentColor; }
+#home .pv-slot .pv-s{ color:var(--slate); }
+/* Grid View header link: Lucide layout-grid mark before the label */
+.top .links a.gridv svg{ margin-right:7px; flex:none; }
+#home .pv-slot .pv-t{ white-space:nowrap; }   /* lines break between titles, never inside one */
+@media (max-width:759px){ #home .pv-slot{ display:none; } }
+.pv-sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+body:not(.inner) #themesH1{ display:none; }
+
+/* two-stage home (mock, Taylor 2026-11-05) */
+body.intro #globeSvg, body.intro #scene, body.intro #chips .chip, body.intro #sightLayer, body.intro .cue{ opacity:0 !important; visibility:hidden !important; }
+body.revealing #globeSvg, body.revealing #scene, body.revealing #chips .chip.show{ animation:navIn .6s cubic-bezier(.2,.6,.2,1) both; }
+@keyframes navIn{ from{ opacity:0; } to{ opacity:1; } }
+#introCue{ position:fixed; left:50%; transform:translateX(-50%); z-index:30; display:none; flex-direction:column; align-items:center; gap:14px;
+  background:none; border:0; padding:12px 18px; cursor:pointer; color:var(--text); font:inherit; }
+body.intro #introCue{ display:flex; }
+#introCue .ic-t{ white-space:nowrap; font-family:'HVMedium','IBM Plex Sans',sans-serif; font-size:15px; letter-spacing:.06em; line-height:1; color:var(--dim); }
+#introCue svg{ width:30px; height:30px; display:block; color:var(--icon,var(--accent)); animation:icBob 1.8s ease-in-out infinite; }
+@keyframes icBob{ 0%,100%{ transform:translateY(0); opacity:.75; } 50%{ transform:translateY(6px); opacity:1; } }
+#introCue:focus-visible{ outline:2px solid var(--slate); outline-offset:4px; }
+@media (prefers-reduced-motion: reduce){ #introCue svg{ animation:none; } body.revealing #globeSvg, body.revealing #scene, body.revealing #chips .chip.show{ animation:none; } }
+@media (forced-colors: active){ #introCue svg{ color:ButtonText; animation:none; } }
+
+/* contour ground on the home view (mock, Taylor 2026-11-05), from Version 104: one slate layer, the SVG is an alpha mask, 15% dark / 14% light,
+   25% calm zone behind the headline, and the globe exclusion zone (alpha 0 inside the silhouette, 56 px feather). --gk scales the
+   exclusion zone: 0 during the intro (no globe, full contours), 1 once the navigator is revealed, animated over the same 0.6 s. */
+@property --gk{ syntax:'<number>'; inherits:false; initial-value:1; }
+html body{ background:transparent; }
+#bgtex{ position:fixed; inset:0; z-index:-1; pointer-events:none; background:var(--slate); opacity:.15; --gk:1; transition:--gk .6s cubic-bezier(.2,.6,.2,1), opacity .3s;
+  --tex-hole:radial-gradient(ellipse 46% 40% at 50% 46%, rgba(0,0,0,.25) 0, #000 100%); --gx:50%; --gy:100%; --gr:0px;
+  --tex-glob:radial-gradient(circle at var(--gx) var(--gy), rgba(0,0,0,calc(1 - var(--gk))) var(--gr), rgba(0,0,0,calc(1 - .8 * var(--gk))) calc(var(--gr) + 17px), rgba(0,0,0,calc(1 - .35 * var(--gk))) calc(var(--gr) + 36px), #000 calc(var(--gr) + 56px));
+  -webkit-mask-image:url(img/bg_topo.svg),var(--tex-hole),var(--tex-glob); mask-image:url(img/bg_topo.svg),var(--tex-hole),var(--tex-glob);
+  -webkit-mask-size:cover,100% 100%,100% 100%; mask-size:cover,100% 100%,100% 100%; -webkit-mask-position:center; mask-position:center; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+  -webkit-mask-composite:source-in; mask-composite:intersect; }
+html[data-theme="light"] #bgtex{ opacity:.14; }
+body.intro #bgtex{ --gk:0; }
+body.inner #bgtex{ opacity:0; }
+@media (prefers-reduced-motion: reduce){ #bgtex{ transition:none; } }
+@media (forced-colors:active){ #bgtex{ display:none; } }
+@media (prefers-contrast:more){ #bgtex{ display:none; } }
+
+/* Grid View (Taylor 2026-11-05; moved 2026-11-06): the other way to browse. On the home view it sits in the lower right corner above
+   the scroll cue. When the visitor scrolls into the patterns it travels up the right edge and docks under the header band, where it stays
+   while browsing the patterns, so the view can be switched at any time. grid.html carries "Return to List View" in the same docked spot.
+   The vertical position is set in script (top, animated); hidden below 760 px like the cue. */
+#gridCue{ position:fixed; z-index:29; right:clamp(16px,4.5vw,64px); top:calc(100vh - 92px); bottom:auto; display:none; align-items:center; gap:8px; min-height:36px; padding:0 10px; margin-right:-10px;
+  font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); text-decoration:none;
+  border:1px solid transparent; border-radius:2px; transition:top .6s cubic-bezier(.2,.6,.2,1), background-color .3s, border-color .3s; }
+body.inner #gridCue{ background:var(--bg); border-color:var(--hair); }   /* cards scroll under it inside the patterns */
+#gridCue svg{ width:15px; height:15px; flex:none; }
+#gridCue:hover, #gridCue:focus-visible{ color:var(--text); }
+#gridCue:focus-visible{ outline:2px solid var(--slate); outline-offset:3px; }
+body:not(.intro):not(.compact) #gridCue{ display:flex; }
+@media (prefers-reduced-motion: reduce){ #gridCue{ transition:none; } }
+/* Projects placement (Taylor 2026-11-10, critique findings 2 and 3): desktop home carries it in the hero line under the role (#projLine);
+   the corner link stays only inside the patterns, docked under the header. Phones show #gridCue as a bottom-centre bar on the home and
+   pattern pages, above the dock inside the patterns. The home header has no Projects link at any width. */
+body:not(.inner) #gridCue{ display:none !important; }
+#gridCue .ar{ display:none; }
+#home .proj-line{ position:relative; display:flex; justify-content:center; align-items:stretch; margin:-2px 0 -6px; border-bottom:1px solid var(--hair); }
+#home .proj-line .vw{ position:relative; isolation:isolate; display:inline-flex; align-items:center; gap:8px; min-height:38px; padding:0 16px; font-size:15px; line-height:1; color:var(--dim); text-decoration:none; white-space:nowrap; }
+#home .proj-line .vw svg{ width:16px; height:16px; flex:none; color:var(--icon,var(--accent)); }
+#home .proj-line .vw .ar{ color:var(--dim); transition:transform .2s var(--out); }
+#home .proj-line .vw-cur{ color:var(--text); }
+/* Lucent wash, as in the dock: clear at the top, warm toward the base, a bright lip on the base line. The arriving item rises in 0.22 s; the one left fades over 1.2 s. */
+#home .proj-line .vw::after{ content:''; position:absolute; left:0; right:0; top:0; bottom:-1px; z-index:-1; pointer-events:none;
+  background:linear-gradient(to bottom, rgba(232,161,92,0) 0%, rgba(232,161,92,.10) 42%, rgba(232,161,92,.30) calc(100% - 4px), rgba(255,224,188,.82) calc(100% - 1px));
+  opacity:0; transition:opacity 1.2s cubic-bezier(.2,.6,.2,1); }
+#home .proj-line .vw-cur::after{ opacity:1; transition:opacity .22s ease-out; }
+#home .proj-line:has(a.vw:hover, a.vw:focus-visible) .vw-cur::after{ opacity:0; transition:opacity 1.2s cubic-bezier(.2,.6,.2,1); }
+#home .proj-line:has(a.vw:hover, a.vw:focus-visible) .vw-cur{ color:var(--dim); }
+#home .proj-line a.vw:hover, #home .proj-line a.vw:focus-visible{ color:var(--text); }
+#home .proj-line a.vw:hover::after, #home .proj-line a.vw:focus-visible::after{ opacity:1; transition:opacity .22s ease-out; }
+#home .proj-line a.vw:hover .ar{ transform:translateX(3px); }
+#home .proj-line a.vw:focus-visible{ outline:2px solid var(--slate); outline-offset:3px; }
+@media (prefers-reduced-motion: reduce){ #home .proj-line .vw::after, #home .proj-line .vw .ar{ transition:none !important; } }
+@media (forced-colors: active){ #home .proj-line .vw::after{ display:none; } #home .proj-line .vw-cur{ text-decoration:underline; text-underline-offset:6px; } }
+@media (max-width:759px){
+  #home .proj-line{ display:none; }
+  body:not(.inner):not(.intro) #gridCue, body.inner #gridCue{ display:flex !important; }
+  body.intro #gridCue{ display:none !important; }   /* the intro's own cue holds the bottom edge until the reveal */
+  #gridCue{ top:auto !important; right:auto; left:50%; transform:translateX(-50%); bottom:calc(16px + env(safe-area-inset-bottom,0px)); margin:0; gap:10px; min-height:46px; padding:0 22px;
+    font-family:'IBM Plex Sans',sans-serif; font-size:15px; letter-spacing:0; text-transform:none; white-space:nowrap; color:var(--text);
+    background:color-mix(in srgb, var(--bg) 92%, transparent); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); border:1.5px solid var(--slate); border-radius:0;
+    transition:bottom .35s var(--out), border-color .2s; }
+  body.inner #gridCue{ bottom:calc(52px + env(safe-area-inset-bottom,0px) + 12px); background:color-mix(in srgb, var(--bg) 92%, transparent); border-color:var(--slate); }   /* stacks above the pattern dock */
+  #gridCue svg{ width:16px; height:16px; color:var(--icon,var(--accent)); }
+  #gridCue .ar{ display:inline; color:var(--dim); }
+  .contact{ height:calc(59px + 52px + 58px + env(safe-area-inset-bottom,0px)); padding-bottom:calc(52px + 58px + env(safe-area-inset-bottom,0px)); }   /* the band clears the dock and the Projects bar above it */
+  #gridCue:hover, #gridCue:focus-visible{ border-color:var(--icon,var(--accent)); }
+}
+@media (max-width:759px) and (prefers-reduced-motion: reduce){ #gridCue{ transition:none; } }
+
+/* preview on dwell (Taylor 2026-11-06): the line shows only while the pointer rests on a chip (or a chip has keyboard focus), after
+   a 180 ms dwell, and clears the moment it leaves. It arrives with a lucent sheen: a fade from a slight blur, and one band of light
+   that passes left to right across the titles (900 ms, the commit sweep's easing). Light band is pearl in dark mode, champagne in light. */
+#home .pv-slot{ --pvl:#F6F1E8; }
+html[data-theme="light"] #home .pv-slot{ --pvl:#D7A24E; }
+#home .pv-slot.pv-in{ color:transparent; background:linear-gradient(100deg, var(--dim) 0 38%, var(--pvl) 50%, var(--dim) 62% 100%) 100% 0 / 260% 100% no-repeat;
+  -webkit-background-clip:text; background-clip:text; animation:pvIn .34s cubic-bezier(.2,.6,.2,1) both, pvSheen .9s cubic-bezier(.37,.1,.33,.95) .06s both; }
+#home .pv-slot.pv-in .pv-t, #home .pv-slot.pv-in .pv-s{ color:transparent; }   /* one band across the whole line, both rows */
+@keyframes pvIn{ from{ opacity:0; filter:blur(3px); } to{ opacity:1; filter:none; } }
+@keyframes pvSheen{ from{ background-position:100% 0; } to{ background-position:0 0; } }
+@media (prefers-reduced-motion: reduce){ #home .pv-slot.pv-in{ animation:none; color:var(--dim); background:none; } #home .pv-slot.pv-in .pv-t{ color:inherit; } #home .pv-slot.pv-in .pv-s{ color:var(--slate); } }
+@media (forced-colors: active){ #home .pv-slot.pv-in, #home .pv-slot.pv-in .pv-t, #home .pv-slot.pv-in .pv-s{ color:CanvasText; background:none; } }
+
+/* phones (2026-11-10, critique "Next pass"): dock items carry a short text label */
+@media (max-width:759px){
+  #dock{ background:linear-gradient(to bottom, color-mix(in srgb, var(--bg) 92%, transparent) 0%, color-mix(in srgb, var(--bg) 97%, transparent) 100%); }   /* more opaque now that the dock carries text labels */
+  #dock a .dl{ display:block; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-family:'IBM Plex Sans',sans-serif; font-size:12px; line-height:1.2; letter-spacing:0; color:inherit; }
+}
+
+/* type and targets (2026-11-10, critique "Next pass"): functional mono labels and links move from 11 to 12 px up to 13 px, and standalone links get a 24 px
+   target; decorative eyebrows (page and card category lines, section numbers, chip indices) stay at 12 px. 13 px rather than the critique's 14 for
+   uppercase mono links: tracked uppercase mono at 13 px is already wider than 15 px sans. */
+.cue{ font-size:13px; }
+@media (min-width:760px){ #gridCue{ font-size:13px; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <span class="band" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+  <a class="home" href="#" id="homeLink" aria-label="Home"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L14.2 9.8L22 12L14.2 14.2L12 22L9.8 14.2L2 12L9.8 9.8Z" fill="var(--icon,var(--accent))" stroke="var(--icon,var(--accent))"/></svg><span class="hm-lbl" aria-hidden="true"><span>Home</span></span></a><!-- home mark (Taylor 2026-11-09): the amber four-pointed star, the flyby mark's craft on its own, because the globe is shown on this page -->   <!-- placeholder home mark until the logo exists (Taylor 2026-10-17); swap the svg for the logo, keep id=homeLink -->
+  <!-- header (Taylor 2026-11-10): Projects, Case Studies, Connect on every page, less the page itself; no Résumé link, since the request form lives on Connect (Taylor 2026-11-10) --><div class="links"><a href="case-studies.html">Case Studies</a><a href="contact.html">Connect</a><button class="theme" type="button" id="themeToggle" aria-pressed="false" aria-label="Light mode"><span class="sw" aria-hidden="true"><span class="kn"></span></span></button></div>   <!-- theme toggle at the right end, after Contact (Taylor 2026-11-03): a preference, not navigation, so the home mark stands alone at the left -->
+</header>
+
+<!-- one main landmark for the home view and the patterns (2026-11-10, critique a11y): it wraps the hero, the globe stage and the pattern pages, so the content is in a landmark in both states -->
+<main id="main">
+<section id="home">
+  <p class="lbl"><span>BS/MS, Human Systems Engineering</span><span class="eb2">Arizona State University, 2026</span></p>   <!-- school and year added (Taylor 2026-11-10, critique finding 1); one line on desktop, two on phones -->
+  <h1 class="disp name"><span class="fn">Taylor</span> <span class="sn">Foster</span></h1>
+  <p class="role">Human factors practitioner specializing in research and design for safety, usability, and <span style="white-space:nowrap">human-automation interaction.</span></p>
+  <nav class="proj-line" aria-label="Views"><span class="vw vw-cur" aria-current="page"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18a9 9 0 0 1 18 0"/><path d="M8 18a4 9 0 0 1 8 0"/><path d="M5.2 13h13.6"/><path d="M2 18h20"/></svg>Thematic View</span><a class="vw" href="grid.html"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>Projects (Grid View)<span class="ar" aria-hidden="true">→</span></a></nav>   <!-- view switch (Taylor 2026-11-10): Thematic View is current and lit; the Lucent light moves to Projects (Grid View) on hover or focus, before the click. The project count was removed. -->
+  <p class="pv-slot" aria-hidden="true"></p>
+</section>
+<div id="bgtex" aria-hidden="true"></div>
+<script>
+/* globe exclusion zone, as in Version 104: centre and true radius of the globe, written only when they change */
+(function(){ var el=document.getElementById('bgtex'), last=null, key=''; if(!el) return;   /* the globe element comes later in the page; render() hands us its state */
+  function read(){ var g=document.getElementById('globeSvg'); if(!g) return null; var r=g.getBoundingClientRect(); if(!(r.width>0)) return null; var m=getComputedStyle(g).transform, sc=1; if(m && m!=='none'){ var v=m.match(/matrix\(([^)]+)\)/); if(v){ var a=v[1].split(',').map(parseFloat); sc=Math.sqrt(a[0]*a[0]+a[1]*a[1]); } }
+    return {cx:r.left+r.width/2, cy:r.top+r.height/2, s:sc*3}; }
+  function apply(){ if(!last) return; var x=last.cx, y=last.cy, r=100*last.s, k=Math.round(x*2)+','+Math.round(y*2)+','+Math.round(r*2);
+    if(k===key) return; key=k; el.style.setProperty('--gx',x.toFixed(1)+'px'); el.style.setProperty('--gy',y.toFixed(1)+'px'); el.style.setProperty('--gr',r.toFixed(1)+'px'); }
+  window.__texG=function(s){ last=s; apply(); };
+  last=read(); apply(); })();
+</script>
+
+<button id="introCue" type="button" aria-label="Scroll to explore: show the pattern navigation"><span class="ic-t" aria-hidden="true">Scroll to explore</span><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15"/><path d="m6 13 6 6 6-6"/></svg></button>
+<a id="gridCue" href="grid.html"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>Projects (Grid View)<span class="ar" aria-hidden="true">→</span></a>
+<div class="cue" aria-hidden="true"><span class="cue-txt">Scroll to explore</span><span class="cue-bar"><i></i></span></div>
+
+<div id="stage">
+<svg id="globeSvg" viewBox="-450 -450 900 900" aria-hidden="true" focusable="false"></svg>
+<svg id="scene" role="group" aria-label="Pattern navigation"></svg>
+<svg id="sightLayer" aria-hidden="true" focusable="false"></svg>
+<div id="chips"></div>
+</div>
+<h1 id="themesH1" class="pv-sr">Taylor Foster: project themes</h1>   <!-- the hero h1 is hidden inside the patterns; this one is read there instead -->
+<div id="pages"></div>
+</main>
+<!-- Contact links (Taylor 2026-10-18): email, LinkedIn, GitHub, in that order, symbols only. Lucide 0.544 mail, linkedin, github (ISC; the brand marks are deprecated upstream and gone in Lucide 1.0, so they are inlined here, not linked).
+     The address is the mailto target only, never page text (data guard no-email-in-prose). GITHUB URL STILL NEEDED: the href="#" below is a placeholder and the build gate rejects it. -->
+<footer class="contact" aria-label="Connect">
+  <div class="row">
+    <a href="mailto:taylor@fosteringhumanfactors.tech" aria-label="Email" title="Email"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg></a>
+    <a href="https://www.linkedin.com/in/taylor-foster-human-centered-design/" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)" title="LinkedIn"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+    <a href="https://github.com/TayFost" target="_blank" rel="noopener" aria-label="GitHub (opens in a new tab)" title="GitHub"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></a>
+  </div>
+</footer>
+<nav id="dock" aria-label="Patterns"></nav>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  /* ---- the five patterns, in registry order. The order a visitor sees is chosen at load (below), never by position here. ----
+     since = the year of the earliest dated work this page shows (cards, lines, and the items its gloss cites), from site_data.json
+     item years: safety 2022 (DHS hackathon, NSF REU), trust 2023 (ASIST), resilience 2023 (off-grid homes brief, SpaceHACK),
+     knowledge 2024 (HSE 427, Insight Enclave; ENTERPRISE moved to trust 2026-11-08), ventures 2025 (BlueMatter). Kept as data only: since no longer sets the default order (see DEFAULT_ORDER). */
+  /* Pattern marks: Lucide (https://lucide.dev), ISC License, Copyright (c) 2026 Lucide Icons and Contributors. 24-unit grid, stroke only. Keyed by pattern id, so they follow a page wherever the order puts it. The licence text ships with the repo (LICENSES/lucide-ISC.txt); where the credit is shown (README or colophon) is still open. */
+  var ICONS={
+    safety:'<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
+    trust:'<path d="m11 17 2 2a1 1 0 1 0 3-3"/> <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/> <path d="m21 3 1 11h-2"/> <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/> <path d="M3 4h8"/>',
+    knowledge:'<rect x="16" y="16" width="6" height="6" rx="1"/> <rect x="2" y="16" width="6" height="6" rx="1"/> <rect x="9" y="2" width="6" height="6" rx="1"/> <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/> <path d="M12 12V8"/>',
+    ventures:'<path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/> <path d="M9 18h6"/> <path d="M10 22h4"/>',   /* Lucide lightbulb (Taylor 2026-11-05, T-2026-10-14-66); replaces the custom shooting star drawn under T-2026-10-14-65 */
+    resilience:'<path d="M12 2v8"/> <path d="m4.93 10.93 1.41 1.41"/> <path d="M2 18h2"/> <path d="M20 18h2"/> <path d="m19.07 10.93-1.41 1.41"/> <path d="M22 22H2"/> <path d="m8 6 4-4 4 4"/> <path d="M16 18a4 4 0 0 0-8 0"/>'
+  };
+  /* Honor cards (Taylor 2026-10-18), text verbatim. Keyed by pattern id, so each follows its page wherever the order puts it. Placement follows site_data.json: devils-invent is on safety (KM-7, order 2), spacehack is on resilience (KM-6, order 1). Eyebrows reuse the data file's labels for those two items. Dates are Taylor's ("Mar 2023", "Feb 2022"); KM rule 6 says years only, so KM decides. */
+  var HONORS={
+    safety:'<div class="card multi"><p class="lbl">Project / Hackathon</p><p class="t">1st Place, Critical Infrastructure Hackathon</p><p class="m">Issued by Department of Homeland Security Centers for Excellence / <span class="nw">Devils Invent &middot; Feb 2022</span></p><img class="hero" src="img/fulcrum_title_card.webp" width="1734" height="975" loading="lazy" alt="Title slide from the Team Fulcrum presentation: Blockchain and Asymmetric Encryption in Agricultural Supply Chains, Team Fulcrum, Problem Statement 2, over a darkened photo of parked freight trucks."><p class="s">Our six-person team proposed a blockchain-based approach to agricultural supply-chain traceability. I contributed stakeholder and value-proposition analysis and helped develop the Figma demonstration. We won first place in our category. I also designed the team&#39;s logo, which appears on the demonstration&#39;s login screen.</p><p class="links"><a href="https://cina.gmu.edu/dhs-st-hackathon-addresses-emerging-threats-to-critical-infrastructure/" target="_blank" rel="noopener">DHS S&amp;T Hackathon Addresses Emerging Threats to Critical Infrastructure</a><a href="https://www.figma.com/design/fClE3fje5vzXAlP4sgOUKF/Fulcrum?node-id=0-1&amp;t=9U8GdQhiHQGV6S0P-1" target="_blank" rel="noopener">Figma demo</a></p></div>',
+    resilience:'<div class="card static"><p class="lbl">Case study / Hackathon</p><p class="t">Honorable Mention, SpaceHACK for Sustainability</p><img class="hero" src="img/spacehack_title_card.webp" width="1200" height="617" loading="lazy" alt="Title slide of the Team 25 presentation: the SpaceHACK for Sustainability logo and the title Wildfire Risk and Social Disparity at the Wildland Urban Interface above a view of North America at night with a bright sunrise on the horizon."><p class="m">Issued by Interplanetary Initiative at <span class="nw">ASU &middot; Mar 2023</span></p><p class="m">Associated with Arizona State University</p><p class="s">I joined a four-person team in the 2023 SpaceHACK for Sustainability track on wildfire risk and social disparity at the wildland-urban interface. Using Google Earth Engine, I examined satellite-derived wildfire observations to inform our exploratory maps and our proposal for selective forest thinning and biomass reuse. Our team received an Honorable Mention.</p><p class="links"><a href="spacehack.html">Project page</a><a href="https://www.spacehack4sustainability.com/our-impact" target="_blank" rel="noopener">Past and Current Program Impact</a><a href="https://news.asu.edu/20230421-hackathon-gathers-students-around-world-tackle-social-environmental-issues" target="_blank" rel="noopener">Event recap</a></p></div>'
+  };
+  function mark(id,px,stroke){ return '<svg aria-hidden="true" focusable="false" width="'+px+'" height="'+px+'" viewBox="0 0 24 24" fill="none" stroke="'+stroke+'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'+ICONS[id]+'</svg>'; }
+  var REG=[
+    {id:'knowledge', since:2024, name:'Knowledge as Infrastructure', alt:'Context for Coordination',
+     gloss:"I treat knowledge as infrastructure: the structures that let people acquire, organize, transfer, and apply expertise. I&#39;ve evaluated satellite-operator training, designed and tested a collaborative research-archive concept, and analyzed how uncrewed aircraft safety reports are classified. These projects examine how information becomes usable, interpretable, and actionable."},   /* Taylor 2026-11-05 (chat, T-2026-10-14-83, -84): the closing clause cites Insight Enclave in place of the WithKiP curriculum, which moved to Ventures; wording is the coordination-framed alternative Taylor chose (-84). Taylor 2026-11-03: Draft A approved verbatim (T-2026-10-14-58) */
+    {id:'trust', since:2023, name:'Trust as Infrastructure', alt:'Human-Autonomy Teaming',
+     gloss:"I study how authority between people and automated systems shapes expectations, oversight, and trust. That question has guided my work on uncrewed aircraft system (UAS) operator displays, human-robot teaming for space exploration, and an observer-study proposal examining how decision rights affect perceived robot trustworthiness."},
+    {id:'safety', since:2022, name:'Designing for Safety', alt:'Environmental, Health, Safety, and Security',
+     gloss:"I approach safety by examining how people, technologies, and infrastructure interact under operational constraints. My work has taken me from geosynthetic reinforcement experiments to energy-sector safety operations and research on human-robot collaboration. Across these settings, I focus on identifying vulnerabilities and translating evidence into safer designs and procedures."},
+    {id:'ventures', since:2025, name:'Designing for Ventures', alt:'Human Factors in Early-Stage R&amp;D Teams',
+     gloss:"Early-stage development requires decisions before the evidence is complete. Through ASU&#39;s EPICS program and Luminosity Lab, I&#39;ve contributed to prototyping, product research, instructional design, and venture planning across sustainable furniture, robotics education, and emerging assistive technologies."},   /* Taylor 2026-11-05 (chat): Ambiguity becomes Ventures (T-2026-10-14-65). Alt line and gloss are my draft, awaiting Taylor; gloss widened to the three cards 2026-11-05 (T-2026-10-14-71). */
+    {id:'resilience', since:2023, name:'Designing for Resilience', alt:'Grand Challenges and Long-Horizon Risk',
+     gloss:"I think of resilience as the capacity to keep adapting as conditions change, not simply to recover from a disruption. My work through the Grand Challenges Scholars Program connects infrastructure security and sustainability with a growing interest in safety engineering and interaction design."}
+  ];
+  /* ---- order: ?order=a,b,c lists pages first (the rest follow in default order), ?for=name picks a preset, and with neither
+     the default is DEFAULT_ORDER (set by hand). Presets keep their own endings. Unknown names and repeats are ignored. ---- */
+  var PRESETS={ hri:['trust','knowledge','ventures','resilience','safety'], safety:['safety','ventures','resilience','knowledge','trust'] };   /* a preset is a different reading path and keeps its own ending (Taylor 2026-10-17) */
+  var PREVIEW=true;   /* prototype only: the artifact viewer may not pass a query string, so the O key on the home view cycles the presets (kept in sessionStorage, then reloads). Remove in the static build. */
+  var PV_KEYS=['','hri','safety'], pvFor='';
+  function qparam(name){ try{ return new URLSearchParams(location.search).get(name); }catch(e){ return null; } }
+  if(PREVIEW){ try{ pvFor=sessionStorage.getItem('pv_for')||''; }catch(e){} }
+  /* Default order (Taylor, 2026-10-17), a conceptual progression: concrete safety applications, then trust and ventures (Taylor 2026-11-05: ambiguity became ventures, T-2026-10-14-65; whether position 3 still fits this rationale is open), then knowledge infrastructure and the long-term resilience of human systems. Set by hand; since no longer drives it. Ids missing here follow in registry order. */
+  var DEFAULT_ORDER=['safety','trust','ventures','knowledge','resilience'];
+  function chronological(){
+    var out=DEFAULT_ORDER.filter(function(id){ return !!pat(id); });
+    REG.forEach(function(p){ if(out.indexOf(p.id)<0){ out.push(p.id); } });
+    return out;
+  }
+  function pickOrder(){
+    var base=chronological(), want=null, o=qparam('order'), f=qparam('for');
+    if(o){ want=o.toLowerCase().split(/[\s,;]+/); }
+    else if(f && PRESETS[f.toLowerCase()]){ want=PRESETS[f.toLowerCase()]; }
+    else if(!f && PREVIEW && PRESETS[pvFor]){ want=PRESETS[pvFor]; }
+    var out=[];
+    (want||[]).forEach(function(id){ if(base.indexOf(id)>=0 && out.indexOf(id)<0){ out.push(id); } });
+    base.forEach(function(id){ if(out.indexOf(id)<0){ out.push(id); } });
+    return out;
+  }
+  var ids=pickOrder();
+  function pat(id){ for(var k=0;k<REG.length;k++){ if(REG[k].id===id) return REG[k]; } }
+  var names=ids.map(function(id){ return pat(id).name; });
+  var alts=ids.map(function(id){ return pat(id).alt; });
+  var glosses=ids.map(function(id){ return pat(id).gloss; });
+  var N=5, D2R=Math.PI/180;
+  var mqReduce=window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  var hc=window.matchMedia ? window.matchMedia('(prefers-contrast: more)') : null;   /* D10: read live, not once */
+  var reduce=!!(mqReduce && mqReduce.matches);
+
+  /* ---- globe drawing: its own element, drawn once at radius 300, moved by CSS transform ---- */
+  var RG=300, ROG=414, RN=138, PITCH=14*D2R, cp=Math.cos(PITCH), sp=Math.sin(PITCH);
+  function P(x,y,z){ var y2=y*cp-z*sp, z2=y*sp+z*cp; return [x,-y2,z2]; }
+  function mk(tag,attrs,parent){ var e=document.createElementNS(NS,tag); for(var k in attrs){ e.setAttribute(k,attrs[k]); } if(parent) parent.appendChild(e); return e; }
+  var scene=document.getElementById('scene');
+  var globeEl=document.getElementById('globeSvg');
+  function runs(pts){
+    var out={}, cur=null, run=[], prev=null;
+    function flush(){ if(cur && run.length>1){ (out[cur]=out[cur]||[]).push('M'+run.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' L')); } }
+    pts.forEach(function(p){ var c=p[2]; if(c!==cur){ flush(); run=(prev&&c&&cur)?[prev]:[]; cur=c; } if(c) run.push([p[0],p[1]]); prev=[p[0],p[1]]; });
+    flush(); return out;
+  }
+  function path(d,w,op){ mk('path',{d:d,'stroke-width':w,opacity:op,fill:'none',stroke:'var(--slate)'},globeEl); }
+  mk('circle',{cx:0,cy:0,r:RG,'stroke-width':1.5,opacity:.9,fill:'none',stroke:'var(--slate)'},globeEl);
+  function grat(f){ var pts=[]; f(pts); var r=runs(pts); (r.back||[]).forEach(function(d){ path(d,1,.14); }); (r.front||[]).forEach(function(d){ path(d,1,.45); }); }
+  [-60,-30,0,30,60].forEach(function(lat){ grat(function(pts){ var a=lat*D2R; for(var k=0;k<=360;k+=4){ var b=k*D2R; var p=P(RG*Math.cos(a)*Math.sin(b),RG*Math.sin(a),RG*Math.cos(a)*Math.cos(b)); pts.push([p[0],p[1],p[2]>=0?'front':'back']); } }); });
+  for(var lon=0;lon<360;lon+=30){ (function(lon){ grat(function(pts){ var b=lon*D2R; for(var k=-90;k<=90;k+=4){ var a=k*D2R; var p=P(RG*Math.cos(a)*Math.sin(b),RG*Math.sin(a),RG*Math.cos(a)*Math.cos(b)); pts.push([p[0],p[1],p[2]>=0?'front':'back']); } }); })(lon); }
+  /* the arch the nodes sit on: a full ring, so its ends never show while the globe rolls and slides */
+  mk('circle',{cx:0,cy:0,r:ROG,'stroke-width':1.5,opacity:.75,fill:'none',stroke:'var(--slate)'},globeEl);
+  /* the page-header fragment re-uses the very same paths (limb, graticule, node ring) through <use>, so it cannot drift from the home globe */
+  var gdefs=document.createElementNS(NS,'svg'); gdefs.setAttribute('id','gdefs'); gdefs.setAttribute('aria-hidden','true'); gdefs.setAttribute('focusable','false');
+  var gfrag=mk('g',{id:'gfrag'},mk('defs',{},gdefs)); Array.prototype.forEach.call(globeEl.childNodes,function(n){ gfrag.appendChild(n.cloneNode(true)); });
+  document.body.appendChild(gdefs);
+  var FRAG_VB='-215 -308 300 113';
+
+  var gLead=mk('g',{id:'leaders'},scene);
+  var leaders=names.map(function(){ return mk('line',{x1:0,y1:0,x2:0,y2:0},gLead); });
+  var sight=mk('g',{id:'sight'},document.getElementById('sightLayer'));
+  var sg=mk('g',{stroke:'var(--icon,var(--accent))','stroke-width':1.8,opacity:.85},sight), sb=mk('path',{d:'',fill:'none',stroke:'var(--icon,var(--accent))','stroke-width':1.8,opacity:.85},sight);
+  [[0,-34,0,-22],[0,22,0,34],[-34,0,-22,0],[22,0,34,0]].forEach(function(l){ mk('line',{x1:l[0],y1:l[1],x2:l[2],y2:l[3]},sg); });
+  var nodes=names.map(function(nm,i){
+    var g=mk('a',{href:'#'+ids[i],class:'node','aria-label':nm,tabindex:'-1'},scene);
+    mk('circle',{class:'ring',cx:0,cy:0,r:24,fill:'transparent',stroke:'transparent','stroke-width':1.5},g);
+    mk('rect',{class:'bx',x:-15,y:-15,width:30,height:30,fill:'var(--bg)',stroke:'var(--slate)','stroke-width':1.5},g);   /* the node box (Taylor 2026-10-17): the mark sits inside it; the fill keeps the globe line out of the box */
+    var mkg=mk('g',{class:'mk',transform:'translate(-9 -9) scale(.75)',fill:'none',stroke:'var(--icon,var(--accent))','stroke-width':2,'stroke-linecap':'round','stroke-linejoin':'round'},g);   /* Lucide mark, 18 px, about 1.5 px stroke */
+    mkg.innerHTML=ICONS[ids[i]];
+    return {a:g,x:0,y:0};
+  });
+
+  /* ---- ground: a state shift, not a gradient ----
+     Home is ink navy. On the pattern pages the ground moves toward the chosen endpoint, a little more with each
+     page you scroll through. Only the ground tokens move; text and strokes stay fixed. Graphite stays in
+     the system elsewhere. The range is a few 8-bit steps, so the variables are rewritten only when the
+     rounded colour changes. Each endpoint sits about 3.8 perceptual units from navy at 100%. */
+  var TINT_START=0.00, TINT_END=0.55;                 /* tune here: 0 = navy, 1 = the endpoint */
+  var START={ bg:[11,14,20], raised:[17,21,29], hair:[38,45,61] };
+  var ENDS=[
+    {name:'Umber', bg:[26,15,10], raised:[33,22,16], hair:[56,42,35]},
+    {name:'Walnut', bg:[24,16,9], raised:[31,23,16], hair:[54,44,34]},
+    {name:'Bronze', bg:[21,18,8], raised:[28,25,15], hair:[49,46,33]},
+    {name:'Oxblood', bg:[28,14,14], raised:[35,21,21], hair:[59,40,40]},
+    {name:'Plum', bg:[27,12,24], raised:[34,19,31], hair:[58,38,53]},
+    {name:'Muted indigo', bg:[12,15,38], raised:[19,23,46], hair:[40,44,66]},
+    {name:'Sage', bg:[14,20,10], raised:[21,28,17], hair:[40,49,36]},
+    {name:'Petrol teal', bg:[0,24,28], raised:[0,31,36], hair:[17,52,55]},
+    {name:'Deep violet', bg:[20,13,35], raised:[27,21,43], hair:[47,42,64]},
+    {name:'Moss green', bg:[7,22,14], raised:[14,29,21], hair:[32,51,40]}
+  ];
+  var endIdx=0, groundKey='', prog=0, maxTop=1;
+  function setGround(p){
+    if((hc && hc.matches) || document.documentElement.getAttribute('data-theme')==='light'){   /* stable ground under prefers-contrast: more, and in light mode */
+      if(groundKey!=='hc'){ var r0=document.documentElement.style; r0.removeProperty('--bg'); r0.removeProperty('--raised'); r0.removeProperty('--hair'); groundKey='hc'; }
+      return;
+    }
+    var a=Math.max(0,Math.min(1,p))*(TINT_START+(TINT_END-TINT_START)*prog), E=ENDS[endIdx];
+    var out={}, key='';
+    ['bg','raised','hair'].forEach(function(k){
+      out[k]='rgb('+START[k].map(function(v,i){ return Math.max(0,Math.round(v+(E[k][i]-v)*a)); }).join(',')+')'; key+=out[k];
+    });
+    if(key===groundKey) return; groundKey=key;
+    var rs=document.documentElement.style;
+    rs.setProperty('--bg',out.bg); rs.setProperty('--raised',out.raised); rs.setProperty('--hair',out.hair);
+  }
+
+  /* ---- state of the globe: centre, scale, roll, node spacing ---- */
+  var mode='home', sel=-1, current=0, hover=-1, homeHover=-1, linkTarget=null, sightVis=false, sightT=null, ready=true, animating=false, raf=null;
+  var vw=innerWidth, vh=innerHeight;
+  var compactOn=false, holdCompact=false, touching=false, MINCLR=16, COMPACT_CLR=24, ARCCLR=40 /* phones: last chip to the top node centre; 40 leaves 25 px to the node box, matching the role-to-chip gap (Taylor 2026-11-06; was 28, 13 px) */, ELASTIC=0.12, homeEl=document.getElementById('home');
+  function metrics(){
+    vw=innerWidth; vh=innerHeight;
+    var narrow=vw<760, H=vh, compact=false, c0=null;
+    var Rh=narrow? Math.min(vw*0.28,150) : Math.min(vh*0.30, vw*0.19);
+    if(!narrow && vh>=480){ var cta=document.querySelector('#home .pv-slot'); if(!cta||!cta.offsetHeight) cta=document.querySelector('#home .role'); if(cta){ var slotPad=cta.classList.contains('pv-slot')?20:0; var cb=cta.getBoundingClientRect().bottom+slotPad; Rh=Math.max(60,Math.min(Rh,(vh-cb-124)/1.38)); } }   /* D3, desktop heights only */
+    var Ri=narrow? Math.min(vw*0.30,120) : Math.min(vh*0.215, vw*0.15);
+    if(narrow){   /* phones: keep MINCLR between the CTA row and the first chip. First shrink the globe a little (up to ELASTIC), then fall back to a scrolling home. */
+      c0=document.querySelector('#home .role');   /* phones: the CTA row is gone and the slot is hidden, so the role line is the anchor */
+      if(c0 && chips.length){
+        var ctaB=c0.offsetTop+c0.offsetHeight, stackH=(N-1)*8, k;
+        for(k=0;k<chips.length;k++){ stackH+=chips[k].ws.h; }
+        var s0=Rh/100, hC=Math.ceil(ctaB+COMPACT_CLR+stackH+ARCCLR+RN*s0);
+        if(ctaB+MINCLR+stackH+ARCCLR+RN*s0>vh){
+          var s1=(vh-ctaB-MINCLR-stackH-ARCCLR)/RN;
+          if(s1>=s0*(1-ELASTIC)){ Rh=s1*100; }
+          else { compact=true; H=hC; }
+        }
+        if(holdCompact && !compact){ compact=true; Rh=s0*100; H=hC; }   /* latch: a mobile address bar that collapses or expands mid-scroll changes innerHeight; do not flip the layout under a finger or a scrolled page */
+      }
+    }
+    return {narrow:narrow, sh:Rh/100, si:Ri/100, compact:compact, H:H, top:(narrow && c0 ? c0.offsetTop+c0.offsetHeight : null)};
+  }
+  function syncCompact(){
+    holdCompact=compactOn && ((window.scrollY||0)>2 || touching);
+    var m=metrics(), on=(mode==='home' && m.compact);
+    if(on!==compactOn){ lastShift=now(); }   /* the existing lock keeps swipes from committing for a moment after any mode change */
+    compactOn=on;
+    document.documentElement.style.setProperty('--H', m.H+'px');
+    document.body.classList.toggle('compact',on);
+    if(!on){ document.body.classList.remove('scrolled'); }
+  }
+  function targetState(m,md){
+    if(md==='home') return {cx:vw/2, cy:m.H, s:m.sh, rho:0, span:36};
+    if(m.narrow) return {cx:vw/2, cy:vh+Math.round(160*m.sh)+24, s:m.sh, rho:0, span:36};   /* phones: the globe and nodes slide out below the viewport; the dock takes over */
+    return {cx:0, cy:vh, s:m.si, rho:45, span:17.5};
+  }
+  function nodePos(st,k){
+    var th=((k-2)*st.span+st.rho)*D2R;
+    return {x:st.cx+RN*st.s*Math.sin(th), y:st.cy-RN*st.s*Math.cos(th), sx:Math.sin(th), cy:-Math.cos(th)};
+  }
+  var st=null;
+  function render(s){
+    st=s;
+    globeEl.style.transform='translate('+(s.cx-450)+'px,'+(s.cy-450)+'px) rotate('+s.rho+'deg) scale('+(s.s/3)+')'; if(window.__texG){ window.__texG(s); }
+    nodes.forEach(function(n,k){ var p=nodePos(s,k); n.x=p.x; n.y=p.y; n.a.setAttribute('transform','translate('+p.x.toFixed(1)+' '+p.y.toFixed(1)+')'); });
+    if(animating){ sight.style.transition='none'; }
+    moveSight();
+    setGround(s.rho/45);
+  }
+  /* the sight marks one thing: a link under the pointer or focus (corner brackets), else a pattern node (crosshair).
+     Inner mode rests it on the current pattern. The home view shows nothing until something is hovered or focused. */
+  function moveSight(){
+    var x=0,y=0,box=null,vis=false,k;
+    var gk=(mode==='inner')?sel:homeHover;   /* the node and chip that carry the amber glow */
+    nodes.forEach(function(n,j){ n.a.classList.toggle('cur',j===gk); });
+    (chips||[]).forEach(function(c,j){ c.el.classList.toggle('cur',j===gk); });
+    if(linkTarget){ var r=linkTarget.getBoundingClientRect(); if(r.width>0 && r.height>0){ x=r.left+r.width/2; y=r.top+r.height/2+(compactOn?(window.scrollY||0):0); box=[r.width/2+7,r.height/2+5]; vis=true; } }
+    if(!vis){ k=(mode==='inner')?sel:homeHover; if(k>=0 && nodes[k]){ x=nodes[k].x; y=nodes[k].y; vis=true; } }
+    sg.style.display=box?'none':'';
+    if(box){ var hw=box[0], hh=box[1], a=Math.min(12,hw,hh);
+      sb.setAttribute('d','M'+(-hw)+','+(-hh+a)+' V'+(-hh)+' H'+(-hw+a)+' M'+(hw-a)+','+(-hh)+' H'+hw+' V'+(-hh+a)+' M'+hw+','+(hh-a)+' V'+hh+' H'+(hw-a)+' M'+(-hw+a)+','+hh+' H'+(-hw)+' V'+(hh-a));
+      sb.style.display=''; } else { sb.style.display='none'; }
+    if(vis && !sightVis){ sight.style.transition='opacity .18s var(--out)'; clearTimeout(sightT); sightT=setTimeout(function(){ if(!animating){ sight.style.transition=''; } },80); }   /* first appearance does not sweep in from the last place */
+    sightVis=vis; sight.style.opacity=vis?'1':'0';
+    if(vis){ sight.style.transform='translate('+x+'px,'+y+'px)'; }
+  }
+  function entryTarget(){ return sel>=0 ? sel : 0; }
+  function lerp(a,b,u){ return a+(b-a)*u; }
+  function ease(u){ return 1-Math.pow(1-u,3); }
+  function animateTo(to,done,early){
+    if(raf) cancelAnimationFrame(raf);
+    var from={cx:st.cx,cy:st.cy,s:st.s,rho:st.rho,span:st.span};
+    if(reduce){ animating=false; sight.style.transition=''; render(to); if(early) early(); if(done) done(); return; }
+    animating=true; sight.style.transition='none'; var t0=null, dur=700, fired=false;
+    function step(ts){
+      if(t0===null) t0=ts;
+      var u=Math.min(1,(ts-t0)/dur), e=ease(u);
+      render({cx:lerp(from.cx,to.cx,e),cy:lerp(from.cy,to.cy,e),s:lerp(from.s,to.s,e),rho:lerp(from.rho,to.rho,e),span:lerp(from.span,to.span,e)});
+      if(!fired && u>=0.55){ fired=true; if(early) early(); }
+      if(u<1){ raf=requestAnimationFrame(step); }
+      else { raf=null; animating=false; sight.style.transition=''; render(to); if(!fired && early) early(); if(done) done(); }
+    }
+    raf=requestAnimationFrame(step);
+  }
+
+  /* ---- chamfered labels with leader lines ---- */
+  var chipsEl=document.getElementById('chips'), chips=[];
+  names.forEach(function(nm,i){
+    var a=document.createElement('a'); a.className='chip'; a.href='#'+ids[i]; a.setAttribute('tabindex','-1');
+    a.innerHTML='<svg class="bd" aria-hidden="true"><polygon></polygon></svg><span class="idx">0'+(i+1)+'</span><span class="nm">'+nm+'</span>';   /* phone subtitles under the names were tried and removed (Taylor 2026-11-10: too cluttered) */
+    chipsEl.appendChild(a);
+    a.addEventListener('mouseenter',function(){ if(mode==='home'){ select(i); } });
+    a.addEventListener('focus',function(){ if(mode==='home'){ select(i); } });
+    a.addEventListener('mouseleave',unselect); a.addEventListener('blur',unselect);
+    a.addEventListener('click',function(e){ e.preventDefault(); go(i); });
+    chips.push({el:a,ws:{w:230,h:44},cs:{w:166,h:58}});
+  });
+  function drawPoly(c,w,h){
+    var cut=Math.min(14,h/3), poly=c.el.querySelector('polygon');
+    c.el.querySelector('svg').setAttribute('viewBox','0 0 '+w+' '+h);
+    poly.setAttribute('points',[[.75,.75],[w-cut,.75],[w-.75,cut],[w-.75,h-.75],[cut,h-.75],[.75,h-cut]].map(function(p){return p.join(',');}).join(' '));
+  }
+  function measureChips(){
+    chips.forEach(function(c){
+      c.el.classList.remove('compact');
+      c.ws={w:c.el.offsetWidth||230,h:c.el.offsetHeight||44};
+      c.el.classList.add('compact');
+      c.cs={w:c.el.offsetWidth||166,h:c.el.offsetHeight||58};
+      c.el.classList.remove('compact');
+    });
+  }
+  function setChipMode(md){
+    chips.forEach(function(c){
+      var comp=(md==='inner');
+      c.el.classList.toggle('compact',comp);
+      var z=comp?c.cs:c.ws; drawPoly(c,z.w,z.h);
+    });
+  }
+  function drawChips(){ measureChips(); setChipMode(mode); }
+  function clamp(v,a,b){ return Math.max(a,Math.min(b,v)); }
+  var chipPos=[];
+  function innerPlacement(i,p,w,h,pts){
+    var best=null;
+    var dirs=[[p.sx,p.cy],[-p.sx,-p.cy]];
+    [52,64,78,92,110].forEach(function(gap){
+      dirs.forEach(function(dv){
+        var dx=dv[0], dy=dv[1];
+        var tb=Math.min(Math.abs(dx)>0.001?(w/2)/Math.abs(dx):1e9, Math.abs(dy)>0.001?(h/2)/Math.abs(dy):1e9);
+        var cx=clamp(p.x+dx*(gap+tb),16+w/2,vw-16-w/2), cy=clamp(p.y+dy*(gap+tb),84+h/2,vh-16-h/2);
+        var score=gap*0.5, L=cx-w/2-18, Rr=cx+w/2+18, T=cy-h/2-18, B=cy+h/2+18;
+        pts.forEach(function(q,k){ if(k!==i && q.x>L && q.x<Rr && q.y>T && q.y<B) score+=1000; });
+        if(p.x>cx-w/2-8 && p.x<cx+w/2+8 && p.y>cy-h/2-8 && p.y<cy+h/2+8) score+=1000;
+        score+=Math.max(0,cx+w/2-290)*3;
+        if(!best || score<best.score) best={cx:cx,cy:cy,score:score};
+      });
+    });
+    return best;
+  }
+  var cache={home:null,inner:null};
+  function computeLayout(md,narrow){
+    var m=metrics(), s=targetState(m,md), out={pos:[],lead:[],gutter:0};
+    var stackY=null, maxRight=0;
+    chips.forEach(function(c,i){
+      var z=(md==='inner')?c.cs:c.ws, p=nodePos(s,i), w=z.w, h=z.h, cx, cy, lead=true;
+      if(md==='home' && narrow){
+        if(stackY===null){   /* phones (Taylor 2026-11-06): the list sits 24 px under the role line; when space is tight it keeps the old bottom anchor (16 px minimum) */
+          var stH=(N-1)*8; chips.forEach(function(c2){ stH+=c2.ws.h; });
+          var low=m.H-RN*s.s-ARCCLR-stH;
+          stackY=(m.top===null)? low : Math.max(m.top+MINCLR, Math.min(m.top+COMPACT_CLR, low));
+        }
+        cx=vw/2; cy=stackY+h/2; stackY+=h+8; lead=false;
+      } else if(md==='inner'){
+        var pts=[0,1,2,3,4].map(function(k){ return nodePos(s,k); });
+        var bp=innerPlacement(i,p,w,h,pts); cx=bp.cx; cy=bp.cy;
+      } else {
+        var gap=Math.max(64,vh*0.085), dx=p.sx, dy=p.cy;
+        var tb=Math.min(Math.abs(dx)>0.001?(w/2)/Math.abs(dx):1e9, Math.abs(dy)>0.001?(h/2)/Math.abs(dy):1e9);
+        cx=clamp(p.x+dx*(gap+tb),16+w/2,vw-16-w/2); cy=clamp(p.y+dy*(gap+tb),84+h/2,vh-16-h/2);
+      }
+      if(md==='inner'){ maxRight=Math.max(maxRight,cx+w/2); }
+      var q={x:clamp(p.x,cx-w/2,cx+w/2), y:clamp(p.y,cy-h/2,cy+h/2)};
+      var vx=q.x-p.x, vy=q.y-p.y, len=Math.hypot(vx,vy)||1;
+      out.pos.push({cx:cx,cy:cy,w:w,h:h});
+      out.lead.push({x1:p.x+vx/len*20, y1:p.y+vy/len*20, x2:q.x, y2:q.y, hidden:!lead});
+    });
+    out.gutter=(md==='inner')?((narrow||vw<760)?20:Math.max(24,Math.round(maxRight+28))):0;
+    return out;
+  }
+  /* both layouts are computed up front, so a state change only applies cached numbers */
+  function buildCache(){
+    var m=metrics();
+    cache.home=computeLayout('home',m.narrow);
+    cache.inner=computeLayout('inner',false);
+    document.documentElement.style.setProperty('--gutter', cache.inner.gutter+'px');
+  }
+  function applyLayout(md){
+    var L=cache[md]; if(!L) return;
+    setChipMode(md);
+    chips.forEach(function(c,i){
+      var p=L.pos[i], l=L.lead[i], el=leaders[i];
+      c.el.style.left=(p.cx-p.w/2)+'px'; c.el.style.top=(p.cy-p.h/2)+'px';
+      el.setAttribute('x1',l.x1); el.setAttribute('y1',l.y1); el.setAttribute('x2',l.x2); el.setAttribute('y2',l.y2);
+      if(l.hidden) el.setAttribute('visibility','hidden'); else el.removeAttribute('visibility');
+    });
+  }
+  function updateChips(){
+    chips.forEach(function(c,i){
+      var show=false;
+      if(ready){
+        if(mode==='home') show=true;
+        else show=(vw<760) ? false : (hover>=0 ? i===hover : i===current);
+      }
+      c.el.classList.toggle('show',show);
+      c.el.classList.toggle('sel', show && i===sel);
+      leaders[i].classList.toggle('show',show);
+    });
+    dks.forEach(function(a,i){ if(mode==='inner' && i===current){ a.setAttribute('aria-current','true'); } else { a.removeAttribute('aria-current'); } });
+  }
+
+  /* ---- selection ---- */
+  function select(i){ sel=i; homeHover=i; moveSight(); updateChips(); }
+  function unselect(){ if(mode==='home'){ homeHover=-1; sel=-1; moveSight(); updateChips(); } }   /* Taylor 2026-11-06: leaving a chip un-selects it */
+  function setCurrent(i){ current=i; if(mode==='inner'){ sel=i; moveSight(); trackUrl(i); } updateChips(); }
+  function setFocusables(){
+    nodes.forEach(function(n){ n.a.setAttribute('tabindex', (mode==='inner' && vw>=760) ? '0' : '-1'); });
+    chips.forEach(function(c){ c.el.setAttribute('tabindex', mode==='home' ? '0' : '-1'); });
+  }
+  nodes.forEach(function(n,i){
+    n.a.addEventListener('click',function(e){ e.preventDefault(); go(i); });
+    n.a.addEventListener('mouseenter',function(){ if(mode==='home'){ select(i); } else { hover=i; updateChips(); } });
+    n.a.addEventListener('mouseleave',function(){ hover=-1; unselect(); updateChips(); });
+    n.a.addEventListener('focus',function(){ if(mode==='inner'){ hover=i; updateChips(); } });
+    n.a.addEventListener('blur',function(){ hover=-1; unselect(); updateChips(); });
+  });
+
+  /* ---- pages ---- */
+  var dockEl=document.getElementById('dock'), dks=[];
+  function dockLabel(nm){ return /^Designing for /.test(nm) ? nm.replace(/^Designing for /,'') : nm.split(' ')[0]; }   /* Safety, Trust, Ventures, Knowledge, Resilience */
+  names.forEach(function(nm,i){
+    var a=document.createElement('a'); a.href='#'+ids[i]; a.setAttribute('aria-label',(i+1)+', '+nm);
+    a.innerHTML=mark(ids[i],18,'var(--accent)')+'<span class="dl" aria-hidden="true">'+dockLabel(nm)+'</span>';   /* short text label under each mark (2026-11-10, critique "Next pass") */
+    a.addEventListener('click',function(e){ e.preventDefault(); go(i); });
+    dockEl.appendChild(a); dks.push(a);
+  });
+  var pages=document.getElementById('pages'), secs=[];
+  function glyph(id){ return mark(id,20,'var(--slate)'); }
+  names.forEach(function(nm,i){
+    var s=document.createElement('section'); s.className='page'; s.id='p'+(i+1); s.setAttribute('data-id',ids[i]);
+    var cards=(nm==='Trust as Infrastructure')
+      ? '<div class="card multi"><p class="lbl">Case study / Course design</p><p class="t">CrisisCourier UAS operator displays</p><img class="hero" src="img/cc_payload_view.webp" width="1440" height="960" loading="lazy" alt="Payload operator view over a 3D city map: package status en route with a progress bar and an inventory button, an alerts panel (smog warning, new drop zone added, temperature alert), the final destination and arrival time, a drop-zone target marker, a compass, and an operator chat reading Cease operations immediately. Safety risk!"><p class="s">In a six-person HSE 542 team (2024), I helped design uncrewed aircraft system (UAS) operator displays for disaster relief. I contributed to the shift toward cargo delivery, operator-role requirements, pilot-control sketches, and alert design. Our concept allocated routine flight tasks to automation while retaining human decision authority.</p><p class="links"><a href="crisiscourier.html">Project page</a></p></div>'   /* Taylor 2026-10-27 (chat): Trust as Infrastructure is the HAT pattern, so the CrisisCourier card goes here (site_data.json crisiscourier-uav, page trust, order 1, after the observer study). Text is the approved title, caption and scope (52 words). Images are the launch set in data order with the data alt text (alt for image 2 shortened). The project page link is a .soon placeholder until the page's URL exists. */
+        + '<div class="card multi"><p class="lbl">Project / Research role</p><p class="t" data-pvt="Space Human Autonomy Teaming Annotated Bibliography">Project ENTERPRISE Annotated Bibliography</p><img class="hero" src="img/enterprise_astrobee_card.webp" width="1200" height="953" loading="lazy" alt="An Astrobee free-flying robot floating inside the International Space Station: a cube-shaped robot with a white top panel, a camera, two glowing blue eyes on a small screen, and black and yellow side panels, in front of stowage bags and a row of national flags. A context image of the kind of robot teammate the bibliography discusses, not a photo of Project ENTERPRISE."><p class="m">Illustrative image: Astrobee free-flying robot on the International Space Station. Credit: <a href="https://www.nasa.gov/missions/station/nasa-celebrates-three-years-of-astrobees-buzzing-on-space-station/" target="_blank" rel="noopener">NASA</a>.</p><p class="s">Project ENTERPRISE (Enhanced Networks for Trusted Exploration and Reliability with Predictive Resilient Intelligent Systems for Exploration) examined human-robot collaboration for space exploration by addressing technical and non-technical challenges associated with distributed teams. In ASU&#39;s Interplanetary Initiative Undergraduate Research Scholars Program (Fall 2024), my role in Project ENTERPRISE was to develop an annotated bibliography for the team&#39;s roadmap proposal, featuring cognitive science topics from the Human Systems Engineering program.</p><p class="links"><a href="docs/project_enterprise_annotated_bibliography.pdf" target="_blank" rel="noopener">Annotated bibliography (PDF)</a><a href="https://news.asu.edu/b/20240829-asus-interplanetary-initiative-adds-three-new-pilot-projects-will-champion-innovative" target="_blank" rel="noopener">Program page</a></p></div>'   /* Taylor 2026-11-03 (T-2026-10-14-57): approved enterprise-bibliography card (title T, caption TE, scope T, limit A, all approved T-2026-10-14-20). Only the program link; no excerpt link until the excerpt is hosted. The limit sentence keeps the team's roadmap apart from Taylor's bibliography. */ /* Taylor 2026-11-08 (chat): ENTERPRISE moves from Knowledge to Trust and ASRS from Trust to Knowledge; card text unchanged. */
+        + '<div class="card multi"><p class="lbl">Case study / Proposal stage</p><p class="t">Observer paradigm for robot-teammate trust</p><img class="hero" src="img/obs_filming_layout_card.webp" width="1090" height="826" loading="lazy" alt="Top-down schematic of the filming room for the observer study. Fetch starts at upper right. A black pickup table with Human A is at left. A folding table with an orange and a white basket and Human B is at lower right. The camera sits along the bottom edge."><p class="s">I designed an observer study on decision rights in human-robot teams, developed its survey and analysis plan, and prepared robot-control scripts and video-stimulus materials. Data collection has not begun.</p><p class="links"><a href="observer.html">Project page</a></p></div>'
+      : (nm==='Designing for Resilience')
+      ? '<div class="card multi"><p class="lbl">Experience / Program reflection</p><p class="t">National Academy of Engineering Grand Challenges Scholars Program (GCSP) at ASU</p><img class="hero" src="img/gcsp_banner_card.webp" width="1200" height="258" loading="lazy" alt="The Grand Challenges Scholars Program logo: a lightbulb made of dots with a world map inside, beside the words Grand Challenges Scholars Program on a gold background."><p class="s">My reflection on four years in the program (GCSP), year by year. I describe what its courses, projects, and research experience taught me, from stakeholder analysis and market fit to algorithmic bias, circular-economy design, and aid effectiveness. The Future Solutions Poster is my first-year (FSE 150) team&#39;s Concept of Operations proposal for earthquake prediction software paired with exoskeleton augmentation for first responders. In its societal-challenges deliverable, I wrote the passages on over-reliance on AI and on who commands rescue operations.</p><p class="links"><a href="https://asu.digication.com/taylor-fosters-gcsp-portfolio/my-gcsp-experience" target="_blank" rel="noopener">Reflection page</a><a href="https://news.engineering.asu.edu/graduate/taylor-foster/" target="_blank" rel="noopener">ASU Engineering News profile</a><a href="https://docs.google.com/presentation/d/1jsu6XATFsBrPNHEMwQVMUzkotFfNhixD/edit?slide=id.p1#slide=id.p1" target="_blank" rel="noopener">Future Solutions Poster</a></p></div>'
+        + '<div class="card multi"><p class="lbl">Project / Course proposal</p><p class="t">Off-grid modular homes</p><img class="hero" src="img/design_brief_cover_card.webp" width="1200" height="729" loading="lazy" alt="Cover page of the Sustainable Desert Home Design brief: the title and a tree-ring Ecosystemic Solutions logo on a tan panel, beside an AI-generated visualization of a modular desert home with a red-brown and glass facade among rocks under a dusky sky."><p class="s">In DSC 394 (Design Entrepreneurship and Society), I served as the Green Technology Researcher on a team proposal for climate-adaptive housing in the American Southwest, addressing present and projected climate conditions, documented in my GCSP Portfolio, linked below. Building on the team&#39;s original concept, I independently developed a conceptual product design brief for a modular, off-grid desert home in IND 354 (Principles of Product Design). The brief reflects an early exploration of AI-assisted concept visualization and climate-responsive product design, made while also discovering the latest AI visual generation capabilities as of 2023.</p><p class="links"><a href="https://asu.digication.com/taylor-fosters-gcsp-portfolio/entrepreneurship" target="_blank" rel="noopener">Entrepreneurship page</a><a href="docs/design_brief_sustainable_desert_home.pdf" target="_blank" rel="noopener">Design brief (PDF)</a></p></div>'   /* Taylor 2026-10-27 (artifact comments): the Digication entrepreneurship page goes under the text (v29a). DSC 394 (team proposal) and IND 354 (design brief) are separate classes, so the text names both and the second link is the brief PDF in the IND 354 folder of Taylor's Drive, replacing the GCSP experience link (v29b). The card is no longer one big link, so both links sit in the same row pattern as the BlueMatter card. Taylor 2026-10-27 (chat): the program reflection (the Digication my-gcsp-experience page) gets its own card ahead of the off-grid card, as the GCSP lead that the data model already names for page 05; its summary is condensed from the page text Taylor attached (v29c). */
+      : (nm==='Designing for Safety')
+      ? '<div class="card multi"><p class="lbl">Experience / Internship</p><p class="t">Safety and Operations Intern</p><img class="hero" src="img/aes_context_card.webp" width="1200" height="799" loading="lazy" alt="Close-up from behind a virtual reality headset, showing the two lenses and a dark teal interior. A context image of the technology, not a photo of the internship or its training."><p class="m">Image: <a href="https://commons.wikimedia.org/wiki/File:Virtual_reality_headset.jpg" target="_blank" rel="noopener">FloppaIngénieur</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>, via Wikimedia Commons. Resized and converted to WebP.</p><p class="s">During an energy-sector internship, I developed safety maps and digital inspection checklists. In 2023, as my first assignment, I assessed the usability of an existing VR lockout/tagout training, promoted its use, and researched alternative vendors. I later collaborated with an external vendor to scope a separate proposed VR training application for power plant operators, contributing to its instructional requirements.</p><p class="links"><a href="https://www.gpstrategies.com/our-work/technical-training-to-power-the-aes-workforce/" target="_blank" rel="noopener">Background: AES operator training</a><a href="https://www.aes.com/sustainability/our-people/occupational-health-and-safety" target="_blank" rel="noopener">AES: Occupational safety</a></p></div>'   /* Taylor 2026-10-27 (chat, fifth relayed message, "Execute"): claim-level disclosure review replaces the categorical exclusion; the card text is unchanged from v29h and gains public-context links (v29i). Taylor 2026-10-27 (artifact comment, v29k): the 2023 sentence now states her account, a usability assessment of the existing VR lockout/tagout training, promoting its use, and researching alternative vendors when the vendor showed no interest in more trainings (55 words, at the budget). Taylor 2026-10-27 (v29j): keep AES occupational safety, remove the 2019 report, replace the vendor customer page with the GP Strategies AES case study. GP Strategies is a different training provider, so the link is context for the plants and their operator training, not documentation of her vendor work. Public launch still waits on the claim-level review against her agreement terms, which her own directive makes the condition. */
+        + '<div class="card multi"><p class="lbl">Project / Published paper</p><p class="t">Experimental design for structural safety</p><img class="hero" src="img/reu_slide_card.webp" width="800" height="596" loading="lazy" alt="Slide from the REU presentation titled Instrumentation Layout. Left: elevation drawing of the model footing, geogrid, laminar soil container and instrument rack with dimensions. Right: two photos of the instrumented model on the centrifuge shake table, labeled laminar box, model column, guide rails and model mass."><p class="s">National Science Foundation REU site, UC San Diego, 2022. I collaborated with a graduate student and visiting scholar on an experimental design for testing geosynthetic reinforcement and performed material characterization of 3D-printed polymers to determine load-bearing capacity before centrifuge modeling.</p><p class="links"><a href="https://asu.digication.com/taylor-fosters-gcsp-portfolio/research" target="_blank" rel="noopener">Research page</a><a href="https://doi.org/10.1051/e3sconf/202456910001" target="_blank" rel="noopener">Paper</a><a href="https://armor.ucsd.edu/apply/reu" target="_blank" rel="noopener">ARMOR Lab REU</a></p></div>'   /* Taylor 2026-10-27 (artifact comment): add the REU experience to the first card on Designing for Safety, with the Digication research page link (v29d). Text is the approved reu-paper wording in site_data.json (title, caption, scope: 40 words, under the 55 budget; "3D-printed" as in that file, while the older item bundle has "3D printed"). The card replaces the Safety placeholder and sits ahead of the Devils Invent honor card (data order 1, then 2). The explainer line stays off until Taylor writes it. Taylor's link comes first. The second link, Paper (the DOI), is my addition: the eyebrow says Published paper and the data item's own link is the DOI. */
+        + '<div class="card multi"><p class="lbl">Project / Capstone review</p><p class="t" data-pvk>Human-Robot Collaboration in Construction</p><img class="hero" src="img/hrc_capstone_robot_card.webp" width="1144" height="699" loading="lazy" alt="An orange robotic arm mounted on a grey wheeled base, positioned at an unfinished interior wall. A context image of the kind of construction robot the review discusses, not a photo from the review."><p class="m">Illustrative image: mobile construction robot in an unfinished interior. Credit: <a href="https://commons.wikimedia.org/wiki/File:Roso%E2%80%99s_automated_construction_robot.jpg" target="_blank" rel="noopener">Willywangpowei</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>, via Wikimedia Commons; cropped, logo removed.</p><p class="s">This thematic literature review examines the safety challenges of human-robot collaboration in architecture, engineering, and construction (AEC). Drawing on 22 peer-reviewed studies, it explores how physical hazards, cognitive workload, trust, and worker perceptions influence the safe integration of collaborative robots into construction environments. The review also considers immersive training technologies and organizational barriers to adoption, highlighting the importance of human-centered design in developing safer and more effective human-robot teams.</p><p class="links"><a href="docs/hrc_construction_capstone_review.pdf" target="_blank" rel="noopener">Review (PDF)</a></p></div>'   /* Taylor 2026-11-10 (chat, T-2026-10-14-209): HSE 477 capstone, sole author, 22 April 2025 (Dr. Qiaoning Carol Zhang). Placed after AES on Designing for Safety at Taylor's request. 'Narrative review' as in its Discussion (the Methods also call the search systematic). The two gaps are the review's own synthesis (standards gap cites Liang et al., 2021). Image (T-2026-10-14-212): Wikimedia Commons photo by Willywangpowei, CC BY 4.0, cropped and both Roso logos inpainted out; built from the 1280 px copy Taylor supplied (original too large to upload). Replaces Table 1. The poster is not used (third-party images and the ASU logo); no faces on project imagery (T-2026-10-14-211). The review PDF is hosted. Text is my draft from the review, awaiting approval. */
+      : (nm==='Knowledge as Infrastructure')
+      ? '<div class="card multi"><p class="lbl">Project / Course evaluation</p><p class="t">Learning-science review of an online satellite course</p><img class="hero" src="img/satops_title_card.webp" width="1200" height="588" loading="lazy" alt="Top of the title slide from the Satellite Operations Training Program Evaluation deck: cyan title text over a purple and blue background, above a line drawing of a satellite with solar panels."><p class="s">HSE 427 (Design for Learning) project (2024) evaluating ASU&#39;s online Introduction to Satellite Operations program. I assessed its instruction structure, feedback, and learner motivation against learning-science criteria, then recommended mixed practice, delayed feedback, and retention and transfer tests. An expert review; no learners were tested.</p><p class="links"><a href="docs/satellite_ops_training_evaluation.pdf" target="_blank" rel="noopener">Evaluation (PDF)</a><a href="https://careercatalyst.asu.edu/programs/introduction-satellite-operations/" target="_blank" rel="noopener">Program page</a></p></div>'   /* Taylor 2026-11-03 (chat): approved card text (T-2026-10-14-56), HSE 427, 2024, individual work, year shown in the text as on CrisisCourier (T-2026-10-14-57). The deck is hosted as the evidence (Taylor: "But not the deck? Where is the evidence then?"); the narrated video stays off. First on the page: it has a directly inspectable deliverable. */
+        + '<div class="card multi"><p class="lbl">Project / Course design</p><p class="t" data-pvt="Insight Enclave citizen-science app">Insight Enclave</p><img class="hero" src="img/insight_enclave_screens.webp" width="1200" height="687" loading="lazy" alt="Three phone screens from the Insight Enclave prototype: a home screen of trending research topics, a Create New Stratum form with fields for title, description, collaborators and source upload, and an editor annotating a source on sustainable mobility."><p class="s">HSE 429 (Product Design and Evaluation) project (2024): an app concept where citizen scientists publish &ldquo;strata,&rdquo; annotated research notes whose credibility reflects the quality of their sources. I wrote the user requirements, prototyped the core flow in Figma, and ran a usability test with five students that traced most confusion to drag-and-drop organizing.</p><p class="links"><a href="https://www.figma.com/proto/tkbFS2NNGUidiqpNBty125/Insight-Enclave-Prototyping-Screens?node-id=4-2&amp;starting-point-node-id=4%3A2" target="_blank" rel="noopener">Figma prototype</a></p></div>'   /* Taylor 2026-11-05 (chat): Insight Enclave card from the HSE 429 materials he attached (user requirements, 3 Nov 2024; usability test summary, 4 to 6 Dec 2024, five participants; prototyping screens PDF) and the Figma prototype embed (T-2026-10-14-82). A design concept with a usability test, never a built or shipped product (T-2026-10-14-71). Hero is the first three screens of the prototyping-screens board as supplied (home, create, editor); the fourth screen carries a video thumbnail with a person's face and is left out. Link-out to the prototype rather than an embedded iframe, following the Fulcrum precedent (T-2026-10-14-76). The usability report is not hosted: it lists each participant's year, major and gender. */
+        + '<div class="card multi"><p class="lbl">Case study / Course analysis</p><p class="t">Software and Automation Coding in UAS Reports: A Reproducible Analysis of NASA Aviation Safety Reporting System (ASRS) Incident Reports</p><img class="hero" src="img/asrs_figure2.webp" width="1650" height="750" loading="lazy" alt="Two-panel dot plot of the share of NASA ASRS UAS reports coded Software and Automation (overall 32.2 percent of 497 reports), each point with a 95% exact binomial confidence interval. Panel A splits the reports by FAR part: Part 107, public aircraft operations, and recreational operations. Panel B splits them by UAS control mode: transitioning between modes, autonomous, waypoint flying, unknown, and manual control."><p class="s">I analyzed 497 NASA Aviation Safety Reporting System (ASRS) uncrewed aircraft system (UAS) reports using R, comparing the share coded “Software and Automation” across regulatory regimes and control modes. I visualized subgroup proportions with 95% exact binomial confidence intervals while keeping the interpretation descriptive.</p><p class="links"><a href="asrs.html">Project page</a><a href="https://github.com/TayFost/asrs-uas-software-automation-analysis" target="_blank" rel="noopener">Repository</a></p></div>'   /* Taylor 2026-11-08 (chat, T-2026-10-14-188): project page asrs.html added and linked; eyebrow back to Case study. Taylor 2026-11-03 (chat): public GitHub repository (R script, figure, README) linked under the text (T-2026-10-14-54). Taylor 2026-11-03 (chat): ASRS moves from Designing for Safety to Trust as Infrastructure, its analysis of Software and Automation coding across regulatory regimes and control modes being an authority and control question (T-2026-10-14-53). Text is the approved card in site_data.json asrs-analysis: title and caption verbatim (portfolio p. 11), scope as edited and approved (T-2026-10-14-20), limit verbatim (p. 12). 45 words. */
+      : '<div class="card ph"><p class="lbl">Project</p><p class="t">[Project card to come]</p><p class="s">[One line on the project.]</p></div>';
+    if(nm==='Designing for Ventures'){ cards='<div class="card multi"><p class="lbl">Project / Prototyping role</p><p class="t" data-pvt="Countdown CES recycled-plastic school furniture">Countdown CES (Circular Economy Solutions)</p><img class="hero" src="img/ces_build_card.webp" width="1724" height="852" loading="lazy" alt="Two team photos, Fall 2023. Left, a CNC router bit cutting chair parts from a sheet of recycled HDPE, purple flecked with teal. Right, a chair prototype in marbled recycled HDPE, with wedged joints holding its backrest, shown on a white background."><p class="s">Through ASU&#39;s Engineering Projects in Community Service (EPICS), our team designed recycled high-density polyethylene (HDPE) school furniture with Countdown CES for schools in Ghana. As prototyping lead, I operated computer numerical control (CNC) equipment and tested furniture joints to inform fit and manufacturing decisions.</p><p class="links"><a href="https://epics.engineering.asu.edu/2021/01/countdown-ces/" target="_blank" rel="noopener">EPICS project page</a><a href="https://asu.digication.com/taylor-fosters-gcsp-portfolio/project-1-1" target="_blank" rel="noopener">Fall 2023 reflection</a><a href="https://asu.digication.com/taylor-fosters-gcsp-portfolio/project-2" target="_blank" rel="noopener">Spring 2024 reflection</a></p></div>'+'<div class="card multi"><p class="lbl">Project / Research role</p><p class="t" data-pvt="BlueMatter brain-computer interface">The BlueMatter Project</p><img class="hero" src="img/bluematter_site_card.webp" width="1200" height="681" loading="lazy" alt="Hero section of the BlueMatter website: the headline Technology Controlled by Thought, No Implant Required, beside a glowing outline of a head with a stylized brain wired to icons of a phone, robot arm and house, on a dark blue background."><p class="s">Luminosity Lab research project on a discreet, non-invasive electroencephalography (EEG) brain-computer interface. As Human Systems and Algorithms Research Lead, I summarized the research on reading EEG brain signals, including machine learning and analysis methods inspired by dynamical systems theory. I also built and deployed much of the website&#39;s initial front end with the help of AI coding agents (Manus and ChatGPT&#39;s Codex).</p><p class="links"><a href="https://theluminositylab.com/projects/bluematter" target="_blank" rel="noopener">Luminosity Lab project page</a><a href="https://bluematterbci.github.io/" target="_blank" rel="noopener">BlueMatter website</a></p></div>'+'<div class="card multi"><p class="lbl">Project / Strategist role</p><p class="t" data-pv="full">Attune: A Lightweight Pre-fitting EMG Training Platform</p><img class="hero" src="img/attune_prosthetic_card.webp" width="509" height="339" loading="lazy" alt="A young woman in a white T-shirt sits cross-legged on a bed, wearing a black myoelectric prosthetic arm and resting its hand on her knee. Photo from the Attune NEXUS Summit 2026 poster."><p class="s">At the Luminosity Lab, I contributed research and product strategy for a proposed pre-fitting training platform using electromyography (EMG) and immersive environments. My work included partner and market research, motor-learning synthesis, and contributions to the team&#39;s white paper. The project remains in development and is not validated.</p><p class="links"><a href="https://www.attuneprep.com" target="_blank" rel="noopener">Attune website</a><a href="https://theluminositylab.com/projects/attune" target="_blank" rel="noopener">Luminosity Lab project page</a><a href="https://drive.google.com/file/d/1Na7Z4FcOGB7Lg7O1fgjbXNacWtIPz8Wl/view" target="_blank" rel="noopener">White paper (PDF)</a></p></div>'+'<div class="card multi"><p class="lbl">Project / Instructional role</p><p class="t">WithKiP Robotics Curriculum and Teacher-Led AI Support</p><img class="hero" src="img/kip_render_card.webp" width="1200" height="750" loading="lazy" alt="Transparent wireframe render of the KiP classroom robot from above, showing its housing, internal mounts, two side wheels and a rear caster ball."><p class="s">WithKiP Robotics/STEM Learning Platform, Former Luminosity Lab Project. My contribution to this team product is instructional design grounded in learning science. It includes seven teacher guides, an audit against the Computer Science Teachers Association (CSTA) Level 1B standards, before their 2026 revisions, a Next Generation Science Standards (NGSS) activity alignment, and the pedagogical specification, system prompt, and teacher feedback instrument for a teacher-led AI assistant. I also researched grant funding and marketing statistics for the team.</p><p class="links"><a href="https://theluminositylab.com/projects/kip" target="_blank" rel="noopener">Venture page</a><a href="https://www.linkedin.com/company/withkip/" target="_blank" rel="noopener">WithKiP on LinkedIn</a><a href="https://www.nextgenscience.org/search-standards" target="_blank" rel="noopener">NGSS standards</a><a href="https://csteachers.org/wp-content/uploads/2025/03/csta-k-12-computer-science-standards-revised.pdf" target="_blank" rel="noopener">CSTA standards (2017)</a></p></div>'; }   /* Taylor 2026-11-05 (chat): Attune card drafted from her LinkedIn Luminosity Lab entry, awaiting approval (T-2026-10-14-67). The open placeholder stays last until the third venture is chosen. Taylor 2026-11-09 (chat): Countdown CES card added first, chronologically (T-2026-10-14-203); text is my draft from her blurb, awaiting approval; image pairs CNC cutting of recycled HDPE with a chair prototype, no people (Fall 2023 transition slides, slide 5; Taylor 2026-11-09). Text reframed as builder for a startup (T-2026-10-14-205). data-pvt keeps the home preview short. */
+    cards+=(HONORS[ids[i]]||'');   /* after the existing cards on that page */
+    var ORD={'Trust as Infrastructure':['CrisisCourier','Project ENTERPRISE','Observer paradigm'],'Designing for Safety':['1st Place','Experimental design','Safety and Operations','Human-Robot Collaboration'],'Designing for Ventures':['Countdown CES','WithKiP','The BlueMatter Project','Attune']};
+    if(ORD[nm]){ var cs=cards.split(/(?=<(?:div|a) class="card)/), rk=function(c){ for(var j=0;j<ORD[nm].length;j++){ if(new RegExp('<p class="t"[^>]*>'+ORD[nm][j]).test(c)){ return j; } } return 99; }; cards=cs.map(function(c,k){ return [rk(c),k,c]; }).sort(function(a,b){ return a[0]-b[0]||a[1]-b[1]; }).map(function(x){ return x[2]; }).join(''); }   /* Taylor 2026-11-05 (chat): cards run in chronological order by the work's start, earliest first, on every pattern page; page order does not change. Safety: Devils Invent (Feb 2022), REU (summer 2022), internship (June 2023). Trust: CrisisCourier (HSE 542, Fall 2024), ENTERPRISE (Fall 2024; swapped in for ASRS, Taylor 2026-11-08), observer last (Taylor 2026-11-06: worked on into summer 2026, so it is placed by where the work ran to, as in Grid View). Ventures: Countdown CES (Fall 2023, Taylor 2026-11-09), WithKiP (Feb 2025), BlueMatter (31 Aug 2025), Attune (6 Sep 2025). Resilience and Knowledge already read in that order (GCSP first as the program; off-grid brief from Spring 2023, SpaceHACK Mar 2023; HSE 427, Insight Enclave, then ASRS from Spring 2026) and need no entry. Cards not listed keep their source order after the listed ones. */
+    s.innerHTML='<div class="page-in"><svg class="gfrag" viewBox="'+FRAG_VB+'" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use href="#gfrag"/></svg><span class="pchip"><span class="n">0'+(i+1)+'</span>'+glyph(ids[i])+'</span><h2 class="disp">'+nm+'</h2><p class="alt"><span class="altx">'+alts[i]+'</span></p><p class="gloss">'+glosses[i]+'</p><div class="cards">'+cards+'</div></div>';
+    pages.appendChild(s); secs.push(s);
+  });
+  var ins=secs.map(function(s){ return s.querySelector('.page-in'); });
+  var FADE_FLOOR=0.75;   /* lowest opacity a section reaches: gloss 5.2:1 and card summary 5.0:1 at 0.75 (card summary is 4.48:1 at 0.7 on the last ground) */
+  function fadeAndTrack(){
+    if(mode!=='inner') return;
+    var best=-1, bestOp=-1, still=reduce || !!(hc && hc.matches);
+    secs.forEach(function(s,i){
+      var r=s.getBoundingClientRect(), c=r.top+r.height/2, d=c-vh/2,
+          dz=Math.max(0,(r.height-vh)/2), dd=(d<0?-1:1)*Math.max(0,Math.abs(d)-dz),   /* D1: no dimming while a tall section covers the viewport */
+          q=Math.abs(dd)/(vh*0.62), op=still?1:Math.max(FADE_FLOOR,1-q*q);
+      ins[i].style.opacity=op.toFixed(3);
+      ins[i].style.transform=still?'none':'translateY('+(d*0.05).toFixed(1)+'px)';
+      if(r.top<=vh/2 && r.bottom>vh/2){ best=i; bestOp=2; } else if(op>bestOp){ bestOp=op; best=i; }   /* current section = the one under the viewport midline */
+    });
+    prog=Math.max(0,Math.min(1,(window.scrollY||0)/maxTop)); paintBar(); setGround(st.rho/45); yieldCue();
+    if(best>=0 && best!==current){ setCurrent(best); }
+  }
+  /* the progress bar and the contact links share the bottom-right corner: once the contact band is on screen the bar steps aside; home and compact home never carry the class */
+  var footerEl=document.querySelector('.contact');
+  function yieldCue(){
+    if(!cueEl) return;
+    var on=false;
+    if(mode==='inner' && footerEl && !document.body.classList.contains('compact')){ on=footerEl.getBoundingClientRect().top < vh-12; }
+    cueEl.classList.toggle('yield',on);
+  }
+  function onPref(){ reduce=!!(mqReduce && mqReduce.matches); groundKey=''; if(mode==='inner'){ fadeAndTrack(); } else if(st){ setGround(st.rho/45); } }
+  window.__onPref=onPref;
+  [mqReduce,hc].forEach(function(m){ if(!m) return; if(m.addEventListener) m.addEventListener('change',onPref); else if(m.addListener) m.addListener(onPref); });
+  var ticking=false;
+  addEventListener('scroll',function(){ if(ticking) return; ticking=true; requestAnimationFrame(function(){ ticking=false; fadeAndTrack(); if(linkTarget){ moveSight(); } }); },{passive:true});
+
+  /* ---- moving between states ---- */
+  function now(){ return (window.performance && performance.now) ? performance.now() : Date.now(); }
+  function pad(i){ return '#'+ids[i]; }
+  function pathOnly(){ return location.pathname+location.search; }
+  function pushUrl(h){ try{ history.pushState(null,'',pathOnly()+h); }catch(e){} }
+  function parseHash(){ var h=(location.hash||'').replace(/^#/,'').toLowerCase(), k=ids.indexOf(h); if(k>=0) return k; var m=/^0?([1-5])$/.exec(h); return m ? (+m[1]-1) : -1; }   /* #trust names a page; #01 to #05 still open by position in the order shown */
+  var repT=null;
+  function trackUrl(i){   /* the address bar follows the section in view, without adding history entries */
+    clearTimeout(repT);
+    repT=setTimeout(function(){ if(mode!=='inner' || location.hash===pad(i)) return; try{ history.replaceState(null,'',pathOnly()+pad(i)); }catch(e){} },160);
+  }
+  function go(i){ if(mode==='home'){ enterInner(i); } else { scrollToSection(i); } }
+  function scrollToSection(i){ scrollTo({top:secs[i].offsetTop, behavior: reduce ? 'auto' : 'smooth'}); }
+  var lastShift=-1e9, topAt=0, bootIdx=-1, bootY=0;
+  function enterInner(i,o){
+    o=o||{};
+    if(compactOn){   /* leaving a scrolled compact home: convert document coordinates to viewport coordinates before the scene goes back to fixed */
+      var sy=window.scrollY||0;
+      if(st){ render({cx:st.cx,cy:st.cy-sy,s:st.s,rho:st.rho,span:st.span}); }
+      chips.forEach(function(c){ c.el.style.top=(parseFloat(c.el.style.top)-sy)+'px'; });
+      homeEl.style.top=(-sy)+'px';
+      compactOn=false; document.body.classList.remove('compact','scrolled');
+    }
+    mode='inner'; ready=false; hover=-1; linkTarget=null; homeHover=-1; lastShift=now(); topAt=lastShift; setIntent(0);
+    document.body.classList.add('inner');
+    scrollTo(0,secs[i].offsetTop);
+    maxTop=Math.max(1,secs[N-1].offsetTop); prog=Math.max(0,Math.min(1,secs[i].offsetTop/maxTop)); paintBar();
+    current=i; sel=i;
+    if(!o.silent) pushUrl(pad(i));
+    updateChips(); setFocusables();
+    if(o.instant){
+      if(raf){ cancelAnimationFrame(raf); raf=null; } animating=false;
+      render(targetState(metrics(),'inner')); applyLayout('inner'); ready=true; updateChips();
+    } else {
+      setTimeout(function(){ if(mode==='inner'){ applyLayout('inner'); } }, reduce?0:240);
+      animateTo(targetState(metrics(),'inner'),null,function(){ ready=true; updateChips(); });
+    }
+    fadeAndTrack();
+  }
+  function exitInner(o){
+    o=o||{};
+    mode='home'; ready=false; hover=-1; linkTarget=null; lastShift=now(); setIntent(0);
+    document.body.classList.remove('inner'); yieldCue();
+    scrollTo(0,0); sel=-1; homeEl.style.top='';   /* back home with nothing selected until the pointer or focus picks a chip (Taylor 2026-11-06) */
+    syncCompact();
+    if(!o.silent) pushUrl('');
+    updateChips(); setFocusables();
+    setTimeout(function(){ if(mode==='home'){ applyLayout('home'); } }, reduce?0:240);
+    animateTo(targetState(metrics(),'home'),null,function(){ ready=true; updateChips(); });
+  }
+
+  /* ---- scroll as the command input ---- */
+  /* Intent accumulates from wheel and touch, decays when input stops, and commits only past a threshold (deadband).
+     Leaving needs a larger threshold than entering, and neither accumulates during a transition or just after one (hysteresis). */
+  var IN_AT=140, OUT_AT=240, LOCK=900, TOP_HOLD=350, intent=0, intentT=null, cueBar=document.querySelector('.cue-bar i'), cueEl=document.querySelector('.cue'), cueGone=false;
+  var actT=null, lastF=0;
+  function paintBar(slow){   /* the bar fills toward whatever the next scroll will commit. At rest it shows position: home is empty, inside it is progress through the five patterns */
+    if(!cueBar) return;
+    var f = (mode==='inner') ? (intent>0 ? intent/OUT_AT : prog) : intent/IN_AT;
+    f=Math.max(0,Math.min(1,f));
+    cueBar.style.transform='scaleX('+f.toFixed(3)+')'; lastF=f;
+  }
+  function dismissCue(){ if(cueGone || !cueEl) return; cueGone=true; cueEl.classList.add('gone'); }   /* the words go once the scroll gesture has been performed, and stay gone */
+  function setIntent(v){
+    var was=intent; intent=v;
+    if(mode==='home' && intent>=IN_AT*0.25){ dismissCue(); }
+    if(cueEl){   /* the bar thickens while a pull is pending and lets go as it drains */
+      if(intent>0){ clearTimeout(actT); cueEl.classList.add('act'); }
+      else if(was>0){ clearTimeout(actT); cueEl.classList.remove('act'); }
+    }
+    paintBar(intent<was);
+  }
+  function nudge(dy){   /* dy > 0 points toward the patterns */
+    var t=now();
+    if(animating || t-lastShift<LOCK) return;
+    if(mode==='home' && compactOn) return;   /* compact home scrolls like a page; entry is by tap */
+    clearTimeout(intentT); intentT=setTimeout(function(){ setIntent(0); },320);
+    if(mode==='home'){
+      if(dy<=0){ setIntent(0); return; }
+      setIntent(intent+dy);
+      if(intent>=IN_AT){ enterInner(entryTarget()); }
+    } else {
+      if(dy>=0 || (window.scrollY||0)>2 || t-topAt<TOP_HOLD){ if(intent){ setIntent(0); } return; }
+      setIntent(intent-dy);   /* upward pull at the top fills the bar toward leaving */
+      if(intent>=OUT_AT){ exitInner(); }
+    }
+  }
+  var wasTop=true;
+  addEventListener('scroll',function(){ document.body.classList.toggle('scrolled', compactOn && (window.scrollY||0)>6); },{passive:true});
+  addEventListener('scroll',function(){ var top=(window.scrollY||0)<=2; if(top && !wasTop){ topAt=now(); } wasTop=top; },{passive:true});
+  addEventListener('wheel',function(e){ if(e.ctrlKey) return; nudge(e.deltaY*(e.deltaMode===1?16:(e.deltaMode===2?vh:1))); },{passive:true});
+  var ty=null;
+  addEventListener('touchstart',function(e){ ty=e.touches[0].clientY; touching=true; },{passive:true});
+  addEventListener('touchmove',function(e){ if(ty===null) return; var y=e.touches[0].clientY; nudge((ty-y)*1.4); ty=y; },{passive:true});
+  addEventListener('touchend',function(){ ty=null; touching=false; if(holdCompact){ relayout(); } });
+  addEventListener('touchcancel',function(){ ty=null; touching=false; if(holdCompact){ relayout(); } });
+  addEventListener('keydown',function(e){
+    if(e.ctrlKey||e.metaKey||e.altKey||e.shiftKey || mode!=='home' || animating || compactOn) return;
+    var t=e.target, onPage=(t===document.body || t===document.documentElement);
+    if(onPage && (e.key==='PageDown' || e.key===' ' || e.key==='ArrowDown')){ e.preventDefault(); enterInner(entryTarget()); }
+  });
+  /* the sight follows any link, not only the ones on the globe */
+  function linkOf(t){ var a=t && t.closest ? t.closest('a[href]') : null; return (a && !a.closest('.chip, .node, .top, .contact')) ? a : null; }   /* header links, the home mark and the contact links take the Lucent wash only, no reticle (header: Taylor 2026-10-17; contact band mirrors it, v29) */
+  function setLink(a){ if(a===linkTarget) return; linkTarget=a; moveSight(); }
+  document.addEventListener('mouseover',function(e){ setLink(linkOf(e.target)); });
+  document.addEventListener('mouseout',function(e){ if(!e.relatedTarget){ setLink(null); } });
+  document.addEventListener('focusin',function(e){ setLink(linkOf(e.target)); });
+  document.addEventListener('focusout',function(e){ if(!linkOf(e.relatedTarget)){ setLink(null); } });
+  addEventListener('popstate',function(){
+    var i=parseHash();
+    if(i>=0){ if(mode==='home'){ enterInner(i,{silent:true}); } else { scrollToSection(i); } }
+    else if(mode==='inner'){ exitInner({silent:true}); }
+  });
+  document.addEventListener('click',function(e){ var a=e.target.closest && e.target.closest('a[href="#"]'); if(a){ e.preventDefault(); } });   /* placeholders do not navigate or write history (card affordance is D17) */
+
+  document.getElementById('homeLink').addEventListener('click',function(e){ e.preventDefault(); if(mode==='inner') exitInner(); });
+  function relayout(){ syncCompact(); var m=metrics(); render(targetState(m,mode)); buildCache(); applyLayout(mode); updateChips(); yieldCue(); }
+  addEventListener('resize',relayout);
+  addEventListener('scroll',function(){ if(holdCompact && !touching && (window.scrollY||0)<=2){ relayout(); } },{passive:true});   /* release the latch once the page is back at the top and no finger is down */
+
+
+  /* prototype preview of the order links: O on the home view cycles default, ?for=hri, ?for=safety. A real query string always wins. */
+  var pt=null, ptT=null;
+  if(PREVIEW){
+    pt=document.createElement('div');
+    pt.style.cssText="position:fixed;left:16px;bottom:14px;z-index:60;font:11px 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);background:var(--raised);border:1px solid var(--hair);padding:6px 10px;border-radius:4px;opacity:0;transition:opacity .2s;pointer-events:none";
+    document.body.appendChild(pt);
+    var hasQ=!!(qparam('order')||qparam('for'));
+    var label=hasQ ? ('Order link: '+ids.join(', ')) : (pvFor ? ('Preview order: '+pvFor) : '');
+    if(label){ pt.textContent=label; pt.style.opacity=1; ptT=setTimeout(function(){ pt.style.opacity=0; },2200); }
+    addEventListener('keydown',function(e){
+      if(e.ctrlKey||e.metaKey||e.altKey||e.shiftKey||mode!=='home'||animating) return;
+      if(e.target!==document.body && e.target!==document.documentElement) return;
+      if(e.key!=='o' && e.key!=='O') return;
+      var nx=PV_KEYS[(PV_KEYS.indexOf(pvFor)+1)%PV_KEYS.length];
+      try{ sessionStorage.setItem('pv_for',nx); }catch(err){ return; }
+      location.reload();
+    });
+  }
+
+  /* tuning aid for this prototype: [ ] move the start, - = move the end, c or 1 to 0 pick the endpoint hue */
+  var TUNE=/[?&]tune(&|=|$)/.test(location.search);   /* D8: tuning keys are off unless the URL asks for them */
+  var toast=document.createElement('div');
+  toast.style.cssText="position:fixed;right:16px;bottom:14px;z-index:60;font:11px 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);background:var(--raised);border:1px solid var(--hair);padding:6px 10px;border-radius:4px;opacity:0;transition:opacity .2s;pointer-events:none";
+  if(TUNE){ document.body.appendChild(toast); }
+  var toastT=null;
+  function showToast(){
+    toast.textContent=((endIdx+1)%10)+' '+ENDS[endIdx].name+', '+TINT_START.toFixed(2)+' to '+TINT_END.toFixed(2);
+    toast.style.opacity=1; clearTimeout(toastT); toastT=setTimeout(function(){ toast.style.opacity=0; },1400);
+  }
+  addEventListener('keydown',function(e){
+    if(!TUNE || e.ctrlKey || e.metaKey || e.altKey) return;
+    var k=e.key, ch=true;
+    if(k==='['){ TINT_START=Math.max(0,+(TINT_START-0.05).toFixed(2)); }
+    else if(k===']'){ TINT_START=Math.min(TINT_END,+(TINT_START+0.05).toFixed(2)); }
+    else if(k==='-'){ TINT_END=Math.max(TINT_START,+(TINT_END-0.05).toFixed(2)); }
+    else if(k==='=' || k==='+'){ TINT_END=Math.min(1,+(TINT_END+0.05).toFixed(2)); }
+    else if(k==='c' || k==='C'){ endIdx=(endIdx+1)%ENDS.length; }
+    else if(/^[0-9]$/.test(k)){ var di=(+k+9)%10; if(di<ENDS.length){ endIdx=di; } else { ch=false; } }
+    else { ch=false; }
+    if(ch){ groundKey=''; setGround(st.rho/45); showToast(); }
+  });
+
+  /* ---- init ---- */
+  (function(){
+    measureChips(); syncCompact(); var m=metrics(); render(targetState(m,'home'));
+     buildCache(); applyLayout('home'); updateChips(); setFocusables();
+    if(document.fonts && document.fonts.ready){ document.fonts.ready.then(function(){ measureChips(); syncCompact(); render(targetState(metrics(),mode)); measureChips(); buildCache(); applyLayout(mode); updateChips(); if(mode==='inner' && bootIdx>=0 && Math.abs((window.scrollY||0)-bootY)<2){ bootY=secs[bootIdx].offsetTop; maxTop=Math.max(1,secs[N-1].offsetTop); scrollTo(0,bootY); } bootIdx=-1; }); }
+    try{ history.scrollRestoration='manual'; }catch(e){}
+    var h0=parseHash(); if(h0>=0){ bootIdx=h0; bootY=secs[h0].offsetTop; enterInner(h0,{instant:true,silent:true}); }
+  })();
+  window.__nav={go:go,exit:exitInner,get mode(){return mode;},get current(){return current;},get sel(){return sel;},nodes:nodes,chips:chips,get st(){return st;}};
+})();
+</script>
+<script>
+/* light and dark mode toggle (Taylor 2026-11-03). aria-pressed reports light mode; the choice is kept in localStorage when the browser allows it. */
+(function(){
+  var b=document.getElementById('themeToggle'), root=document.documentElement; if(!b) return;
+  function sync(){ var light=root.getAttribute('data-theme')==='light'; b.setAttribute('aria-pressed',light?'true':'false'); b.setAttribute('title',light?'Switch to dark mode':'Switch to light mode'); }
+  b.addEventListener('click',function(e){
+    e.preventDefault(); e.stopPropagation();
+    var light=root.getAttribute('data-theme')!=='light';
+    if(light){ root.setAttribute('data-theme','light'); } else { root.removeAttribute('data-theme'); }
+    try{ localStorage.setItem('theme', light?'light':'dark'); }catch(err){}
+    if(window.__onPref){ window.__onPref(); }
+    sync();
+  });
+  sync();
+})();
+</script>
+<script>
+/* the theme choice travels with links between the home page and the project pages, so a reader who chose light mode is not sent back to dark when the browser blocks storage (Taylor 2026-11-03) */
+function __themeName(){ var t=document.documentElement.getAttribute('data-theme')==='light'?'light':'dark'; try{ window.name=(window.name||'').replace(/(?:^|;)theme=(light|dark)/g,'').replace(/^;+|;+$/g,'')+(window.name&&!/^;*$/.test(window.name.replace(/(?:^|;)theme=(light|dark)/g,''))?';':'')+'theme='+t; }catch(err){} }
+document.addEventListener('click',function(e){ if(e.target && e.target.closest && e.target.closest('#themeToggle')){ setTimeout(function(){ __themeName(); if(window.__themeSave){ window.__themeSave(); } },0); } });
+/* in the claude.ai viewer each page may open in a fresh frame with storage blocked, so the choice is also kept per viewer in the artifact's private db (data/users/<id>/theme). It is read once on load and written only when the viewer clicks the toggle. Outside the viewer this does nothing. */
+(async function(){
+  try{
+    if(!window.claude || !window.claude.use) return;
+    var db=await window.claude.use('db'), user=await window.claude.use('user'); if(!db || !user) return;
+    var id=await user.id(); if(!id) return;
+    var ref=db.doc('data/users/'+id+'/theme'), root=document.documentElement;
+    window.__themeSave=function(){ ref.set({value: root.getAttribute('data-theme')==='light'?'light':'dark'}).catch(function(){}); };
+    var snap=await ref.get(); if(!snap.exists) return;
+    var t=(snap.data()||{}).value, now=root.getAttribute('data-theme')==='light'?'light':'dark';
+    if((t==='light'||t==='dark') && t!==now){
+      if(t==='light'){ root.setAttribute('data-theme','light'); } else { root.removeAttribute('data-theme'); }
+      var b=document.getElementById('themeToggle'); if(b){ b.setAttribute('aria-pressed',t==='light'?'true':'false'); b.setAttribute('title',t==='light'?'Switch to dark mode':'Switch to light mode'); }
+      try{ localStorage.setItem('theme',t); }catch(err){}
+      __themeName(); if(window.__onPref){ window.__onPref(); }
+    }
+  }catch(err){}
+})();
+document.addEventListener('click',function(e){
+  __themeName();
+  var a=e.target && e.target.closest ? e.target.closest('a[href]') : null; if(!a) return;
+  var h=a.getAttribute('href')||''; if(!/^(index|observer|crisiscourier|asrs|spacehack|case-studies|grid|contact)\.html/.test(h)) return;
+  try{ var u=new URL(h, location.href); u.searchParams.set('theme', document.documentElement.getAttribute('data-theme')==='light'?'light':'dark'); a.href=u.pathname.split('/').pop()+u.search+u.hash; }catch(err){}
+}, true);
+</script>
+<script>
+/* commit sweep (Version 109): see the CSS note above */
+(function(){
+  var NS='http://www.w3.org/2000/svg', K=Math.tan(40*Math.PI/180), DUR=1520, EASE='cubic-bezier(.37,.1,.33,.95)';
+  var chips=document.querySelectorAll('#chips .chip'), box=document.getElementById('chips'); if(!chips.length||!box) return;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)'), forced=window.matchMedia&&matchMedia('(forced-colors: active)');
+  function el(n,a,p){ var e=document.createElementNS(NS,n); for(var k in a) e.setAttribute(k,a[k]); if(p) p.appendChild(e); return e; }
+  function bar(x,w,h){ var a=K*h/2; return [(x-w/2+a)+','+0,(x+w/2+a)+','+0,(x+w/2-a)+','+h,(x-w/2-a)+','+h].join(' '); }
+  var live=null;
+  function clear(){ if(!live) return; live.anims.forEach(function(a){ a.cancel(); }); live.parts.forEach(function(p){ p.remove(); }); live=null; }
+  function fire(i){
+    if((reduce&&reduce.matches)||(forced&&forced.matches)||!Element.prototype.animate) return;
+    var ch=chips[i], svg=ch&&ch.querySelector('svg.bd'), poly=svg&&svg.querySelector('polygon'); if(!poly) return;
+    var cs=getComputedStyle(ch); if(cs.display==='none'||cs.visibility==='hidden'||!ch.classList.contains('show')) return;
+    clear();
+    var r=ch.getBoundingClientRect(), W=r.width, H=r.height, a=K*H/2;
+    var cp=el('clipPath',{id:'swp'+i},svg); el('polygon',{points:poly.getAttribute('points')},cp).style.cssText='fill:#000;stroke:none';
+    var gr=el('linearGradient',{id:'swpG'+i,gradientUnits:'userSpaceOnUse',x1:(-18.5-a),y1:0,x2:(8+a),y2:0},svg);
+    ['--sw0','--sw1','--sw2','--sw3'].forEach(function(v,k){ el('stop',{offset:k/3},gr).style.stopColor='var('+v+')'; });
+    var g=el('g',{'clip-path':'url(#swp'+i+')','class':'sweep'},svg), mv=el('g',{},g);
+    /* inline style: the chip's own '.chip .bd polygon' rule would otherwise paint these with the chip fill and stroke */
+    el('polygon',{points:bar(0,16,H)},mv).style.cssText='fill:url(#swpG'+i+');stroke:none';
+    el('polygon',{points:bar(-16,5,H)},mv).style.cssText='fill:url(#swpG'+i+');stroke:none;opacity:.7';
+    var O=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sw-o'))||.5;
+    var anims=[
+      mv.animate([{transform:'translateX(-40px)'},{transform:'translateX('+(W+40)+'px)'}],{duration:DUR,easing:EASE,fill:'forwards'}),
+      g.animate([{opacity:O},{opacity:O,offset:.72},{opacity:0}],{duration:DUR,fill:'forwards'})];
+    var me={parts:[g,cp,gr],anims:anims}; live=me;
+    anims[0].onfinish=function(){ if(live===me) clear(); };
+  }
+  /* commits only (click or Enter on a chip or node). Leaving the home view hides every chip, then the chosen one re-enters
+     in its corner place; the sweep plays on that arrival. A commit whose chip is already showing sweeps at once. */
+  var pending=-1, pendT=null;
+  function arm(i){ requestAnimationFrame(function(){
+    var ch=chips[i]; if(!ch) return;
+    if(ch.classList.contains('show') && parseFloat(getComputedStyle(ch).opacity)>0.5){ pending=-1; fire(i); return; }
+    pending=i; clearTimeout(pendT); pendT=setTimeout(function(){ pending=-1; },2000); }); }
+  new MutationObserver(function(){
+    if(pending<0) return; var ch=chips[pending];
+    if(ch && ch.classList.contains('show')){ var i=pending; pending=-1; clearTimeout(pendT); setTimeout(function(){ fire(i); },140); }   /* after its .22 s fade-in is mostly done */
+  }).observe(box,{subtree:true,attributes:true,attributeFilter:['class']});
+  function hook(list){ list.forEach(function(a,i){ a.addEventListener('click',function(){ arm(i); }); }); }
+  hook(Array.prototype.slice.call(chips)); hook(Array.prototype.slice.call(document.querySelectorAll('#scene .node')));
+})();
+</script>
+<script>
+(function(){
+  var slot=document.querySelector('#home .pv-slot'), chips=[].slice.call(document.querySelectorAll('#chips .chip')), pages=[].slice.call(document.querySelectorAll('.page-in'));
+  if(!slot||!chips.length) return;
+  var data=chips.map(function(c,i){ var g=pages[i]&&pages[i].querySelector('.pchip svg'); return {icon:g?g.outerHTML:'', titles:pages[i]?[].slice.call(pages[i].querySelectorAll('.card:not(.ph) .t')).map(function(e){ return e.hasAttribute('data-pvt') ? e.getAttribute('data-pvt') : e.hasAttribute('data-pv') ? e.textContent.trim() : e.textContent.split(':')[0].trim(); })   /* data-pv: keep the full title, subtitle included (Taylor 2026-11-06, Attune) */.filter(Boolean).slice(0,3).concat([].slice.call(pages[i].querySelectorAll('.card:not(.ph) .t[data-pvk]')).slice(0).filter(function(e,n,a){ return [].indexOf.call(pages[i].querySelectorAll('.card:not(.ph) .t'),e)>=3; }).map(function(e){ return e.getAttribute('data-pvt')||e.textContent.trim(); })):[]}; });   /* data-pvk: a card past the first three that also shows in the home preview (Taylor 2026-11-10, T-2026-10-14-213) */
+  data.forEach(function(d,i){ if(!d.titles.length) return; var s=document.createElement('span'); s.id='pvd'+i; s.className='pv-sr'; s.textContent='Includes '+d.titles.join('; '); (document.getElementById('main')||document.body).appendChild(s); chips[i].setAttribute('aria-describedby','pvd'+i); });
+  function esc(t){ return t.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+  var shown=-1, dwellT=null, DWELL=180;
+  function paint(k){ shown=k; slot.classList.remove('pv-in');
+    slot.innerHTML=(k<0||!data[k].titles.length)?'':'<span class="pv-i" aria-hidden="true">'+data[k].icon+'</span>'+data[k].titles.map(function(t){ return '<span class="pv-t">'+esc(t)+'</span>'; }).join('<span class="pv-s"> · </span>');
+    if(k>=0){ void slot.offsetWidth; slot.classList.add('pv-in'); } }
+  slot.addEventListener('animationend',function(e){ if(e.animationName==='pvSheen' && e.target===slot){ slot.classList.remove('pv-in'); } });
+  function render(){ var k=-1; chips.forEach(function(c,j){ if(c.classList.contains('sel')) k=j; });
+    clearTimeout(dwellT); if(k===shown) return;
+    if(k<0){ paint(-1); return; }   /* clears at once */
+    dwellT=setTimeout(function(){ paint(k); },DWELL); }
+  new MutationObserver(render).observe(document.getElementById('chips'),{subtree:true,attributes:true,attributeFilter:['class']}); render();
+})();
+</script>
+<script>
+(function(){
+  var b=document.body, cue=document.getElementById('introCue'); if(!cue) return;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)');
+  /* no intro for a deep link, a compact (scrolling) home, or a visitor who already revealed it this session */
+  var seen=false; try{ seen=sessionStorage.getItem('navSeen')==='1'; }catch(e){}
+  if(location.hash.length>1 || b.classList.contains('compact') || b.classList.contains('inner') || seen) return;
+  b.classList.add('intro');
+  /* the intro no longer waits for a gesture (Taylor 2026-11-10, critique finding 5): it reveals on its own after 1.5 s, or as soon
+     as a mouse moves 40 px, so a first visit shows the themes and their previews without a scroll */
+  var autoT=setTimeout(function(){ reveal(); },1500), mx=null, my=null;
+  addEventListener('mousemove',function(e){ if(!b.classList.contains('intro')) return; if(mx===null){ mx=e.clientX; my=e.clientY; return; } if(Math.abs(e.clientX-mx)+Math.abs(e.clientY-my)>40) reveal(); },{passive:true});
+  function place(){   /* centre the cue in the space the globe and chips will occupy */
+    var slot=document.querySelector('#home .pv-slot'), role=document.querySelector('#home .role');
+    var top=((slot&&slot.offsetHeight)?slot:role).getBoundingClientRect().bottom;
+    cue.style.top=Math.round(top+(innerHeight-top-cue.offsetHeight)*0.42)+'px';
+  }
+  place(); addEventListener('resize',place);
+  var acc=0, armed=true, quietT=null;
+  function reveal(){
+    if(!b.classList.contains('intro')) return;
+    clearTimeout(autoT);
+    b.classList.remove('intro'); try{ sessionStorage.setItem('navSeen','1'); }catch(e){}
+    if(!(reduce&&reduce.matches)){ b.classList.add('revealing'); setTimeout(function(){ b.classList.remove('revealing'); },700); }
+    holdGesture();
+  }
+  /* the gesture that revealed the navigator must not also enter a pattern: swallow input until it has been quiet 350 ms */
+  var holding=false;
+  function holdGesture(){ holding=true; clearTimeout(quietT); quietT=setTimeout(function(){ holding=false; },350); }
+  function gate(e,dy){
+    if(holding){ e.stopImmediatePropagation(); holdGesture(); return; }
+    if(!b.classList.contains('intro')) return;
+    e.stopImmediatePropagation();
+    if(dy>0){ acc+=dy; if(acc>=60) { acc=0; reveal(); } }
+  }
+  addEventListener('wheel',function(e){ if(e.ctrlKey) return; gate(e,e.deltaY*(e.deltaMode===1?16:(e.deltaMode===2?innerHeight:1))); },{capture:true,passive:true});
+  var ty=null;
+  addEventListener('touchstart',function(e){ ty=e.touches[0].clientY; if(holding) holdGesture(); },{capture:true,passive:true});
+  addEventListener('touchmove',function(e){ if(ty===null) return; var y=e.touches[0].clientY; gate(e,(ty-y)*1.4); ty=y; },{capture:true,passive:true});
+  addEventListener('touchend',function(){ ty=null; },{capture:true,passive:true});
+  addEventListener('keydown',function(e){
+    if(!b.classList.contains('intro') && !holding) return;
+    var k=e.key; if(k==='ArrowDown'||k==='PageDown'||(k===' '&&e.target===document.body)){ e.stopImmediatePropagation(); e.preventDefault(); if(b.classList.contains('intro')) reveal(); }
+  },true);
+  cue.addEventListener('click',function(){ reveal(); var c=document.querySelector('#chips .chip'); });
+})();
+</script>
+<script>
+/* resting pointer (Taylor 2026-11-06): revealing the navigator, or returning to the home view, can put a chip or node under a pointer
+   that has not moved. That must not count as a selection, so mouseenter on chips and nodes is held until the pointer really moves
+   (more than 2 px from where it was, or a movement delta from a mouse or pen). Keyboard focus and clicks are unaffected. Once armed,
+   the element under the pointer is selected as if it had just been entered. */
+(function(){
+  var armed=false, bx=null, by=null, lx=null, ly=null, b=document.body;
+  function hit(t){ return t && t.closest ? t.closest('#chips .chip, #scene .node') : null; }
+  function disarm(){ armed=false; bx=lx; by=ly; }
+  addEventListener('mouseenter',function(e){ if(!armed && hit(e.target) && e.isTrusted){ e.stopImmediatePropagation(); } },true);
+  function note(e){ if(typeof e.clientX==='number'){ lx=e.clientX; ly=e.clientY; } }
+  addEventListener('wheel',note,{capture:true,passive:true});
+  addEventListener('pointermove',function(e){
+    var moved=(e.pointerType==='mouse'||e.pointerType==='pen') && ((bx===null) ? (Math.abs(e.movementX)+Math.abs(e.movementY)>0) : (Math.abs(e.clientX-bx)+Math.abs(e.clientY-by)>2));
+    note(e);
+    if(armed || !moved) return;
+    armed=true;
+    var t=hit(document.elementFromPoint(e.clientX,e.clientY));
+    if(t){ t.dispatchEvent(new MouseEvent('mouseenter',{clientX:e.clientX,clientY:e.clientY})); }
+  },{capture:true,passive:true});
+  /* the guard drops on the reveal (intro removed) and on every return to the home view (inner removed) */
+  var was={intro:b.classList.contains('intro'), inner:b.classList.contains('inner')};
+  new MutationObserver(function(){
+    var now={intro:b.classList.contains('intro'), inner:b.classList.contains('inner')};
+    if((was.intro && !now.intro) || (was.inner && !now.inner)){ disarm(); }
+    was=now;
+  }).observe(b,{attributes:true,attributeFilter:['class']});
+})();
+</script>
+<script>
+/* Grid View placement (Taylor 2026-11-06): above the scroll cue on home, docked 12 px under the header band inside the patterns. */
+(function(){
+  var g=document.getElementById('gridCue'), top=document.querySelector('.top'), cue=document.querySelector('.cue'), b=document.body; if(!g||!top) return;
+  function place(){
+    var y;
+    if(b.classList.contains('inner')){ y=top.getBoundingClientRect().bottom+8+12; }   /* the band hangs 8 px below the header */
+    else { var cb=cue? cue.getBoundingClientRect() : null; y=(cb&&cb.height? cb.top : innerHeight-35)-10-(g.offsetHeight||36); }
+    g.style.top=Math.round(y)+'px';
+  }
+  new MutationObserver(place).observe(b,{attributes:true,attributeFilter:['class']});
+  addEventListener('resize',place); addEventListener('load',place); place();
+})();
+</script>
+<script>
+/* phone Projects bar (2026-11-10, Taylor: fix the 320x568 overlap): on the home view the bar keeps 16 px below the last theme chip. When the chips reach
+   lower than the bar's resting place, the bar rides below them and scrolls up with the page until it settles at the bottom edge. Inside the patterns it
+   stays above the dock, as before. */
+(function(){
+  var g=document.getElementById('gridCue'), b=document.body, mq=window.matchMedia('(max-width:759px)'), raf=0; if(!g) return;
+  function fit(){
+    raf=0;
+    if(!mq.matches || b.classList.contains('inner') || b.classList.contains('intro')){ if(g.style.transform) g.style.transform=''; return; }
+    var cs=document.querySelectorAll('.chip.show'), last=0; for(var i=0;i<cs.length;i++){ var r=cs[i].getBoundingClientRect(); if(r.height && r.bottom>last) last=r.bottom; }
+    g.style.transform=''; var gr=g.getBoundingClientRect(); if(!gr.height || !last){ return; }
+    var dy=Math.ceil(last+16-gr.top); g.style.transform = dy>0 ? 'translate(-50%,'+dy+'px)' : '';
+  }
+  function req(){ if(!raf) raf=requestAnimationFrame(fit); }
+  addEventListener('scroll',req,{passive:true}); addEventListener('resize',req); addEventListener('load',req);
+  new MutationObserver(req).observe(b,{attributes:true,attributeFilter:['class']});
+  setTimeout(req,600); setTimeout(req,2000);
+})();
+</script>
+</body>
+</html>
+
+
+
+
+</body></html>
+<script>
+/* Card summaries (Taylor 2026-11-10): every card shows only the first sentence of its summary; "Learn more" opens the full text and the links, unchanged.
+   The split happens at load from whatever text the card carries, so summary edits need no markup changes. Without JavaScript the full text shows.
+   Card links that read generically ("Project page", "Paper") get the card title as hidden context for screen readers. */
+(function(){
+  var ABBR=/(?:\b(?:Dr|Mr|Ms|Mrs|St|vs|etc|al|No|Fig|Inc|Ltd|Jr|Sr|approx|e\.g|i\.e|U\.S|U\.K|Ph\.D|B\.S|M\.S)|\b[A-Z])\.$/;
+  function firstSentence(t){
+    var re=/[.!?][”"’)]?(?=\s+[A-Z“"(\d])/g, m;
+    while((m=re.exec(t))){ var head=t.slice(0,m.index+m[0].length); if(!ABBR.test(head)) return head.trim(); }
+    return null;
+  }
+  function vh(text){ var s=document.createElement('span'); s.className='vh'; s.textContent=text; return s; }
+  function enhance(root){
+    [].forEach.call((root||document).querySelectorAll('.card'),function(card){
+      if(card.getAttribute('data-more')) return; card.setAttribute('data-more','1');
+      var t=card.querySelector('.t'), title=t?t.textContent.trim():'';
+      var p=null; [].some.call(card.children,function(c){ if(c.matches && c.matches('p.s')){ p=c; return true; } return false; });
+      if(p){
+        var full=p.textContent.replace(/\s+/g,' ').trim(), lead=firstSentence(full);
+        if(lead && lead.length<full.length-1){
+          var lp=document.createElement('p'); lp.className='s lead'; lp.textContent=lead;
+          var d=document.createElement('details'); d.className='more';
+          d.innerHTML='<summary><span class="o">Learn more</span><span class="c">Show less</span></summary>';
+          if(title) d.querySelector('summary').appendChild(vh(': '+title));
+          p.parentNode.insertBefore(lp,p); p.parentNode.insertBefore(d,p); d.appendChild(p);
+          d.addEventListener('toggle',function(){ try{ window.dispatchEvent(new Event('resize')); }catch(e){} });   /* pages that cache section offsets re-measure */
+        }
+      }
+      if(title){ [].forEach.call(card.querySelectorAll('.links a'),function(a){ if(a.querySelector('.vh')) return; var x=a.textContent.trim(); if(x.split(/\s+/).length<=4 && x.indexOf(title)<0) a.appendChild(vh(': '+title)); }); }
+    });
+  }
+  window.__cardMore=enhance;
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){ enhance(); try{ window.dispatchEvent(new Event('resize')); }catch(e){} });
+  else { enhance(); try{ window.dispatchEvent(new Event('resize')); }catch(e){} }
+})();
+</script>
+</body></html>
+</body></html>

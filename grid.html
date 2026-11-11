@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>(function(){ var t=null, m; try{ t=new URLSearchParams(location.search).get("theme"); }catch(e){} if(t!=="light" && t!=="dark"){ t=null; m=/(?:^|;)theme=(light|dark)(?:;|$)/.exec(window.name||""); if(m){ t=m[1]; } } if(t!=="light" && t!=="dark"){ t=null; try{ t=localStorage.getItem("theme"); }catch(e){} } else { try{ localStorage.setItem("theme",t); }catch(e){} } if(t==="light"){ document.documentElement.setAttribute("data-theme","light"); } })();</script>
+<title>Projects · Taylor Foster</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&display=swap">
+<link rel="stylesheet" href="css/homemark.css">   <!-- "Home" label that slides out from behind the corner mark; keep this line in pages built from this shell (Taylor 2026-11-09) -->
+<link rel="stylesheet" href="css/toggle.css">   <!-- light and dark switch drawn as a toggle (Taylor 2026-11-09) -->
+<style>
+/* Grid View (draft, Taylor 2026-11-06): every card from the five pattern pages in one grid. Shell from observer.html; card
+   styles from the home page. Amber marks only the pressed sort order (the selected-control colour) and link hovers. */
+:root{
+  --bg:#0B0E14; --raised:#11151D; --hair:#262D3D; --slate:#6E7A93;
+  --text:#E6E9F0; --dim:#A3ADC2; --accent:#E8A15C;
+  --out:cubic-bezier(.22,.8,.3,1);
+  color-scheme:dark; scroll-padding-top:88px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#0B0E14; --raised:#11151D; --hair:#262D3D; --slate:#6E7A93; --text:#E6E9F0; --dim:#A3ADC2; --accent:#E8A15C; } }
+:root[data-theme="dark"]{ --bg:#0B0E14; --raised:#11151D; --hair:#262D3D; --slate:#6E7A93; --text:#E6E9F0; --dim:#A3ADC2; --accent:#E8A15C; }
+@media (prefers-contrast: more){ html:root:root{ --hair:#5E6985; --slate:#97A3BD; --dim:#C9D0DF; } }
+*,*::before,*::after{ box-sizing:border-box; }
+html{ background:var(--bg); scrollbar-gutter:stable; }
+body{ margin:0; background:var(--bg); color:var(--text); font-family:'IBM Plex Sans',system-ui,sans-serif; }
+a{ color:inherit; }
+a:focus-visible{ outline:2px solid var(--slate); outline-offset:3px; }
+.lbl{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; line-height:1.5; color:var(--dim); margin:0; }
+.disp{ font-family:'Michroma','IBM Plex Sans',system-ui,sans-serif; font-weight:400; letter-spacing:0; margin:0; }
+
+.top{ position:sticky; top:0; z-index:30; display:flex; justify-content:space-between; align-items:center; padding:max(20px,env(safe-area-inset-top,0px)) clamp(16px,4.5vw,64px) 16px; background:var(--bg); border-bottom:1px solid var(--hair); }
+.top a{ display:inline-flex; align-items:center; min-height:44px; margin:-11px 0; color:var(--dim); text-decoration:none; font-size:15px; }
+.top .home{ width:44px; justify-content:center; margin-left:-13px; }
+.top .links a{ padding:0 14px; }
+.top .links{ margin-right:-14px; display:flex; }
+@media (hover:hover){ .top a:hover{ color:var(--text); } }
+@media (max-width:760px){ .top .links a{ padding:0 10px; } }   /* phones keep both header links, Case Studies and Connect (T-2026-10-14-189) */
+/* slanted amber band under the header (Taylor 2026-11-02; short bars doubled in length on desktop the same day, 12/28/52/88 px; phones and 400% zoom keep 6/10/18/30 px so the burst does not crowd narrow views (W3C COGA 'Help users focus'; reflow note that 320 CSS px is desktop at 400% zoom)): anchored to the home mark as part of the identity, short bars at the left that dim toward a long run fading out to the right; the brightest bar stays below the chip glow (--accent), every edge cut at the same slant */
+.top .band{ position:absolute; left:0; right:0; bottom:-8px; height:6px; display:flex; gap:5px;  overflow:hidden; pointer-events:none;
+  --b1:#3E2610; --b2:#6A4216; --b3:#8E5A1E; --b4:#B0742E; --b5:#C88A44; }
+.top .band i{ display:block; height:100%; transform:skewX(-40deg); }
+.top .band i:nth-child(1){ flex:0 0 calc(clamp(16px,4.5vw,64px) - var(--home-shift,0px) + 3px); margin-left:-8px; background:var(--b3); }   /* edge bar: runs off the left edge of the screen (Taylor 2026-11-02) */
+.top .band i:nth-child(2){ flex:0 0 12px; background:var(--b5); opacity:.6; }
+.top .band i:nth-child(3){ flex:0 0 28px; background:var(--b5); }
+.top .band i:nth-child(4){ flex:0 0 52px; background:var(--b4); }
+.top .band i:nth-child(5){ flex:0 0 88px; background:var(--b3); }
+.top .band i:nth-child(6){ flex:1 1 auto; margin-right:-8px; background:linear-gradient(90deg, var(--b2), var(--b1) 70%, transparent); }
+@media (max-width:760px){ .top .band{ bottom:-7px; height:5px; gap:4px; } .top .band i:nth-child(1){ flex-basis:calc(clamp(16px,4.5vw,64px) + 4px); } .top .band i:nth-child(2){ flex-basis:6px; } .top .band i:nth-child(3){ flex-basis:10px; } .top .band i:nth-child(4){ flex-basis:18px; } .top .band i:nth-child(5){ flex-basis:30px; } }
+@media (forced-colors: active){ .top .band{ display:none; } }
+/* light mode and header band, matching the home page (Taylor 2026-11-03): dark is the default; the toggle after Contact sets data-theme="light" on html and the choice is shared with the home page through localStorage */
+:root[data-theme="light"]{ --bg:#FAF7F0; --raised:#FFFFFF; --hair:#DDD5C4; --slate:#5A616F; --text:#111318; --dim:#3F4552; --accent:#E8A15C; --icon:#A8621A; color-scheme:light; }
+html[data-theme="light"]{ background:linear-gradient(180deg, #F1E6CC 0%, #F8F4EA 45%, #FFFFFF 100%) no-repeat; background-color:#FFFFFF; min-height:100%; }
+html[data-theme="light"] body{ background:transparent; }
+html[data-theme="light"] .top{ background:color-mix(in srgb, var(--bg) 90%, transparent); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+@media (prefers-contrast: more){ html:root:root[data-theme="light"]{ --hair:#8C8472; --slate:#4F5563; --dim:#2C313B; } }
+@media (prefers-reduced-transparency: reduce){ html[data-theme="light"] .top{ background:var(--bg); -webkit-backdrop-filter:none; backdrop-filter:none; } }
+.top .theme{ display:inline-flex; align-items:center; justify-content:center; width:44px; min-height:44px; margin:-11px 0; padding:0; border:0; background:none; color:var(--dim); cursor:pointer; font:inherit; }
+@media (hover:hover){ .top .theme:hover{ color:var(--text); } }
+.top .theme:focus-visible{ outline:2px solid var(--slate); outline-offset:-4px; }
+.top .theme svg{ display:block; }
+.top .theme .moon{ display:none; }
+html[data-theme="light"] .top .theme .sun{ display:none; }
+html[data-theme="light"] .top .theme .moon{ display:block; }
+
+
+/* cards: same rules as the pattern pages */
+.card{ display:block; padding:20px; border:1px solid var(--hair); border-radius:4px; background:var(--raised); text-decoration:none; }
+.card:hover{ border-color:var(--slate); }
+.card .t{ font-size:18px; font-weight:500; margin:6px 0 0; text-wrap:balance; }
+.card .s{ font-size:15px; color:var(--dim); margin:6px 0 0; line-height:1.5; text-wrap:pretty; }
+.card.multi:hover, .card.static:hover{ border-color:var(--hair); }
+.card .links{ display:flex; flex-wrap:wrap; gap:10px 24px; margin:16px 0 0; }
+.card .links a, .card .links .soon{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; line-height:1.5; padding-bottom:2px; }
+.card .links a{ color:var(--text); text-decoration:none; border-bottom:1px solid var(--slate); }
+.card .links a:hover{ border-bottom-color:var(--accent); }
+.card .links .soon{ color:var(--slate); border-bottom:1px dashed var(--hair); }
+.card .m{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:12px; letter-spacing:.04em; line-height:1.5; color:var(--dim); margin:8px 0 0; }
+.card .m + .m{ margin-top:2px; }
+.card .m .nw{ white-space:nowrap; }
+.card .m + .s{ margin-top:12px; }
+.card .hero{ display:block; width:100%; height:auto; margin:14px 0 0; border:1px solid var(--hair); border-radius:2px; background:var(--bg); }
+.card .hero + .s{ margin-top:14px; }
+
+/* grid page */
+main{ max-width:1200px; margin:0 auto; padding:64px clamp(16px,4.5vw,64px) 120px; }
+h1{ font-size:clamp(22px,3.4vw,34px); line-height:1.25; margin-top:8px; }
+/* date sort (Taylor 2026-11-06): oldest or newest first by when the work began; amber marks the pressed order */
+.gtools{ display:flex; flex-wrap:wrap; align-items:center; gap:12px 16px; margin:28px 0 0; }
+.gsort{ display:flex; gap:6px; }
+.gsort button{ display:inline-flex; align-items:center; min-height:44px; padding:0 12px; border:1px solid var(--hair); border-radius:2px; background:none; color:var(--dim); cursor:pointer; font-family:'IBM Plex Sans',system-ui,sans-serif; font-size:14px; font-weight:500; line-height:1.2; }
+@media (hover:hover){ .gsort button:hover{ border-color:var(--slate); color:var(--text); } }
+.gsort button[aria-pressed="true"]{ border-color:var(--icon,var(--accent)); color:var(--text); }
+.gsort button:focus-visible{ outline:2px solid var(--slate); outline-offset:3px; }
+@media (forced-colors: active){ .gsort button[aria-pressed="true"]{ border-color:Highlight; } }
+/* contour ground, as on the home view (Version 104 layer): one slate layer masked by the topographic SVG, 15% dark / 14% light.
+   No globe on this page, so no exclusion zone; the cards are opaque, so the lines read in the gutters and margins. */
+html body{ background:transparent; }
+#bgtex{ position:fixed; inset:0; z-index:-1; pointer-events:none; background:var(--slate); opacity:.15;
+  -webkit-mask-image:url(img/bg_topo.svg); mask-image:url(img/bg_topo.svg); -webkit-mask-size:cover; mask-size:cover; -webkit-mask-position:center; mask-position:center; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; }
+html[data-theme="light"] #bgtex{ opacity:.14; }
+@media (forced-colors:active){ #bgtex{ display:none; } }
+@media (prefers-contrast:more){ #bgtex{ display:none; } }
+/* one flat grid in the home page's pattern order; each card's eyebrow names its pattern as the third entry (Taylor 2026-11-06) */
+.ggrid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap:20px; margin:24px 0 0; padding:0; list-style:none; }
+.ggrid > li{ display:flex; }
+.ggrid > li[hidden]{ display:none; }
+.card .lbl .seg{ white-space:nowrap; }
+.ggrid > li > .card{ flex:1 1 auto; }
+.end{ margin-top:72px; padding-top:16px; border-top:1px solid var(--hair); }
+.back{ display:inline-block; font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); text-decoration:none; border-bottom:1px solid var(--slate); padding-bottom:2px; }
+.back:hover{ color:var(--text); border-bottom-color:var(--accent); }
+/* Return to List View (Taylor 2026-11-06): docked under the header band in the same spot as Grid View on the pattern pages; replaces the "Back to home" link at the foot of the page. */
+#listCue{ position:fixed; z-index:29; right:clamp(16px,4.5vw,64px); top:var(--dock,104px); display:flex; align-items:center; gap:8px; min-height:36px; padding:0 10px; margin-right:-10px;
+  font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); text-decoration:none;
+  background:var(--bg); border:1px solid var(--hair); border-radius:2px; }
+#listCue svg{ width:15px; height:15px; flex:none; }
+#listCue:hover, #listCue:focus-visible{ color:var(--text); }
+#listCue:focus-visible{ outline:2px solid var(--slate); outline-offset:3px; }
+/* industry filter (Taylor 2026-11-06): a dropdown (listbox) of seven industry applications (Societal Systems added 2026-11-08, T-195: membership follows Stephanidis et al. 2019, challenge 7), default All Applications; a card can belong to two (CrisisCourier, the satellite course,
+   ENTERPRISE, WithKiP), so this filters rather than groups and no card is shown twice. Works with the date sort. */
+.gind{ position:relative; }
+#gindBtn{ display:inline-flex; align-items:center; gap:10px; min-height:44px; padding:0 10px 0 12px; border:1px solid var(--hair); border-radius:2px; background:none; color:var(--text); cursor:pointer; font-family:'IBM Plex Sans',system-ui,sans-serif; font-size:14px; font-weight:500; line-height:1.2; }
+#gindBtn svg{ width:16px; height:16px; color:var(--dim); transition:transform .2s; }
+#gindBtn[aria-expanded="true"] svg{ transform:rotate(180deg); }
+@media (hover:hover){ #gindBtn:hover{ border-color:var(--slate); } }
+#gindBtn:focus-visible{ outline:2px solid var(--slate); outline-offset:3px; }
+#gindList{ position:absolute; z-index:40; top:calc(100% + 4px); left:0; min-width:100%; margin:0; padding:4px 0; list-style:none; background:var(--raised); border:1px solid var(--slate); border-radius:2px; box-shadow:0 8px 24px rgba(0,0,0,.28); }
+#gindList[hidden]{ display:none; }
+#gindList li{ display:flex; align-items:center; min-height:40px; padding:0 14px 0 12px; border-left:2px solid transparent; color:var(--dim); cursor:pointer; white-space:nowrap; font-size:14px; }
+#gindList li.act{ background:color-mix(in srgb, var(--slate) 22%, transparent); color:var(--text); }
+#gindList li[aria-selected="true"]{ color:var(--text); border-left-color:var(--icon,var(--accent)); }
+#gindList:focus{ outline:none; }
+@media (forced-colors: active){ #gindList li.act{ outline:1px solid Highlight; } #gindList li[aria-selected="true"]{ border-left-color:Highlight; } }
+
+/* card titles are headings for screen-reader navigation (2026-11-10) */
+.card h2.t{ font-family:inherit; letter-spacing:normal; line-height:1.3; }
+
+/* type and targets (2026-11-10, critique "Next pass"): functional mono labels and links move from 11 to 12 px up to 13 px, and standalone links get a 24 px
+   target; decorative eyebrows (page and card category lines, section numbers, chip indices) stay at 12 px. 13 px rather than the critique's 14 for
+   uppercase mono links: tracked uppercase mono at 13 px is already wider than 15 px sans. */
+.card .links a, .card .links .soon{ font-size:13px; display:inline-flex; align-items:flex-end; min-height:24px; padding-top:3px; box-sizing:border-box; }
+.card .m{ font-size:13px; }
+.gtools .lbl{ font-size:13px; }
+#listCue{ font-size:13px; }
+</style>
+<link rel="stylesheet" href="css/header.css">   <!-- header links on narrow phones (Taylor 2026-11-10) -->
+<link rel="stylesheet" href="css/light.css">   <!-- light mode accent: terracotta coral in place of amber (Taylor 2026-11-09); keep last in the head -->
+<link rel="stylesheet" href="css/cardmore.css">
+</head>
+<body>
+
+<header class="top">
+  <span class="band" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+  <a class="home" href="index.html" aria-label="Home"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><defs><clipPath id="o2clip"><rect width="24" height="19.20"/></clipPath></defs><path d="M1.80 19.20 A8.20 8.20 0 0 1 18.20 19.20"/><g clip-path="url(#o2clip)"><path d="M3.28 14.64 L3.29 14.72 L3.32 14.81 L3.37 14.89 L3.43 14.97 L3.51 15.06 L3.61 15.14 L3.73 15.22 L3.86 15.30 L4.02 15.37 L4.18 15.45 L4.37 15.52 L4.57 15.59 L4.78 15.66 L5.01 15.72 L5.25 15.79 L5.51 15.84 L5.77 15.90 L6.05 15.95 L6.34 16.00 L6.64 16.04 L6.95 16.08 L7.27 16.12 L7.59 16.15 L7.92 16.18 L8.26 16.21 L8.60 16.23 L8.95 16.24 L9.30 16.25 L9.65 16.26 L10.00 16.26 L10.35 16.26 L10.70 16.25 L11.05 16.24 L11.40 16.23 L11.74 16.21 L12.08 16.18 L12.41 16.15 L12.73 16.12 L13.05 16.08 L13.36 16.04 L13.66 16.00 L13.95 15.95 L14.23 15.90 L14.49 15.84 L14.75 15.79 L14.99 15.72 L15.22 15.66 L15.43 15.59 L15.63 15.52 L15.82 15.45 L15.98 15.37 L16.14 15.30 L16.27 15.22 L16.39 15.14 L16.49 15.06 L16.57 14.97 L16.63 14.89 L16.68 14.81 L16.71 14.72 L16.72 14.64"/><path d="M4.55 23.24 L4.46 22.87 L4.37 22.49 L4.31 22.10 L4.26 21.70 L4.22 21.29 L4.21 20.88 L4.20 20.46 L4.22 20.04 L4.24 19.62 L4.29 19.20 L4.35 18.78 L4.43 18.36 L4.52 17.94 L4.62 17.52 L4.74 17.11 L4.88 16.70 L5.03 16.30 L5.19 15.91 L5.37 15.53 L5.56 15.16 L5.76 14.80 L5.97 14.45 L6.20 14.12 L6.43 13.79 L6.67 13.49 L6.93 13.20 L7.19 12.92 L7.46 12.66 L7.73 12.42 L8.02 12.20 L8.30 12.00 L8.60 11.82 L8.89 11.66 L9.19 11.52 L9.49 11.40 L9.80 11.30"/><path d="M15.45 23.24 L15.54 22.87 L15.63 22.49 L15.69 22.10 L15.74 21.70 L15.78 21.29 L15.79 20.88 L15.80 20.46 L15.78 20.04 L15.76 19.62 L15.71 19.20 L15.65 18.78 L15.57 18.36 L15.48 17.94 L15.38 17.52 L15.26 17.11 L15.12 16.70 L14.97 16.30 L14.81 15.91 L14.63 15.53 L14.44 15.16 L14.24 14.80 L14.03 14.45 L13.80 14.12 L13.57 13.79 L13.33 13.49 L13.07 13.20 L12.81 12.92 L12.54 12.66 L12.27 12.42 L11.98 12.20 L11.70 12.00 L11.40 11.82 L11.11 11.66 L10.81 11.52 L10.51 11.40 L10.20 11.30"/></g><path d="M1.00 19.20 H19.00"/><path d="M1 4.6C8.4 4.2 13.8 5.4 16.7 8C19 10.1 21 13.3 23.2 17.6"/><path d="M16.70 4.20 L17.65 7.05 L20.50 8.00 L17.65 8.95 L16.70 11.80 L15.75 8.95 L12.90 8.00 L15.75 7.05Z" fill="var(--icon,var(--accent))" stroke="var(--icon,var(--accent))" stroke-width=".7" stroke-linejoin="round"/></svg><span class="hm-lbl" aria-hidden="true"><span>Home</span></span></a><!-- corner mark (Taylor 2026-11-09): the flyby over the half-globe on pages where the globe is not shown. Its craft is the amber four-pointed star, which stands alone as the home mark where the globe is shown (index.html) and on Connect's back link -->
+  <!-- header (Taylor 2026-11-10): Projects, Case Studies, Connect on every page, less the page itself; no Résumé link, since the request form lives on Connect (Taylor 2026-11-10) --><div class="links"><a href="case-studies.html">Case Studies</a><a href="contact.html">Connect</a><button class="theme" type="button" id="themeToggle" aria-pressed="false" aria-label="Light mode"><span class="sw" aria-hidden="true"><span class="kn"></span></span></button></div>
+</header>
+
+<div id="bgtex" aria-hidden="true"></div>
+<main>
+<a id="listCue" href="index.html"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg>Themes</a>   <!-- moved inside main (2026-11-10) so it sits in a landmark; it is fixed, so its place on screen is unchanged -->
+  <h1 class="disp">Projects</h1>
+  <div class="gtools"><div class="gsort" role="group" aria-label="Sort by date"><button type="button" data-o="oldest" aria-pressed="true">Oldest first</button><button type="button" data-o="newest" aria-pressed="false">Newest first</button></div><div class="gind"><button type="button" id="gindBtn" aria-haspopup="listbox" aria-expanded="false" aria-controls="gindList" aria-label="Industry application: All Applications"><span id="gindVal">All Applications</span><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button><ul id="gindList" role="listbox" aria-label="Industry application" tabindex="-1" hidden><li role="option" id="gi-all" data-i="all" aria-selected="true">All Applications</li><li role="option" id="gi-aerospace" data-i="aerospace" aria-selected="false">Aerospace</li><li role="option" id="gi-biosensing" data-i="biosensing" aria-selected="false">Biosensing</li><li role="option" id="gi-built" data-i="built" aria-selected="false">Built Environment</li><li role="option" id="gi-logistics" data-i="logistics" aria-selected="false">Logistics</li><li role="option" id="gi-robotics" data-i="robotics" aria-selected="false">Robotics</li><li role="option" id="gi-societal" data-i="societal" aria-selected="false">Societal Systems</li><li role="option" id="gi-training" data-i="training" aria-selected="false">Training</li></ul></div><p class="lbl" id="gcount" aria-live="polite">15 items</p></div>
+  <ul class="ggrid">
+    <li data-i="societal" data-p="resilience" data-date="2021-08"><div class="card multi"><p class="lbl"><span class="seg">Experience</span> / <span class="seg">Program reflection</span> / <span class="seg">Designing for Resilience</span></p><h2 class="t">National Academy of Engineering Grand Challenges Scholars Program (GCSP) at ASU</h2><img class="hero" src="img/gcsp_banner_card.webp" width="1200" height="258" loading="lazy" alt="The Grand Challenges Scholars Program logo: a lightbulb made of dots with a world map inside, beside the words Grand Challenges Scholars Program on a gold background."><p class="s">My reflection on four years in the program (GCSP), year by year. I describe what its courses, projects, and research experience taught me, from stakeholder analysis and market fit to algorithmic bias, circular-economy design, and aid effectiveness. The Future Solutions Poster is my first-year (FSE 150) team's Concept of Operations proposal for earthquake prediction software paired with exoskeleton augmentation for first responders. In its societal-challenges deliverable, I wrote the passages on over-reliance on AI and on who commands rescue operations.</p><p class="links"><a href="https://asu.digication.com/taylor-fosters-gcsp-portfolio/my-gcsp-experience" target="_blank" rel="noopener">Reflection page</a><a href="https://news.engineering.asu.edu/graduate/taylor-foster/" target="_blank" rel="noopener">ASU Engineering News profile</a><a href="https://docs.google.com/presentation/d/1jsu6XATFsBrPNHEMwQVMUzkotFfNhixD/edit?slide=id.p1#slide=id.p1" target="_blank" rel="noopener">Future Solutions Poster</a></p></div></li>
+    <li data-i="logistics" data-p="safety" data-date="2022-02"><div class="card multi"><p class="lbl"><span class="seg">Project</span> / <span class="seg">Hackathon</span> / <span class="seg">Designing for Safety</span></p><h2 class="t">1st Place, Critical Infrastructure Hackathon</h2><p class="m">Issued by Department of Homeland Security Centers for Excellence / <span class="nw">Devils Invent · Feb 2022</span></p><img class="hero" src="img/fulcrum_title_card.webp" width="1734" height="975" loading="lazy" alt="Title slide from the Team Fulcrum presentation: Blockchain and Asymmetric Encryption in Agricultural Supply Chains, Team Fulcrum, Problem Statement 2, over a darkened photo of parked freight trucks."><p class="s">Our six-person team proposed a blockchain-based approach to agricultural supply-chain traceability. I contributed stakeholder and value-proposition analysis and helped develop the Figma demonstration. We won first place in our category. I also designed the team's logo, which appears on the demonstration's login screen.</p><p class="links"><a href="https://cina.gmu.edu/dhs-st-hackathon-addresses-emerging-threats-to-critical-infrastructure/" target="_blank" rel="noopener">DHS S&amp;T Hackathon Addresses Emerging Threats to Critical Infrastructure</a><a href="https://www.figma.com/design/fClE3fje5vzXAlP4sgOUKF/Fulcrum?node-id=0-1&amp;t=9U8GdQhiHQGV6S0P-1" target="_blank" rel="noopener">Figma demo</a></p></div></li>
+    <li data-i="built" data-p="safety" data-date="2022-06"><div class="card multi"><p class="lbl"><span class="seg">Project</span> / <span class="seg">Published paper</span> / <span class="seg">Designing for Safety</span></p><h2 class="t">Experimental design for structural safety</h2><img class="hero" src="img/reu_slide_card.webp" width="800" height="596" loading="lazy" alt="Slide from the REU presentation titled Instrumentation Layout. Left: elevation drawing of the model footing, geogrid, laminar soil container and instrument rack with dimensions. Right: two photos of the instrumented model on the centrifuge shake table, labeled laminar box, model column, guide rails and model mass."><p class="s">National Science Foundation REU site, UC San Diego, 2022. I collaborated with a graduate student and visiting scholar on an experimental design for testing geosynthetic reinforcement and performed material characterization of 3D-printed polymers to determine load-bearing capacity before centrifuge modeling.</p><p class="links"><a href="https://asu.digication.com/taylor-fosters-gcsp-portfolio/research" target="_blank" rel="noopener">Research page</a><a href="https://doi.org/10.1051/e3sconf/202456910001" target="_blank" rel="noopener">Paper</a><a href="https://armor.ucsd.edu/apply/reu" target="_blank" rel="noopener">ARMOR Lab REU</a></p></div></li>
+    <li data-i="built societal" data-p="resilience" data-date="2023-01"><div class="card multi"><p class="lbl"><span class="seg">Project</span> / <span class="seg">Course proposal</span> / <span class="seg">Designing for Resilience</span></p><h2 class="t">Off-grid modular homes</h2><img class="hero" src="img/design_brief_cover_card.webp" width="1200" height="729" loading="lazy" alt="Cover page of the Sustainable Desert Home Design brief: the title and a tree-ring Ecosystemic Solutions logo on a tan panel, beside an AI-generated visualization of a modular desert home with a red-brown and glass facade among rocks under a dusky sky."><p class="s">In DSC 394 (Design Entrepreneurship and Society), I served as the Green Technology Researcher on a team proposal for climate-adaptive housing in the American Southwest, addressing present and projected climate conditions, documented in my GCSP Portfolio, linked below. Building on the team&#39;s original concept, I independently developed a conceptual product design brief for a modular, off-grid desert home in IND 354 (Principles of Product Design). The brief reflects an early exploration of AI-assisted concept visualization and climate-responsive product design, made while also discovering the latest AI visual generation capabilities as of 2023.</p><p class="links"><a href="https://asu.digication.com/taylor-fosters-gcsp-portfolio/entrepreneurship" target="_blank" rel="noopener">Entrepreneurship page</a><a href="docs/design_brief_sustainable_desert_home.pdf" target="_blank" rel="noopener">Design brief (PDF)</a></p></div></li>
+    <li data-i="built aerospace societal" data-p="resilience" data-date="2023-03"><div class="card static"><p class="lbl"><span class="seg">Case study</span> / <span class="seg">Hackathon</span> / <span class="seg">Designing for Resilience</span></p><h2 class="t">Honorable Mention, SpaceHACK for Sustainability</h2><img class="hero" src="img/spacehack_title_card.webp" width="1200" height="617" loading="lazy" alt="Title slide of the Team 25 presentation: the SpaceHACK for Sustainability logo and the title Wildfire Risk and Social Disparity at the Wildland Urban Interface above a view of North America at night with a bright sunrise on the horizon."><p class="m">Issued by Interplanetary Initiative at <span class="nw">ASU · Mar 2023</span></p><p class="m">Associated with Arizona State University</p><p class="s">I joined a four-person team in the 2023 SpaceHACK for Sustainability track on wildfire risk and social disparity at the wildland-urban interface. Using Google Earth Engine, I examined satellite-derived wildfire observations to inform our exploratory maps and our proposal for selective forest thinning and biomass reuse. Our team received an Honorable Mention.</p><p class="links"><a href="spacehack.html">Project page</a><a href="https://www.spacehack4sustainability.com/our-impact" target="_blank" rel="noopener">Past and Current Program Impact</a><a href="https://news.asu.edu/20230421-hackathon-gathers-students-around-world-tackle-social-environmental-issues" target="_blank" rel="noopener">Event recap</a></p></div></li>
+    <li data-i="built training" data-p="safety" data-date="2023-06"><div class="card multi"><p class="lbl"><span class="seg">Experience</span> / <span class="seg">Internship</span> / <span class="seg">Designing for Safety</span></p><h2 class="t">Safety and Operations Intern</h2><img class="hero" src="img/aes_context_card.webp" width="1200" height="799" loading="lazy" alt="Close-up from behind a virtual reality headset, showing the two lenses and a dark teal interior. A context image of the technology, not a photo of the internship or its training."><p class="m">Image: <a href="https://commons.wikimedia.org/wiki/File:Virtual_reality_headset.jpg" target="_blank" rel="noopener">FloppaIngénieur</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>, via Wikimedia Commons. Resized and converted to WebP.</p><p class="s">During an energy-sector internship, I developed safety maps and digital inspection checklists. In 2023, as my first assignment, I assessed the usability of an existing VR lockout/tagout training, promoted its use, and researched alternative vendors. I later collaborated with an external vendor to scope a separate proposed VR training application for power plant operators, contributing to its instructional requirements.</p><p class="links"><a href="https://www.gpstrategies.com/our-work/technical-training-to-power-the-aes-workforce/" target="_blank" rel="noopener">Background: AES operator training</a><a href="https://www.aes.com/sustainability/our-people/occupational-health-and-safety" target="_blank" rel="noopener">AES: Occupational safety</a></p></div></li>
+    <li data-i="societal" data-p="ventures" data-date="2023-08"><div class="card multi"><p class="lbl"><span class="seg">Project</span> / <span class="seg">Prototyping role</span> / <span class="seg">Designing for Ventures</span></p><h2 class="t">Countdown CES (Circular Economy Solutions)</h2><img class="hero" src="img/ces_build_card.webp" width="1724" height="852" loading="lazy" alt="Two team photos, Fall 2023. Left, a CNC router bit cutting chair parts from a sheet of recycled HDPE, purple flecked with teal. Right, a chair prototype in marbled recycled HDPE, with wedged joints holding its backrest, shown on a white background."><p class="s">Through ASU's Engineering Projects in Community Service (EPICS), our team designed recycled high-density polyethylene (HDPE) school furniture with Countdown CES for schools in Ghana. As prototyping lead, I operated computer numerical control (CNC) equipment and tested furniture joints to inform fit and manufacturing decisions.</p><p class="links"><a href="https://epics.engineering.asu.edu/2021/01/countdown-ces/" target="_blank" rel="noopener">EPICS project page</a><a href="https://asu.digication.com/taylor-fosters-gcsp-portfolio/project-1-1" target="_blank" rel="noopener">Fall 2023 reflection</a><a href="https://asu.digication.com/taylor-fosters-gcsp-portfolio/project-2" target="_blank" rel="noopener">Spring 2024 reflection</a></p></div></li>
+    <li data-i="aerospace logistics" data-p="trust" data-date="2024-08"><div class="card multi"><p class="lbl"><span class="seg">Case study</span> / <span class="seg">Course design</span> / <span class="seg">Trust as Infrastructure</span></p><h2 class="t">CrisisCourier UAS operator displays</h2><img class="hero" src="img/cc_payload_view.webp" width="1440" height="960" loading="lazy" alt="Payload operator view over a 3D city map: package status en route with a progress bar and an inventory button, an alerts panel (smog warning, new drop zone added, temperature alert), the final destination and arrival time, a drop-zone target marker, a compass, and an operator chat reading Cease operations immediately. Safety risk!"><p class="s">In a six-person HSE 542 team (2024), I helped design uncrewed aircraft system (UAS) operator displays for disaster relief. I contributed to the shift toward cargo delivery, operator-role requirements, pilot-control sketches, and alert design. Our concept allocated routine flight tasks to automation while retaining human decision authority.</p><p class="links"><a href="crisiscourier.html">Project page</a></p></div></li>
+    <li data-i="aerospace training" data-p="knowledge" data-date="2024-08"><div class="card multi"><p class="lbl"><span class="seg">Project</span> / <span class="seg">Course evaluation</span> / <span class="seg">Knowledge as Infrastructure</span></p><h2 class="t">Learning-science review of an online satellite course</h2><img class="hero" src="img/satops_title_card.webp" width="1200" height="588" loading="lazy" alt="Top of the title slide from the Satellite Operations Training Program Evaluation deck: cyan title text over a purple and blue background, above a line drawing of a satellite with solar panels."><p class="s">HSE 427 (Design for Learning) project (2024) evaluating ASU's online Introduction to Satellite Operations program. I assessed its instruction structure, feedback, and learner motivation against learning-science criteria, then recommended mixed practice, delayed feedback, and retention and transfer tests. An expert review; no learners were tested.</p><p class="links"><a href="docs/satellite_ops_training_evaluation.pdf" target="_blank" rel="noopener">Evaluation (PDF)</a><a href="https://careercatalyst.asu.edu/programs/introduction-satellite-operations/" target="_blank" rel="noopener">Program page</a></p></div></li>
+    <li data-i="aerospace robotics" data-p="trust" data-date="2024-08"><div class="card multi"><p class="lbl"><span class="seg">Project</span> / <span class="seg">Research role</span> / <span class="seg">Trust as Infrastructure</span></p><h2 class="t">Project ENTERPRISE Annotated Bibliography</h2><img class="hero" src="img/enterprise_astrobee_card.webp" width="1200" height="953" loading="lazy" alt="An Astrobee free-flying robot floating inside the International Space Station: a cube-shaped robot with a white top panel, a camera, two glowing blue eyes on a small screen, and black and yellow side panels, in front of stowage bags and a row of national flags. A context image of the kind of robot teammate the bibliography discusses, not a photo of Project ENTERPRISE."><p class="m">Illustrative image: Astrobee free-flying robot on the International Space Station. Credit: <a href="https://www.nasa.gov/missions/station/nasa-celebrates-three-years-of-astrobees-buzzing-on-space-station/" target="_blank" rel="noopener">NASA</a>.</p><p class="s">Project ENTERPRISE (Enhanced Networks for Trusted Exploration and Reliability with Predictive Resilient Intelligent Systems for Exploration) examined human-robot collaboration for space exploration by addressing technical and non-technical challenges associated with distributed teams. In ASU's Interplanetary Initiative Undergraduate Research Scholars Program (Fall 2024), my role in Project ENTERPRISE was to develop an annotated bibliography for the team's roadmap proposal, featuring cognitive science topics from the Human Systems Engineering program.</p><p class="links"><a href="docs/project_enterprise_annotated_bibliography.pdf" target="_blank" rel="noopener">Annotated bibliography (PDF)</a><a href="https://news.asu.edu/b/20240829-asus-interplanetary-initiative-adds-three-new-pilot-projects-will-champion-innovative" target="_blank" rel="noopener">Program page</a></p></div></li>
+    <li data-i="societal" data-p="knowledge" data-date="2024-08"><div class="card multi"><p class="lbl"><span class="seg">Project</span> / <span class="seg">Course design</span> / <span class="seg">Knowledge as Infrastructure</span></p><h2 class="t">Insight Enclave</h2><img class="hero" src="img/insight_enclave_screens.webp" width="1200" height="687" loading="lazy" alt="Three phone screens from the Insight Enclave prototype: a home screen of trending research topics, a Create New Stratum form with fields for title, description, collaborators and source upload, and an editor annotating a source on sustainable mobility."><p class="s">HSE 429 (Product Design and Evaluation) project (2024): an app concept where citizen scientists publish “strata,” annotated research notes whose credibility reflects the quality of their sources. I wrote the user requirements, prototyped the core flow in Figma, and ran a usability test with five students that traced most confusion to drag-and-drop organizing.</p><p class="links"><a href="https://www.figma.com/proto/tkbFS2NNGUidiqpNBty125/Insight-Enclave-Prototyping-Screens?node-id=4-2&amp;starting-point-node-id=4%3A2" target="_blank" rel="noopener">Figma prototype</a></p></div></li>
+    <li data-i="robotics training" data-p="ventures" data-date="2025-02"><div class="card multi"><p class="lbl"><span class="seg">Project</span> / <span class="seg">Instructional role</span> / <span class="seg">Designing for Ventures</span></p><h2 class="t">WithKiP Robotics Curriculum and Teacher-Led AI Support</h2><img class="hero" src="img/kip_render_card.webp" width="1200" height="750" loading="lazy" alt="Transparent wireframe render of the KiP classroom robot from above, showing its housing, internal mounts, two side wheels and a rear caster ball."><p class="s">WithKiP Robotics/STEM Learning Platform, Former Luminosity Lab Project. My contribution to this team product is instructional design grounded in learning science. It includes seven teacher guides, an audit against the Computer Science Teachers Association (CSTA) Level 1B standards, before their 2026 revisions, a Next Generation Science Standards (NGSS) activity alignment, and the pedagogical specification, system prompt, and teacher feedback instrument for a teacher-led AI assistant. I also researched grant funding and marketing statistics for the team.</p><p class="links"><a href="https://theluminositylab.com/projects/kip" target="_blank" rel="noopener">Venture page</a><a href="https://www.linkedin.com/company/withkip/" target="_blank" rel="noopener">WithKiP on LinkedIn</a><a href="https://www.nextgenscience.org/search-standards" target="_blank" rel="noopener">NGSS standards</a><a href="https://csteachers.org/wp-content/uploads/2025/03/csta-k-12-computer-science-standards-revised.pdf" target="_blank" rel="noopener">CSTA standards (2017)</a></p></div></li>
+    <li data-i="built robotics" data-p="safety" data-date="2025-04"><div class="card multi"><p class="lbl"><span class="seg">Project</span> / <span class="seg">Capstone review</span> / <span class="seg">Designing for Safety</span></p><h2 class="t">Human-Robot Collaboration in Construction</h2><img class="hero" src="img/hrc_capstone_robot_card.webp" width="1144" height="699" loading="lazy" alt="An orange robotic arm mounted on a grey wheeled base, positioned at an unfinished interior wall. A context image of the kind of construction robot the review discusses, not a photo from the review."><p class="m">Illustrative image: mobile construction robot in an unfinished interior. Credit: <a href="https://commons.wikimedia.org/wiki/File:Roso%E2%80%99s_automated_construction_robot.jpg" target="_blank" rel="noopener">Willywangpowei</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>, via Wikimedia Commons; cropped, logo removed.</p><p class="s">This thematic literature review examines the safety challenges of human-robot collaboration in architecture, engineering, and construction (AEC). Drawing on 22 peer-reviewed studies, it explores how physical hazards, cognitive workload, trust, and worker perceptions influence the safe integration of collaborative robots into construction environments. The review also considers immersive training technologies and organizational barriers to adoption, highlighting the importance of human-centered design in developing safer and more effective human-robot teams.</p><p class="links"><a href="docs/hrc_construction_capstone_review.pdf" target="_blank" rel="noopener">Review (PDF)</a></p></div></li>
+    <li data-i="biosensing" data-p="ventures" data-date="2025-08-31"><div class="card multi"><p class="lbl"><span class="seg">Project</span> / <span class="seg">Research role</span> / <span class="seg">Designing for Ventures</span></p><h2 class="t">The BlueMatter Project</h2><img class="hero" src="img/bluematter_site_card.webp" width="1200" height="681" loading="lazy" alt="Hero section of the BlueMatter website: the headline Technology Controlled by Thought, No Implant Required, beside a glowing outline of a head with a stylized brain wired to icons of a phone, robot arm and house, on a dark blue background."><p class="s">Luminosity Lab research project on a discreet, non-invasive electroencephalography (EEG) brain-computer interface. As Human Systems and Algorithms Research Lead, I summarized the research on reading EEG brain signals, including machine learning and analysis methods inspired by dynamical systems theory. I also built and deployed much of the website&#39;s initial front end with the help of AI coding agents (Manus and ChatGPT&#39;s Codex).</p><p class="links"><a href="https://theluminositylab.com/projects/bluematter" target="_blank" rel="noopener">Luminosity Lab project page</a><a href="https://bluematterbci.github.io/" target="_blank" rel="noopener">BlueMatter website</a></p></div></li>
+    <li data-i="biosensing training" data-p="ventures" data-date="2025-09-06"><div class="card multi"><p class="lbl"><span class="seg">Project</span> / <span class="seg">Strategist role</span> / <span class="seg">Designing for Ventures</span></p><h2 class="t">Attune: A Lightweight Pre-fitting EMG Training Platform</h2><img class="hero" src="img/attune_prosthetic_card.webp" width="509" height="339" loading="lazy" alt="A young woman in a white T-shirt sits cross-legged on a bed, wearing a black myoelectric prosthetic arm and resting its hand on her knee. Photo from the Attune NEXUS Summit 2026 poster."><p class="s">At the Luminosity Lab, I contributed research and product strategy for a proposed pre-fitting training platform using electromyography (EMG) and immersive environments. My work included partner and market research, motor-learning synthesis, and contributions to the team's white paper. The project remains in development and is not validated.</p><p class="links"><a href="https://www.attuneprep.com" target="_blank" rel="noopener">Attune website</a><a href="https://theluminositylab.com/projects/attune" target="_blank" rel="noopener">Luminosity Lab project page</a><a href="https://drive.google.com/file/d/1Na7Z4FcOGB7Lg7O1fgjbXNacWtIPz8Wl/view" target="_blank" rel="noopener">White paper (PDF)</a></p></div></li>
+    <li data-i="aerospace" data-p="knowledge" data-date="2026-01"><div class="card multi"><p class="lbl"><span class="seg">Case study</span> / <span class="seg">Course analysis</span> / <span class="seg">Knowledge as Infrastructure</span></p><h2 class="t">Software and Automation Coding in UAS Reports: A Reproducible Analysis of NASA Aviation Safety Reporting System (ASRS) Incident Reports</h2><img class="hero" src="img/asrs_figure2.webp" width="1650" height="750" loading="lazy" alt="Two-panel dot plot of the share of NASA ASRS UAS reports coded Software and Automation (overall 32.2 percent of 497 reports), each point with a 95% exact binomial confidence interval. Panel A splits the reports by FAR part: Part 107, public aircraft operations, and recreational operations. Panel B splits them by UAS control mode: transitioning between modes, autonomous, waypoint flying, unknown, and manual control."><p class="s">I analyzed 497 NASA Aviation Safety Reporting System (ASRS) uncrewed aircraft system (UAS) reports using R, comparing the share coded “Software and Automation” across regulatory regimes and control modes. I visualized subgroup proportions with 95% exact binomial confidence intervals while keeping the interpretation descriptive.</p><p class="links"><a href="asrs.html">Project page</a><a href="https://github.com/TayFost/asrs-uas-software-automation-analysis" target="_blank" rel="noopener">Repository</a></p></div></li>
+    <li data-i="robotics" data-p="trust" data-date="2026-06"><div class="card multi"><p class="lbl"><span class="seg">Case study</span> / <span class="seg">Proposal stage</span> / <span class="seg">Trust as Infrastructure</span></p><h2 class="t">Observer paradigm for robot-teammate trust</h2><img class="hero" src="img/obs_filming_layout_card.webp" width="1090" height="826" loading="lazy" alt="Top-down schematic of the filming room for the observer study. Fetch starts at upper right. A black pickup table with Human A is at left. A folding table with an orange and a white basket and Human B is at lower right. The camera sits along the bottom edge."><p class="s">I designed an observer study on decision rights in human-robot teams, developed its survey and analysis plan, and prepared robot-control scripts and video-stimulus materials. Data collection has not begun.</p><p class="links"><a href="observer.html">Project page</a></p></div></li>
+  </ul>
+</main>
+<script>
+/* light and dark mode toggle (Taylor 2026-11-03). aria-pressed reports light mode; the choice is kept in localStorage when the browser allows it. */
+(function(){
+  var b=document.getElementById('themeToggle'), root=document.documentElement; if(!b) return;
+  function sync(){ var light=root.getAttribute('data-theme')==='light'; b.setAttribute('aria-pressed',light?'true':'false'); b.setAttribute('title',light?'Switch to dark mode':'Switch to light mode'); }
+  b.addEventListener('click',function(e){
+    e.preventDefault(); e.stopPropagation();
+    var light=root.getAttribute('data-theme')!=='light';
+    if(light){ root.setAttribute('data-theme','light'); } else { root.removeAttribute('data-theme'); }
+    try{ localStorage.setItem('theme', light?'light':'dark'); }catch(err){}
+    sync();
+  });
+  sync();
+})();
+</script>
+<script>
+/* the theme choice travels with links between the home page and the project pages, so a reader who chose light mode is not sent back to dark when the browser blocks storage (Taylor 2026-11-03) */
+function __themeName(){ var t=document.documentElement.getAttribute('data-theme')==='light'?'light':'dark'; try{ window.name=(window.name||'').replace(/(?:^|;)theme=(light|dark)/g,'').replace(/^;+|;+$/g,'')+(window.name&&!/^;*$/.test(window.name.replace(/(?:^|;)theme=(light|dark)/g,''))?';':'')+'theme='+t; }catch(err){} }
+document.addEventListener('click',function(e){ if(e.target && e.target.closest && e.target.closest('#themeToggle')){ setTimeout(function(){ __themeName(); if(window.__themeSave){ window.__themeSave(); } },0); } });
+/* in the claude.ai viewer each page may open in a fresh frame with storage blocked, so the choice is also kept per viewer in the artifact's private db (data/users/<id>/theme). It is read once on load and written only when the viewer clicks the toggle. Outside the viewer this does nothing. */
+(async function(){
+  try{
+    if(!window.claude || !window.claude.use) return;
+    var db=await window.claude.use('db'), user=await window.claude.use('user'); if(!db || !user) return;
+    var id=await user.id(); if(!id) return;
+    var ref=db.doc('data/users/'+id+'/theme'), root=document.documentElement;
+    window.__themeSave=function(){ ref.set({value: root.getAttribute('data-theme')==='light'?'light':'dark'}).catch(function(){}); };
+    var snap=await ref.get(); if(!snap.exists) return;
+    var t=(snap.data()||{}).value, now=root.getAttribute('data-theme')==='light'?'light':'dark';
+    if((t==='light'||t==='dark') && t!==now){
+      if(t==='light'){ root.setAttribute('data-theme','light'); } else { root.removeAttribute('data-theme'); }
+      var b=document.getElementById('themeToggle'); if(b){ b.setAttribute('aria-pressed',t==='light'?'true':'false'); b.setAttribute('title',t==='light'?'Switch to dark mode':'Switch to light mode'); }
+      try{ localStorage.setItem('theme',t); }catch(err){}
+      __themeName(); if(window.__onPref){ window.__onPref(); }
+    }
+  }catch(err){}
+})();
+document.addEventListener('click',function(e){
+  __themeName();
+  var a=e.target && e.target.closest ? e.target.closest('a[href]') : null; if(!a) return;
+  var h=a.getAttribute('href')||''; if(!/^(index|observer|crisiscourier|asrs|spacehack|case-studies|grid|contact)\.html/.test(h)) return;
+  try{ var u=new URL(h, location.href); u.searchParams.set('theme', document.documentElement.getAttribute('data-theme')==='light'?'light':'dark'); a.href=u.pathname.split('/').pop()+u.search+u.hash; }catch(err){}
+}, true);
+</script>
+<script>
+/* date sort: the markup is oldest first; Newest first reverses it. One pressed button at a time; ?sort=newest opens reversed. */
+(function(){
+  var bs=[].slice.call(document.querySelectorAll('.gsort button')), list=document.querySelector('.ggrid'), base=[].slice.call(list.children);
+  function set(o){
+    bs.forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-o')===o ? 'true':'false'); });
+    (o==='newest' ? base.slice().reverse() : base).forEach(function(li){ list.appendChild(li); });
+  }
+  bs.forEach(function(b){ b.addEventListener('click',function(){ set(b.getAttribute('data-o')); }); });
+  var q=null; try{ q=new URLSearchParams(location.search).get('sort'); }catch(e){}
+  set(q==='newest' ? 'newest' : 'oldest');
+})();
+</script>
+<script>
+(function(){ var t=document.querySelector('.top'); function f(){ if(t) document.documentElement.style.setProperty('--dock',Math.round(t.getBoundingClientRect().height+8+12)+'px'); } addEventListener('resize',f); f(); })();   /* the header is sticky at the top, so its height is its bottom */
+</script>
+<script>
+/* industry filter dropdown (Taylor 2026-11-06): a button opens a listbox; default All Applications. Keyboard: Enter, Space or Down
+   opens; Up and Down move; Home and End jump; Enter or Space picks; Escape or Tab closes. ?ind=<key> opens filtered. */
+(function(){
+  var btn=document.getElementById('gindBtn'), list=document.getElementById('gindList'), val=document.getElementById('gindVal'), c=document.getElementById('gcount');
+  if(!btn||!list) return;
+  var opts=[].slice.call(list.querySelectorAll('[role=option]')), items=[].slice.call(document.querySelectorAll('.ggrid > li')), cur='all', act=0;
+  function set(k){
+    var n=0; cur=k;
+    opts.forEach(function(o){ o.setAttribute('aria-selected', o.getAttribute('data-i')===k ? 'true':'false'); if(o.getAttribute('data-i')===k){ val.textContent=o.textContent; btn.setAttribute('aria-label','Industry application: '+o.textContent); } });
+    items.forEach(function(li){ var on=(k==='all') || (' '+(li.getAttribute('data-i')||'')+' ').indexOf(' '+k+' ')>-1; li.hidden=!on; if(on) n++; });
+    if(c) c.textContent=n+(n===1?' item':' items');
+  }
+  function mark(i){ act=(i+opts.length)%opts.length; opts.forEach(function(o,k){ o.classList.toggle('act',k===act); }); list.setAttribute('aria-activedescendant',opts[act].id); }
+  function open(){ list.hidden=false; btn.setAttribute('aria-expanded','true'); mark(Math.max(0,opts.findIndex(function(o){ return o.getAttribute('data-i')===cur; }))); list.focus(); }
+  function close(f){ list.hidden=true; btn.setAttribute('aria-expanded','false'); if(f) btn.focus(); }
+  btn.addEventListener('click',function(){ list.hidden ? open() : close(true); });
+  btn.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'||e.key==='ArrowUp'){ e.preventDefault(); open(); } });
+  list.addEventListener('keydown',function(e){
+    if(e.key==='ArrowDown'){ e.preventDefault(); mark(act+1); }
+    else if(e.key==='ArrowUp'){ e.preventDefault(); mark(act-1); }
+    else if(e.key==='Home'){ e.preventDefault(); mark(0); }
+    else if(e.key==='End'){ e.preventDefault(); mark(opts.length-1); }
+    else if(e.key==='Enter'||e.key===' '){ e.preventDefault(); set(opts[act].getAttribute('data-i')); close(true); }
+    else if(e.key==='Escape'){ e.preventDefault(); close(true); }
+    else if(e.key==='Tab'){ close(false); }
+  });
+  opts.forEach(function(o,k){ o.addEventListener('mousemove',function(){ if(act!==k) mark(k); }); o.addEventListener('click',function(){ set(o.getAttribute('data-i')); close(true); }); });
+  document.addEventListener('pointerdown',function(e){ if(!list.hidden && !e.target.closest('.gind')) close(false); });
+  var q=null; try{ q=new URLSearchParams(location.search).get('ind'); }catch(e){}
+  if(q==='learning') q='training';
+  if(q==='physical') q='built';   /* Physical Systems became Built Environment (T-2026-10-14-206) */
+  set(opts.some(function(o){ return o.getAttribute('data-i')===q; }) ? q : 'all');
+})();
+</script>
+<script>
+/* Card summaries (Taylor 2026-11-10): every card shows only the first sentence of its summary; "Learn more" opens the full text and the links, unchanged.
+   The split happens at load from whatever text the card carries, so summary edits need no markup changes. Without JavaScript the full text shows.
+   Card links that read generically ("Project page", "Paper") get the card title as hidden context for screen readers. */
+(function(){
+  var ABBR=/(?:\b(?:Dr|Mr|Ms|Mrs|St|vs|etc|al|No|Fig|Inc|Ltd|Jr|Sr|approx|e\.g|i\.e|U\.S|U\.K|Ph\.D|B\.S|M\.S)|\b[A-Z])\.$/;
+  function firstSentence(t){
+    var re=/[.!?][”"’)]?(?=\s+[A-Z“"(\d])/g, m;
+    while((m=re.exec(t))){ var head=t.slice(0,m.index+m[0].length); if(!ABBR.test(head)) return head.trim(); }
+    return null;
+  }
+  function vh(text){ var s=document.createElement('span'); s.className='vh'; s.textContent=text; return s; }
+  function enhance(root){
+    [].forEach.call((root||document).querySelectorAll('.card'),function(card){
+      if(card.getAttribute('data-more')) return; card.setAttribute('data-more','1');
+      var t=card.querySelector('.t'), title=t?t.textContent.trim():'';
+      var p=null; [].some.call(card.children,function(c){ if(c.matches && c.matches('p.s')){ p=c; return true; } return false; });
+      if(p){
+        var full=p.textContent.replace(/\s+/g,' ').trim(), lead=firstSentence(full);
+        if(lead && lead.length<full.length-1){
+          var lp=document.createElement('p'); lp.className='s lead'; lp.textContent=lead;
+          var d=document.createElement('details'); d.className='more';
+          d.innerHTML='<summary><span class="o">Learn more</span><span class="c">Show less</span></summary>';
+          if(title) d.querySelector('summary').appendChild(vh(': '+title));
+          p.parentNode.insertBefore(lp,p); p.parentNode.insertBefore(d,p); d.appendChild(p);
+          d.addEventListener('toggle',function(){ try{ window.dispatchEvent(new Event('resize')); }catch(e){} });   /* pages that cache section offsets re-measure */
+        }
+      }
+      if(title){ [].forEach.call(card.querySelectorAll('.links a'),function(a){ if(a.querySelector('.vh')) return; var x=a.textContent.trim(); if(x.split(/\s+/).length<=4 && x.indexOf(title)<0) a.appendChild(vh(': '+title)); }); }
+    });
+  }
+  window.__cardMore=enhance;
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){ enhance(); try{ window.dispatchEvent(new Event('resize')); }catch(e){} });
+  else { enhance(); try{ window.dispatchEvent(new Event('resize')); }catch(e){} }
+})();
+</script>
+</body>
+</html>

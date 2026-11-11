@@ -1,0 +1,4 @@
+/* Header on narrow phones (Taylor 2026-11-10). Three links (Projects, Case Studies, Connect) and the theme switch sit beside the
+   corner mark; under 430 px the links tighten to 14 px with 6 px side padding (each still 44 px tall) so they fit down to 320 px.
+   The résumé has no header link: it is requested from the form on Connect. */
+@media (max-width:430px){ html .top .links a{ font-size:14px; padding:0 6px; } }

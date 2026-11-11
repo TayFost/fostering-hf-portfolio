@@ -1,0 +1,17 @@
+/* Card summaries: first sentence, then "Learn more", which opens the full text and the card's links (Taylor 2026-11-10). The script inline in grid.html and index.html builds the markup. */
+.card details.more{ margin:0; }
+.card details.more > summary{ display:inline-flex; align-items:center; gap:6px; min-height:24px; margin:8px 0 0; cursor:pointer; list-style:none;
+  font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--dim); }
+.card details.more > summary::-webkit-details-marker{ display:none; }
+.card details.more > summary::after{ content:''; width:6px; height:6px; border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform:translateY(-2px) rotate(45deg); transition:transform .2s; }
+.card details.more[open] > summary::after{ transform:translateY(1px) rotate(-135deg); }
+.card details.more > summary:hover{ color:var(--text); }
+.card details.more > summary:focus-visible{ outline:2px solid var(--slate); outline-offset:3px; }
+.card details.more .c, .card details.more[open] .o{ display:none; }
+.card details.more[open] .c{ display:inline; }
+.card:has(details.more[open]) > .lead{ display:none; }
+.card details.more > p.s{ margin-top:6px; }
+.card .hero + .lead{ margin-top:14px; }
+.card .vh, .vh{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+@media (prefers-reduced-motion: reduce){ .card details.more > summary::after{ transition:none; } }
+.card:has(> details.more:not([open])) > .links{ display:none; }   /* links stay folded until Learn more (Taylor 2026-11-10) */

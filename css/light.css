@@ -1,0 +1,19 @@
+/* Light-mode accent: terracotta coral (Taylor 2026-11-09). Replaces every amber value in light mode only; dark mode keeps amber,
+   and the parchment ground stays. Shared by every page; linked last in the head, and every rule starts html:root[data-theme="light"]
+   so it outranks the page's own light rules wherever they sit.
+   --icon  #A34F37 terracotta: state marks, icons, the craft and star, the toggle knob (5.3:1 on parchment; WCAG 1.4.11 asks 3:1).
+   --accent #C26A50 coral: glows, band, hover lines (3.6:1).
+   glimmer  #D9826A light coral: the sheens on the Home label, the home preview and the Connect tagline. */
+html:root[data-theme="light"]{ --accent:#C26A50; --icon:#A34F37; --sw0:#A34F37; --sw1:#D9957C; --sw2:#E6E0EA; --sw3:#2F8F7C; }
+html:root[data-theme="light"] .top .band{ --b1:#4A1F14; --b2:#6E2E1E; --b3:#8E3D29; --b4:#A34F37; --b5:#C26A50; }
+html:root[data-theme="light"] .top .home::before, html:root[data-theme="light"] .top .theme::after, html:root[data-theme="light"] .top .links a::after{
+  background:linear-gradient(to top, rgba(194,106,80,0) 0%, rgba(194,106,80,.10) 42%, rgba(194,106,80,.28) calc(100% - 4px), rgba(240,178,156,.85) calc(100% - 1px)); }
+html:root[data-theme="light"] .contact a::after, html:root[data-theme="light"] #dock a::after{
+  background:linear-gradient(to bottom, rgba(194,106,80,0) 0%, rgba(194,106,80,.10) 42%, rgba(194,106,80,.28) calc(100% - 4px), rgba(240,178,156,.85) calc(100% - 1px)); }
+html:root[data-theme="light"] .chip .bd{ filter:drop-shadow(0 0 0 rgba(194,106,80,0)); }
+html:root[data-theme="light"] .chip.cur .bd{ filter:drop-shadow(0 0 8px rgba(194,106,80,.30)); }
+html:root[data-theme="light"] .top .home .hm-lbl span, html:root[data-theme="light"] #home .pv-slot, html:root[data-theme="light"] .reel{ --pvl:#D9826A; }
+
+html:root[data-theme="light"] #home .proj-line .vw::after{
+  background:linear-gradient(to bottom, rgba(194,106,80,0) 0%, rgba(194,106,80,.10) 42%, rgba(194,106,80,.28) calc(100% - 4px), rgba(240,178,156,.85) calc(100% - 1px)); }   /* home view switch (2026-11-10) */
+html:root[data-theme="light"]{ background:linear-gradient(180deg, #FFFFFF 0%, #F8F4EA 55%, #F1E6CC 100%) no-repeat; background-color:#F1E6CC; }   /* light ground reversed (Taylor 2026-11-10): was #F1E6CC at the top fading to white */

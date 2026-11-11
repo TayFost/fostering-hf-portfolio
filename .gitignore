@@ -1,0 +1,10 @@
+# Font binaries are never committed. Medium.otf (HVNTER) is stored only encrypted (assets/Medium.otf.gpg)
+# and decrypted at build time (see .github/workflows/deploy.yml).
+*.otf
+*.ttf
+*.woff
+*.woff2
+*.eot
+fonts/
+_site/
+_assets/

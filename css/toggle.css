@@ -1,0 +1,11 @@
+/* Theme switch (Taylor 2026-11-09): the light and dark button is drawn as a toggle, with no sun or moon. Shared by every page.
+   Same button and script as before: aria-label "Light mode", aria-pressed true in light mode, title says what a click does.
+   Off (dark, the default): knob left, dim, on a slate track. On (light): knob right, amber, on the same slate track (Taylor
+   2026-11-09: amber knob only, so the corner star stays the header's one strong amber point). 34 x 18 px track inside the 44 px hit area; the hover and focus wash is unchanged. */
+.top .theme .sw{ position:relative; display:block; width:34px; height:18px; box-sizing:border-box; border:1.5px solid var(--slate); border-radius:9px; transition:border-color .2s ease-out; }
+/* hint (Taylor 2026-11-09): in dark mode the knob is a crescent, in light mode a full amber disc; no other symbol */
+.top .theme .kn{ -webkit-mask:radial-gradient(circle at 74% 30%, transparent 3.7px, #000 4.2px); mask:radial-gradient(circle at 74% 30%, transparent 3.7px, #000 4.2px); position:absolute; top:2px; left:2px; width:11px; height:11px; border-radius:50%; background:var(--dim); transition:transform .22s cubic-bezier(.3,.7,.3,1), background-color .2s ease-out; }
+html[data-theme="light"] .top .theme .kn{ transform:translateX(16px); background:var(--icon,var(--accent)); -webkit-mask:none; mask:none; }
+@media (hover:hover){ .top .theme:hover .sw{ border-color:var(--dim); } }
+@media (prefers-reduced-motion: reduce){ .top .theme .sw, .top .theme .kn{ transition:none; } }
+@media (forced-colors: active){ .top .theme .kn{ -webkit-mask:none; mask:none; } .top .theme .sw{ border-color:ButtonText; } .top .theme .kn{ background:ButtonText; forced-color-adjust:none; } html[data-theme="light"] .top .theme .kn{ background:Highlight; } }

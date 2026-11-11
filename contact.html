@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>(function(){ var t=null, m; try{ t=new URLSearchParams(location.search).get("theme"); }catch(e){} if(t!=="light" && t!=="dark"){ t=null; m=/(?:^|;)theme=(light|dark)(?:;|$)/.exec(window.name||""); if(m){ t=m[1]; } } if(t!=="light" && t!=="dark"){ t=null; try{ t=localStorage.getItem("theme"); }catch(e){} } else { try{ localStorage.setItem("theme",t); }catch(e){} } if(t==="light"){ document.documentElement.setAttribute("data-theme","light"); } })();</script>
+<title>Connect · Taylor Foster</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&display=swap">
+<link rel="stylesheet" href="css/homemark.css">   <!-- "Home" label that slides out from behind the corner mark; keep this line in pages built from this shell (Taylor 2026-11-09) -->
+<link rel="stylesheet" href="css/toggle.css">   <!-- light and dark switch drawn as a toggle (Taylor 2026-11-09) -->
+<style>
+:root{
+  --bg:#0B0E14; --raised:#11151D; --hair:#262D3D; --slate:#6E7A93;
+  --text:#E6E9F0; --dim:#A3ADC2; --accent:#E8A15C;
+  --out:cubic-bezier(.22,.8,.3,1);
+  color-scheme:dark; scroll-padding-top:88px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#0B0E14; --raised:#11151D; --hair:#262D3D; --slate:#6E7A93; --text:#E6E9F0; --dim:#A3ADC2; --accent:#E8A15C; } }
+:root[data-theme="dark"]{ --bg:#0B0E14; --raised:#11151D; --hair:#262D3D; --slate:#6E7A93; --text:#E6E9F0; --dim:#A3ADC2; --accent:#E8A15C; }
+@media (prefers-contrast: more){ html:root:root{ --hair:#5E6985; --slate:#97A3BD; --dim:#C9D0DF; } }
+*,*::before,*::after{ box-sizing:border-box; }
+html{ background:var(--bg); scrollbar-gutter:stable; }
+body{ margin:0; background:var(--bg); color:var(--text); font-family:'IBM Plex Sans',system-ui,sans-serif; }
+a{ color:inherit; }
+a:focus-visible{ outline:2px solid var(--slate); outline-offset:3px; }
+.lbl{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; line-height:1.5; color:var(--dim); margin:0; }
+.disp{ font-family:'Michroma','IBM Plex Sans',system-ui,sans-serif; font-weight:400; letter-spacing:0; margin:0; }
+
+.top{ position:sticky; top:0; z-index:30; display:flex; justify-content:space-between; align-items:center; padding:max(20px,env(safe-area-inset-top,0px)) clamp(16px,4.5vw,64px) 16px; background:var(--bg); border-bottom:1px solid var(--hair); }
+.top a{ display:inline-flex; align-items:center; min-height:44px; margin:-11px 0; color:var(--dim); text-decoration:none; font-size:15px; }
+.top .home{ width:44px; justify-content:center; margin-left:-13px; }
+.top .links a{ padding:0 14px; }
+.top .links{ margin-right:-14px; display:flex; }
+@media (hover:hover){ .top a:hover{ color:var(--text); } }
+@media (max-width:760px){ .top .links a{ padding:0 10px; } }   /* phones keep both header links, Case Studies and Connect (T-2026-10-14-189) */
+/* slanted amber band under the header (Taylor 2026-11-02; short bars doubled in length on desktop the same day, 12/28/52/88 px; phones and 400% zoom keep 6/10/18/30 px so the burst does not crowd narrow views (W3C COGA 'Help users focus'; reflow note that 320 CSS px is desktop at 400% zoom)): anchored to the home mark as part of the identity, short bars at the left that dim toward a long run fading out to the right; the brightest bar stays below the chip glow (--accent), every edge cut at the same slant */
+.top .band, .endband .band{ position:absolute; left:0; right:0; bottom:-8px; height:6px; display:flex; gap:5px;  overflow:hidden; pointer-events:none;
+  --b1:#3E2610; --b2:#6A4216; --b3:#8E5A1E; --b4:#B0742E; --b5:#C88A44; }
+.top .band i, .endband .band i{ display:block; height:100%; transform:skewX(-40deg); }
+.top .band i:nth-child(1), .endband .band i:nth-child(1){ flex:0 0 calc(clamp(16px,4.5vw,64px) - var(--home-shift,0px) + 3px); margin-left:-8px; background:var(--b3); }   /* edge bar: runs off the left edge of the screen (Taylor 2026-11-02) */
+.top .band i:nth-child(2), .endband .band i:nth-child(2){ flex:0 0 12px; background:var(--b5); opacity:.6; }
+.top .band i:nth-child(3), .endband .band i:nth-child(3){ flex:0 0 28px; background:var(--b5); }
+.top .band i:nth-child(4), .endband .band i:nth-child(4){ flex:0 0 52px; background:var(--b4); }
+.top .band i:nth-child(5), .endband .band i:nth-child(5){ flex:0 0 88px; background:var(--b3); }
+.top .band i:nth-child(6), .endband .band i:nth-child(6){ flex:1 1 auto; margin-right:-8px; background:linear-gradient(90deg, var(--b2), var(--b1) 70%, transparent); }
+@media (max-width:760px){ .top .band{ bottom:-7px; height:5px; gap:4px; } .top .band i:nth-child(1){ flex-basis:calc(clamp(16px,4.5vw,64px) + 4px); } .top .band i:nth-child(2){ flex-basis:6px; } .top .band i:nth-child(3){ flex-basis:10px; } .top .band i:nth-child(4){ flex-basis:18px; } .top .band i:nth-child(5){ flex-basis:30px; } }
+@media (forced-colors: active){ .top .band, .endband{ display:none; } }
+/* light mode and header band, matching the home page (Taylor 2026-11-03): dark is the default; the toggle after Contact sets data-theme="light" on html and the choice is shared with the home page through localStorage */
+:root[data-theme="light"]{ --bg:#FAF7F0; --raised:#FFFFFF; --hair:#DDD5C4; --slate:#5A616F; --text:#111318; --dim:#3F4552; --accent:#E8A15C; --icon:#A8621A; color-scheme:light; }
+html[data-theme="light"]{ background:linear-gradient(180deg, #F1E6CC 0%, #F8F4EA 45%, #FFFFFF 100%) no-repeat; background-color:#FFFFFF; min-height:100%; }
+html[data-theme="light"] body{ background:transparent; }
+html[data-theme="light"] .top{ background:color-mix(in srgb, var(--bg) 90%, transparent); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+@media (prefers-contrast: more){ html:root:root[data-theme="light"]{ --hair:#8C8472; --slate:#4F5563; --dim:#2C313B; } }
+@media (prefers-reduced-transparency: reduce){ html[data-theme="light"] .top{ background:var(--bg); -webkit-backdrop-filter:none; backdrop-filter:none; } }
+.top .theme{ display:inline-flex; align-items:center; justify-content:center; width:44px; min-height:44px; margin:-11px 0; padding:0; border:0; background:none; color:var(--dim); cursor:pointer; font:inherit; }
+@media (hover:hover){ .top .theme:hover{ color:var(--text); } }
+.top .theme:focus-visible{ outline:2px solid var(--slate); outline-offset:-4px; }
+.top .theme svg{ display:block; }
+.top .theme .moon{ display:none; }
+html[data-theme="light"] .top .theme .sun{ display:none; }
+html[data-theme="light"] .top .theme .moon{ display:block; }
+
+
+/* Contact page (Taylor's spec, 2026-11-07). The site's own type and colours only: Michroma for the tagline, Plex Sans for the
+   links, slate for contours and supporting labels, amber only where the site already uses it (hover underline, header band). */
+html body{ background:transparent; }
+#bgtex{ position:fixed; inset:0; z-index:-1; pointer-events:none; background:var(--slate); opacity:.15;
+  --tx:30%; --ty:40%; --tw:360px; --th:160px; --fx:76%; --fy:44%; --fw:220px; --fh:260px;
+  --calm-t:radial-gradient(var(--tw) var(--th) at var(--tx) var(--ty), rgba(0,0,0,.22) 0, rgba(0,0,0,.22) 55%, #000 100%);
+  --calm-f:radial-gradient(var(--fw) var(--fh) at var(--fx) var(--fy), rgba(0,0,0,.12) 0, rgba(0,0,0,.12) 60%, #000 100%);
+  -webkit-mask-image:url(img/bg_topo.svg),var(--calm-t),var(--calm-f); mask-image:url(img/bg_topo.svg),var(--calm-t),var(--calm-f);
+  -webkit-mask-size:cover,100% 100%,100% 100%; mask-size:cover,100% 100%,100% 100%; -webkit-mask-position:center; mask-position:center; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+  -webkit-mask-composite:source-in; mask-composite:intersect; }
+html[data-theme="light"] #bgtex{ opacity:.14; }
+@media (forced-colors:active){ #bgtex{ display:none; } }
+@media (prefers-contrast:more){ #bgtex{ display:none; } }
+
+main.ct{ max-width:1200px; margin:0 auto; padding:clamp(48px,9vh,112px) clamp(16px,4.5vw,64px) 96px; min-height:calc(100vh - 80px);
+  display:grid; grid-template-columns:minmax(0,3fr) minmax(0,2fr); grid-template-areas:"head photo" "ways photo" "nav nav"; grid-template-rows:auto auto auto; column-gap:clamp(32px,6vw,96px); align-content:center; }
+.ct-head{ grid-area:head; container-type:inline-size; min-width:0; align-self:start; }   /* start (was end) so the headline and portrait share a top edge */
+.tag{ margin:0; line-height:1.18; }
+.tag .fixed{ display:block; color:var(--dim); font-size:clamp(22px,min(4.6cqi,3.2vw),40px); }
+/* the reel: a fixed window one line tall (two below 560 px of column, where 'human-centered design' wraps); the track moves up one
+   item at a time, and the last item is a copy of the first so the loop always moves upward.
+   The rotating word is itself the pause control (Taylor 2026-11-07, WCAG 2.2.2): a real <button> styled as headline text. Click, tap,
+   Enter or Space toggles a paused state that stays until toggled again; the button's name says the action. */
+.reelwrap{ position:relative; margin-top:.12em; }
+.reel{ display:block; position:relative; overflow:hidden; width:100%; margin:0; padding:0; border:0; background:none; text-align:left; cursor:pointer;
+  font-family:'Michroma','IBM Plex Sans',system-ui,sans-serif; font-weight:400; letter-spacing:0; line-height:1.18; color:var(--text);
+  font-size:clamp(24px,min(5cqi,3.5vw),44px); height:1.3em; }
+.reel .track{ display:block; will-change:transform; }
+.reel .item{ display:flex; align-items:flex-start; height:1.3em; white-space:nowrap; }
+.reel .item span{ text-decoration:underline; text-decoration-color:transparent; text-decoration-thickness:1px; text-underline-offset:.22em; transition:text-decoration-color .2s; }
+@media (hover:hover){ .reel:hover .item span{ text-decoration-color:var(--slate); } }
+.reel.paused .item span{ text-decoration-style:dotted; text-decoration-color:var(--slate); }   /* paused: a quiet dotted underline stays */
+.reel:focus-visible{ outline:2px solid var(--slate); outline-offset:4px; border-radius:2px; }
+@container (max-width:560px){
+  .reel, .reelstatic{ font-size:clamp(24px,8.4cqi,36px); }
+  .reel{ height:2.5em; }
+  .reel .item{ height:2.5em; white-space:normal; }
+}
+.reel .item{ transition:opacity .45s ease-in-out; }
+/* click or key on the word: the same lucent arrival as the home preview line (Taylor 2026-11-07) */
+.reel{ --pvl:#E9C68A; }   /* champagne, not the preview's pearl: the word is already near-white, so pearl would not read */
+html[data-theme="light"] .reel{ --pvl:#C9923F; }
+.reel.pv-in{ animation:pvIn .34s cubic-bezier(.2,.6,.2,1) both; }
+/* the band is painted per word: background-clip:text does not reach text inside the moving (transformed) track */
+.reel.pv-in .item > span{ color:transparent; background:linear-gradient(100deg, var(--text) 0 38%, var(--pvl) 50%, var(--text) 62% 100%) 100% 0 / 260% 100% no-repeat;
+  -webkit-background-clip:text; background-clip:text; animation:pvSheen .9s cubic-bezier(.37,.1,.33,.95) .06s both; }
+@keyframes pvIn{ from{ opacity:.35; filter:blur(3px); } to{ opacity:1; filter:none; } }
+@keyframes pvSheen{ from{ background-position:100% 0; } to{ background-position:0 0; } }
+@media (forced-colors: active){ .reel.pv-in, .reel.pv-in .item > span{ color:CanvasText; background:none; animation:none; } }
+.reel.moving .item.out{ opacity:.15; }
+.reelstatic{ display:none; font-family:'Michroma','IBM Plex Sans',system-ui,sans-serif; font-weight:400; line-height:1.18; color:var(--text); font-size:clamp(24px,min(5cqi,3.5vw),44px); }
+@media (prefers-reduced-motion: reduce){ .reel, .reelhint{ display:none; } .reelstatic{ display:block; } }   /* reduced motion: plain text, no control (Taylor 2026-11-07) */
+/* one-time hint on the first mouse hover or keyboard focus */
+.reelhint{ position:absolute; left:0; top:calc(100% + 10px); font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--dim);
+  opacity:0; transition:opacity .3s; pointer-events:none; white-space:nowrap; }
+.reelhint.on{ opacity:1; }
+.vh{ position:absolute !important; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+
+.ways-wrap{ grid-area:ways; align-self:start; margin:clamp(64px,11vh,112px) 0 0; max-width:480px; }
+.req{ margin-top:28px; }   /* résumé request (Taylor 2026-11-10) */
+.req .lbl{ margin:0 0 8px; }
+.req .lbl label{ cursor:pointer; }
+.req-note{ margin:0 0 10px; font-size:15px; line-height:1.4; color:var(--dim); }
+.req-row{ display:flex; gap:8px; flex-wrap:wrap; }
+.req input{ flex:1 1 220px; min-width:0; min-height:44px; box-sizing:border-box; padding:0 12px; font:inherit; font-size:16px; color:var(--text); background:var(--bg); border:1.5px solid var(--slate); border-radius:0; }
+.req input::placeholder{ color:var(--dim); opacity:.7; }
+.req input:focus-visible{ outline:2px solid var(--slate); outline-offset:2px; }
+.req input[aria-invalid="true"]{ border-color:var(--icon,var(--accent)); }
+.req button{ flex:none; min-height:44px; padding:0 16px; font:inherit; font-size:15px; color:var(--text); background:transparent; border:1.5px solid var(--slate); border-radius:0; cursor:pointer; transition:border-color .2s, color .2s; }
+@media (hover:hover){ .req button:hover{ border-color:var(--icon,var(--accent)); } }
+.req button:focus-visible{ outline:2px solid var(--slate); outline-offset:2px; }
+.req .hp{ position:absolute; left:-10000px; width:1px; height:1px; opacity:0; }   /* spam trap: people never fill it */
+.req button[disabled]{ opacity:.6; cursor:progress; }
+.req-msg{ margin:8px 0 0; min-height:1.4em; font-size:14px; line-height:1.4; color:var(--dim); }
+@media (forced-colors: active){ .req input, .req button{ border-color:ButtonText; } }
+.edu{ margin-top:24px; }   /* education under the Connect card (Taylor 2026-11-10) */
+.edu .lbl{ margin:0 0 10px; }
+.edu .school{ margin:0 0 8px; font-size:15px; line-height:1.4; color:var(--text); }
+.edu ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px; }
+.edu li{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; font-size:15px; line-height:1.4; color:var(--dim); }
+.edu .deg{ position:relative; padding-left:18px; }   /* star bullets (Taylor 2026-11-11): the home mark's amber four-pointed star */
+.edu .deg::before{ content:""; position:absolute; left:0; top:.32em; width:10px; height:10px; background:var(--icon,var(--accent)); -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2L14.2 9.8L22 12L14.2 14.2L12 22L9.8 14.2L2 12L9.8 9.8Z'/%3E%3C/svg%3E") center/contain no-repeat; mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2L14.2 9.8L22 12L14.2 14.2L12 22L9.8 14.2L2 12L9.8 9.8Z'/%3E%3C/svg%3E") center/contain no-repeat; }
+@media (forced-colors:active){ .edu .deg::before{ background:CanvasText; } }
+.edu .dt{ flex:none; font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:13px; letter-spacing:.02em; color:var(--dim); }
+.ways-wrap .lbl{ margin:0 0 12px; }   /* the page's one 'Contact' label sits on the card that holds the details (Taylor 2026-11-07) */
+.ways{ position:relative; padding:14px 24px; }
+/* contact card (Taylor 2026-11-07): the pattern chips' motif, a slate outline with the top-right and bottom-left corners cut 14 px,
+   filled with the page ground so the contours stop at its edge */
+.ways .bd{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+.ways .bd polygon{ fill:var(--bg); stroke:var(--slate); stroke-width:1.5; }
+@media (prefers-contrast: more){ .ways .bd polygon{ stroke-width:2; } }
+@media (forced-colors: active){ .ways .bd polygon{ fill:Canvas; stroke:CanvasText; } }
+.ways ul{ position:relative; list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:2px; }
+.ways a{ display:flex; align-items:center; gap:16px; min-height:56px; padding:6px 0; text-decoration:none; color:var(--text); }
+.ways a svg{ flex:none; color:var(--slate); transition:color .2s; }
+.ways .w{ display:flex; flex-direction:column; gap:2px; min-width:0; }
+.ways .k{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); }   /* dim, not slate: dark slate on the navy is 4.48:1, under AA for 11 px text */
+.ways .v{ font-size:17px; line-height:1.35; overflow-wrap:break-word; border-bottom:1px solid transparent; align-self:flex-start; padding-bottom:1px; }
+@media (hover:hover){ .ways a:hover .v{ border-bottom-color:var(--accent); } .ways a:hover svg{ color:var(--text); } }
+.ways a:focus-visible{ outline:2px solid var(--slate); outline-offset:4px; }
+
+.ct-side{ grid-area:photo; align-self:start; justify-self:end; width:100%; max-width:400px; margin-top:4px; }   /* portrait + education; 4px drops the frame to the headline's cap height across the gutter */
+.ct-photo{ margin:0; width:100%; }
+.ct-photo .frame{ position:relative; aspect-ratio:1/1; border:1px solid var(--hair); border-radius:4px; overflow:hidden; background:var(--raised); }
+.ct-photo img{ display:block; width:100%; height:100%; object-fit:cover; }   /* Taylor's square portrait (2026-11-07), shown whole in a square frame; converted to WebP only */
+.ct-photo .wait{ position:absolute; inset:0; display:none; align-items:center; justify-content:center; font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); }
+.ct-photo.missing img{ display:none; } .ct-photo.missing .wait{ display:flex; }
+
+
+/* tablet: smaller portrait, tighter columns */
+@media (max-width:1023px){ main.ct{ grid-template-columns:minmax(0,1fr) minmax(0,.62fr); column-gap:40px; } .ct-side{ max-width:300px; } }
+/* phones and narrow tablets: one column; tagline, then a compact portrait, then the links */
+@media (max-width:767px){
+  main.ct{ grid-template-columns:minmax(0,1fr); grid-template-areas:"head" "photo" "ways" "nav"; padding-top:40px; min-height:0; }
+  .ct-head{ align-self:start; }
+  .ct-side{ max-width:none; margin:32px 0 0; justify-self:stretch; } .ct-photo{ max-width:220px; } .edu{ margin-top:20px; }
+  .ways-wrap{ margin-top:48px; }   /* gap between groups (48) larger than within a group (20 to 24): proximity */
+}
+@media (prefers-reduced-motion: reduce){ .reel .item, .reelhint{ transition:none; } }
+
+/* type and targets (2026-11-10, critique "Next pass"): functional mono labels and links move from 11 to 12 px up to 13 px, and standalone links get a 24 px
+   target; decorative eyebrows (page and card category lines, section numbers, chip indices) stay at 12 px. 13 px rather than the critique's 14 for
+   uppercase mono links: tracked uppercase mono at 13 px is already wider than 15 px sans. */
+.ways .k{ font-size:13px; }
+.reelhint{ font-size:12px; }
+.req .lbl, .ways-wrap > .lbl, .edu > .lbl{ font-size:13px; }
+
+/* closing band (Taylor 2026-11-11): a copy of the header band, mirrored, where the bottom links were. Short bars at the right edge, the long run fading to the left. */
+.endband{ position:relative; height:6px; margin:clamp(56px,10vh,104px) 0 clamp(40px,7vh,72px); transform:scaleX(-1); --home-shift:0px; overflow:hidden; }
+.endband .band{ top:0; bottom:auto; }
+@media (max-width:760px){ .endband{ height:5px; } .endband .band{ bottom:-7px; height:5px; gap:4px; } .endband .band i:nth-child(1){ flex-basis:calc(clamp(16px,4.5vw,64px) + 4px); } .endband .band i:nth-child(2){ flex-basis:6px; } .endband .band i:nth-child(3){ flex-basis:10px; } .endband .band i:nth-child(4){ flex-basis:18px; } .endband .band i:nth-child(5){ flex-basis:30px; } }
+</style>
+<link rel="stylesheet" href="css/header.css">   <!-- header links on narrow phones (Taylor 2026-11-10) -->
+<link rel="stylesheet" href="css/light.css">   <!-- light mode accent: terracotta coral in place of amber (Taylor 2026-11-09); keep last in the head -->
+</head>
+<body>
+
+<div id="bgtex" aria-hidden="true"></div>
+<header class="top">
+  <span class="band" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+  <a class="home" href="index.html" aria-label="Home"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><defs><clipPath id="o2clip"><rect width="24" height="19.20"/></clipPath></defs><path d="M1.80 19.20 A8.20 8.20 0 0 1 18.20 19.20"/><g clip-path="url(#o2clip)"><path d="M3.28 14.64 L3.29 14.72 L3.32 14.81 L3.37 14.89 L3.43 14.97 L3.51 15.06 L3.61 15.14 L3.73 15.22 L3.86 15.30 L4.02 15.37 L4.18 15.45 L4.37 15.52 L4.57 15.59 L4.78 15.66 L5.01 15.72 L5.25 15.79 L5.51 15.84 L5.77 15.90 L6.05 15.95 L6.34 16.00 L6.64 16.04 L6.95 16.08 L7.27 16.12 L7.59 16.15 L7.92 16.18 L8.26 16.21 L8.60 16.23 L8.95 16.24 L9.30 16.25 L9.65 16.26 L10.00 16.26 L10.35 16.26 L10.70 16.25 L11.05 16.24 L11.40 16.23 L11.74 16.21 L12.08 16.18 L12.41 16.15 L12.73 16.12 L13.05 16.08 L13.36 16.04 L13.66 16.00 L13.95 15.95 L14.23 15.90 L14.49 15.84 L14.75 15.79 L14.99 15.72 L15.22 15.66 L15.43 15.59 L15.63 15.52 L15.82 15.45 L15.98 15.37 L16.14 15.30 L16.27 15.22 L16.39 15.14 L16.49 15.06 L16.57 14.97 L16.63 14.89 L16.68 14.81 L16.71 14.72 L16.72 14.64"/><path d="M4.55 23.24 L4.46 22.87 L4.37 22.49 L4.31 22.10 L4.26 21.70 L4.22 21.29 L4.21 20.88 L4.20 20.46 L4.22 20.04 L4.24 19.62 L4.29 19.20 L4.35 18.78 L4.43 18.36 L4.52 17.94 L4.62 17.52 L4.74 17.11 L4.88 16.70 L5.03 16.30 L5.19 15.91 L5.37 15.53 L5.56 15.16 L5.76 14.80 L5.97 14.45 L6.20 14.12 L6.43 13.79 L6.67 13.49 L6.93 13.20 L7.19 12.92 L7.46 12.66 L7.73 12.42 L8.02 12.20 L8.30 12.00 L8.60 11.82 L8.89 11.66 L9.19 11.52 L9.49 11.40 L9.80 11.30"/><path d="M15.45 23.24 L15.54 22.87 L15.63 22.49 L15.69 22.10 L15.74 21.70 L15.78 21.29 L15.79 20.88 L15.80 20.46 L15.78 20.04 L15.76 19.62 L15.71 19.20 L15.65 18.78 L15.57 18.36 L15.48 17.94 L15.38 17.52 L15.26 17.11 L15.12 16.70 L14.97 16.30 L14.81 15.91 L14.63 15.53 L14.44 15.16 L14.24 14.80 L14.03 14.45 L13.80 14.12 L13.57 13.79 L13.33 13.49 L13.07 13.20 L12.81 12.92 L12.54 12.66 L12.27 12.42 L11.98 12.20 L11.70 12.00 L11.40 11.82 L11.11 11.66 L10.81 11.52 L10.51 11.40 L10.20 11.30"/></g><path d="M1.00 19.20 H19.00"/><path d="M1 4.6C8.4 4.2 13.8 5.4 16.7 8C19 10.1 21 13.3 23.2 17.6"/><path d="M16.70 4.20 L17.65 7.05 L20.50 8.00 L17.65 8.95 L16.70 11.80 L15.75 8.95 L12.90 8.00 L15.75 7.05Z" fill="var(--icon,var(--accent))" stroke="var(--icon,var(--accent))" stroke-width=".7" stroke-linejoin="round"/></svg><span class="hm-lbl" aria-hidden="true"><span>Home</span></span></a><!-- corner mark (Taylor 2026-11-09): the flyby over the half-globe on pages where the globe is not shown. Its craft is the amber four-pointed star, which stands alone as the home mark where the globe is shown (index.html) and on Connect's back link -->
+  <!-- header (Taylor 2026-11-10): Projects, Case Studies, Connect on every page, less the page itself; no Résumé link, since the request form lives on Connect (Taylor 2026-11-10) --><div class="links"><a href="grid.html">Projects</a><a href="case-studies.html">Case Studies</a><button class="theme" type="button" id="themeToggle" aria-pressed="false" aria-label="Light mode"><span class="sw" aria-hidden="true"><span class="kn"></span></span></button></div>
+</header>
+
+<main class="ct">
+  <div class="ct-head">
+    <h1 class="disp tag" id="tag"><span class="vh">Fostering the future of innovation, safety, and human-centered design.</span><span class="fixed" aria-hidden="true">Fostering the future of</span></h1>
+    <div class="reelwrap"><button class="reel" type="button" id="reel" aria-label="Pause rotating tagline"><span class="track" aria-hidden="true"><span class="item"><span>innovation</span></span><span class="item"><span>safety</span></span><span class="item"><span>human-centered design</span></span><span class="item"><span>innovation</span></span></span></button><span class="reelhint" id="reelhint" aria-hidden="true">Click to pause</span><span class="reelstatic" aria-hidden="true">human-centered design</span></div>
+  </div>
+  <div class="ways-wrap"><p class="lbl">Connect</p><div class="ways"><svg class="bd" aria-hidden="true" focusable="false"><polygon/></svg><ul>
+      <li><a href="mailto:taylor@fosteringhumanfactors.tech"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg><span class="w"><span class="k">Email</span><span class="v">taylor@<wbr>fosteringhumanfactors<wbr>.tech</span></span></a></li>
+      <li><a href="https://github.com/TayFost" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg><span class="w"><span class="k">Code</span><span class="v">GitHub</span></span><span class="vh">(opens in a new tab)</span></a></li>
+      <li><a href="https://www.linkedin.com/in/taylor-foster-human-centered-design/" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg><span class="w"><span class="k">Profile</span><span class="v">LinkedIn</span></span><span class="vh">(opens in a new tab)</span></a></li>
+  </ul></div>
+  <form class="req" id="resume" method="POST" action="https://formspree.io/f/mjywbwdr" data-endpoint="https://formspree.io/f/mjywbwdr" novalidate>   <!-- résumé on request only (Taylor 2026-11-10): the visitor leaves an address; the page posts it to Taylor's Formspree form (mjywbwdr, set 2026-11-10), which emails Taylor; without an endpoint it falls back to the visitor's email app. -->
+    <p class="lbl"><label for="reqEmail">Résumé on request</label></p>
+    <p class="req-note" id="reqNote">Leave your email and I'll send my current résumé.</p>
+    <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="req-row"><input id="reqEmail" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="name@company.com" aria-describedby="reqNote reqMsg"><button type="submit">Request résumé</button></div>
+    <p class="req-msg" id="reqMsg" role="status" aria-live="polite"></p>
+  </form>
+  </div>
+  <div class="ct-side">   <!-- portrait with education beneath it (Taylor 2026-11-10): who Taylor is, grouped apart from how to reach Taylor -->
+  <figure class="ct-photo" id="photo"><div class="frame"><img src="img/headshot.webp" alt="Portrait of Taylor Foster" width="1012" height="1012" decoding="async"><span class="wait" aria-hidden="true">Headshot</span></div></figure>
+  <div class="edu"><p class="lbl">Education</p>   <!-- graduation dates from the Human Factors résumé (Taylor 2026-11-10) -->
+    <p class="school">Arizona State University, accelerated BS/MS in Human Systems Engineering</p>
+    <ul><li><span class="deg">MS, Human Systems Engineering</span><span class="dt">August 2026</span></li>
+        <li><span class="deg">BS, Human Systems Engineering, Design Studies minor</span><span class="dt">May 2025</span></li></ul></div>
+  </div>
+</main>
+<!-- closing band (Taylor 2026-11-11): the header band mirrored, in place of the bottom links, which repeated the pinned header -->
+<div class="endband" aria-hidden="true"><span class="band"><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+<script>
+/* light and dark mode toggle (Taylor 2026-11-03). aria-pressed reports light mode; the choice is kept in localStorage when the browser allows it. */
+(function(){
+  var b=document.getElementById('themeToggle'), root=document.documentElement; if(!b) return;
+  function sync(){ var light=root.getAttribute('data-theme')==='light'; b.setAttribute('aria-pressed',light?'true':'false'); b.setAttribute('title',light?'Switch to dark mode':'Switch to light mode'); }
+  b.addEventListener('click',function(e){
+    e.preventDefault(); e.stopPropagation();
+    var light=root.getAttribute('data-theme')!=='light';
+    if(light){ root.setAttribute('data-theme','light'); } else { root.removeAttribute('data-theme'); }
+    try{ localStorage.setItem('theme', light?'light':'dark'); }catch(err){}
+    sync();
+  });
+  sync();
+})();
+</script>
+<script>
+/* the theme choice travels with links between the home page and the project pages, so a reader who chose light mode is not sent back to dark when the browser blocks storage (Taylor 2026-11-03) */
+function __themeName(){ var t=document.documentElement.getAttribute('data-theme')==='light'?'light':'dark'; try{ window.name=(window.name||'').replace(/(?:^|;)theme=(light|dark)/g,'').replace(/^;+|;+$/g,'')+(window.name&&!/^;*$/.test(window.name.replace(/(?:^|;)theme=(light|dark)/g,''))?';':'')+'theme='+t; }catch(err){} }
+document.addEventListener('click',function(e){ if(e.target && e.target.closest && e.target.closest('#themeToggle')){ setTimeout(function(){ __themeName(); if(window.__themeSave){ window.__themeSave(); } },0); } });
+/* in the claude.ai viewer each page may open in a fresh frame with storage blocked, so the choice is also kept per viewer in the artifact's private db (data/users/<id>/theme). It is read once on load and written only when the viewer clicks the toggle. Outside the viewer this does nothing. */
+(async function(){
+  try{
+    if(!window.claude || !window.claude.use) return;
+    var db=await window.claude.use('db'), user=await window.claude.use('user'); if(!db || !user) return;
+    var id=await user.id(); if(!id) return;
+    var ref=db.doc('data/users/'+id+'/theme'), root=document.documentElement;
+    window.__themeSave=function(){ ref.set({value: root.getAttribute('data-theme')==='light'?'light':'dark'}).catch(function(){}); };
+    var snap=await ref.get(); if(!snap.exists) return;
+    var t=(snap.data()||{}).value, now=root.getAttribute('data-theme')==='light'?'light':'dark';
+    if((t==='light'||t==='dark') && t!==now){
+      if(t==='light'){ root.setAttribute('data-theme','light'); } else { root.removeAttribute('data-theme'); }
+      var b=document.getElementById('themeToggle'); if(b){ b.setAttribute('aria-pressed',t==='light'?'true':'false'); b.setAttribute('title',t==='light'?'Switch to dark mode':'Switch to light mode'); }
+      try{ localStorage.setItem('theme',t); }catch(err){}
+      __themeName(); if(window.__onPref){ window.__onPref(); }
+    }
+  }catch(err){}
+})();
+document.addEventListener('click',function(e){
+  __themeName();
+  var a=e.target && e.target.closest ? e.target.closest('a[href]') : null; if(!a) return;
+  var h=a.getAttribute('href')||''; if(!/^(index|observer|crisiscourier|asrs|spacehack|case-studies|grid|contact)\.html/.test(h)) return;
+  try{ var u=new URL(h, location.href); u.searchParams.set('theme', document.documentElement.getAttribute('data-theme')==='light'?'light':'dark'); a.href=u.pathname.split('/').pop()+u.search+u.hash; }catch(err){}
+}, true);
+</script>
+<script>
+/* headshot: until the approved photo is in img/headshot.webp the frame stays empty, so the layout holds its shape */
+(function(){ var f=document.getElementById('photo'), i=f&&f.querySelector('img'); if(!i) return;
+  function miss(){ f.classList.add('missing'); }
+  if(i.complete && !i.naturalWidth) miss(); i.addEventListener('error',miss); })();
+</script>
+<script>
+/* rotating term (spec section 4, Taylor 2026-11-07): innovation, safety, human-centered design, repeating; 4 s hold, 450 ms move,
+   ease-in-out, always upward. The word is the only control: click, tap, Enter or Space pauses on the word shown and stays paused until
+   toggled again. No temporary hover or focus hold (Taylor 2026-11-07), so Resume always restarts it, wherever the pointer or focus is.
+   It also rests while the tab is hidden or the tagline is off screen. Reduced motion: CSS swaps the button for plain text. */
+(function(){
+  var reel=document.getElementById('reel'), track=reel&&reel.querySelector('.track'), items=track?[].slice.call(track.children):[], hint=document.getElementById('reelhint');
+  if(!track) return;
+  var N=items.length-1, k=0, HOLD=4000, MOVE=450, t=null, user=false, hidden=false, off=false, hinted=false, hintT=null;
+  var reduce=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)');
+  function rm(){ return !!(reduce&&reduce.matches); }
+  function h(){ return items[0].getBoundingClientRect().height; }
+  function place(anim){ track.style.transition=anim?'transform '+MOVE+'ms cubic-bezier(.45,0,.55,1)':'none'; track.style.transform='translateY('+(-k*h())+'px)'; }
+  function paused(){ return user||hidden||off||rm(); }
+  function step(){
+    t=null; if(paused()) return;
+    items.forEach(function(it,j){ it.classList.toggle('out', j===k); }); reel.classList.add('moving');
+    k++; place(true);
+    setTimeout(function(){ reel.classList.remove('moving'); items.forEach(function(it){ it.classList.remove('out'); }); if(k===N){ k=0; place(false); } schedule(); }, MOVE+20);
+  }
+  function schedule(){ clearTimeout(t); t=null; if(!paused()) t=setTimeout(step,HOLD); }
+  function sync(){ reel.setAttribute('aria-label', user?'Resume rotating tagline':'Pause rotating tagline'); reel.classList.toggle('paused',user); }
+  function showHint(kind){
+    if(hinted||rm()||user) return; hinted=true;
+    hint.textContent=kind==='key'?'Enter to pause':'Click to pause';
+    hint.classList.add('on'); clearTimeout(hintT); hintT=setTimeout(function(){ hint.classList.remove('on'); },2600);
+  }
+  function shine(){ reel.classList.remove('pv-in'); void reel.offsetWidth; reel.classList.add('pv-in'); }
+  reel.addEventListener('animationend',function(e){ if(e.animationName==='pvSheen') reel.classList.remove('pv-in'); });
+  reel.addEventListener('click',function(){ if(rm()) return; user=!user; sync(); schedule(); hinted=true; hint.classList.remove('on'); shine(); });
+  reel.addEventListener('pointerenter',function(e){ if(e.pointerType==='mouse') showHint('mouse'); });
+  reel.addEventListener('focus',function(){ if(reel.matches(':focus-visible')) showHint('key'); });
+  document.addEventListener('visibilitychange',function(){ hidden=document.hidden; schedule(); });
+  if('IntersectionObserver' in window){ new IntersectionObserver(function(es){ off=!es[0].isIntersecting; schedule(); }).observe(reel.parentNode); }
+  if(reduce&&reduce.addEventListener){ reduce.addEventListener('change',function(){ place(false); schedule(); }); }
+  addEventListener('resize',function(){ place(false); });
+  sync(); place(false); schedule();
+})();
+</script>
+<script>
+/* contour calm zones: the lines thin under the tagline and the portrait, wherever the layout puts them */
+(function(){ var el=document.getElementById('bgtex'), tag=document.querySelector('.ct-head'), ph=document.getElementById('photo'); if(!el||!tag) return;
+  function set(){ var a=tag.getBoundingClientRect(), b=ph?ph.getBoundingClientRect():null;
+    el.style.setProperty('--tx',(a.left+a.width/2)+'px'); el.style.setProperty('--ty',(a.top+a.height/2)+'px');
+    el.style.setProperty('--tw',(a.width*0.75+80)+'px'); el.style.setProperty('--th',(a.height*0.75+70)+'px');
+    if(b&&b.width){ el.style.setProperty('--fx',(b.left+b.width/2)+'px'); el.style.setProperty('--fy',(b.top+b.height/2)+'px'); el.style.setProperty('--fw',(b.width*0.75+60)+'px'); el.style.setProperty('--fh',(b.height*0.7+60)+'px'); } }
+  var raf=0; function q(){ if(raf) return; raf=requestAnimationFrame(function(){ raf=0; set(); }); }
+  addEventListener('resize',q); addEventListener('scroll',q,{passive:true}); addEventListener('load',set); if(document.fonts&&document.fonts.ready) document.fonts.ready.then(set); set(); })();
+</script>
+<script>
+/* contact card outline: the chips' polygon (drawPoly on the home page), redrawn when the card changes size */
+(function(){ var w=document.querySelector('.ways'), svg=w&&w.querySelector('svg.bd'), poly=svg&&svg.querySelector('polygon'); if(!poly) return;
+  function draw(){ var W=w.offsetWidth, H=w.offsetHeight, cut=Math.min(14,H/3); svg.setAttribute('viewBox','0 0 '+W+' '+H);
+    poly.setAttribute('points',[[.75,.75],[W-cut,.75],[W-.75,cut],[W-.75,H-.75],[cut,H-.75],[.75,H-cut]].map(function(p){ return p.join(','); }).join(' ')); }
+  draw(); if('ResizeObserver' in window) new ResizeObserver(draw).observe(w); else addEventListener('resize',draw); })();
+</script>
+<script>
+/* Résumé request (Taylor 2026-11-10). With a Formspree endpoint in the form's data-endpoint (https://formspree.io/f/<form id>),
+   the request is posted in the page and Formspree emails it to Taylor; the visitor stays on the page and sees a confirmation.
+   With no endpoint set, it falls back to opening the visitor's email app with the request addressed to Taylor. */
+(function(){ var f=document.getElementById('resume'); if(!f) return; var i=document.getElementById('reqEmail'), m=document.getElementById('reqMsg'), btn=f.querySelector('button[type=submit]');
+  var TO='taylor@fosteringhumanfactors.tech';
+  i.addEventListener('input',function(){ i.removeAttribute('aria-invalid'); m.textContent=''; });
+  function mailto(v){ var body='Hi Taylor,\n\nCould you send your current résumé to '+v+'?\n\nThanks,';
+    location.href='mailto:'+TO+'?subject='+encodeURIComponent('Résumé request')+'&body='+encodeURIComponent(body);
+    m.textContent='Your email app should open with the request ready to send. If it does not, email '+TO+'.'; }
+  f.addEventListener('submit',function(e){ e.preventDefault(); var v=i.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){ i.setAttribute('aria-invalid','true'); m.textContent='Enter an email address, such as name@company.com.'; i.focus(); return; }
+    var url=(f.getAttribute('data-endpoint')||'').trim(); if(!url){ mailto(v); return; }
+    var fd=new FormData(f); fd.set('email',v); fd.set('_subject','Résumé request');
+    btn.disabled=true; m.textContent='Sending…';
+    fetch(url,{method:'POST',body:fd,headers:{'Accept':'application/json'}}).then(function(r){
+      if(r.ok){ f.reset(); m.textContent='Thanks. Your request is in, and I\'ll send my résumé to '+v+'.'; }
+      else { m.textContent='That didn\'t go through. Please try again, or email '+TO+'.'; }
+    }).catch(function(){ m.textContent='That didn\'t go through. Please try again, or email '+TO+'.'; })
+      .then(function(){ btn.disabled=false; });
+  });
+})();
+</script>
+</body>
+</html>

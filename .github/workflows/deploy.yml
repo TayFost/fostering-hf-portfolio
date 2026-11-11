@@ -1,0 +1,58 @@
+# Deploys fosteringhumanfactors.tech to GitHub Pages. Pages source must be set to "GitHub Actions".
+# Medium.otf (HVNTER) is stored here only as assets/Medium.otf.gpg (AES-256, GitHub's documented approach for large secrets).
+# The build decrypts it into the Pages artifact with the FONT_PASSPHRASE secret; the plain font is never committed and
+# nothing in this workflow prints it or the passphrase (GitHub does not redact what a decrypt step prints).
+name: Deploy site
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Refuse tracked font binaries
+        run: |
+          if git ls-files | grep -Ei '\.(otf|ttf|woff2?|eot)$'; then
+            echo "A font binary is tracked in this public repository. Remove it (and purge history) before deploying."; exit 1
+          fi
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site/fonts
+          cp *.html CNAME _site/
+          cp -r css docs img _site/
+
+      - name: Decrypt Medium.otf into the artifact
+        env:
+          FONT_PASSPHRASE: ${{ secrets.FONT_PASSPHRASE }}
+        run: |
+          if [ -z "$FONT_PASSPHRASE" ]; then echo "Secret FONT_PASSPHRASE is not set."; exit 1; fi
+          printf '%s' "$FONT_PASSPHRASE" | gpg --quiet --batch --yes --pinentry-mode loopback --passphrase-fd 0 \
+            --decrypt --output _site/fonts/Medium.otf assets/Medium.otf.gpg
+          (cd _site/fonts && sha256sum -c ../../tools/Medium.otf.sha256)
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+          retention-days: 1
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
