@@ -1,0 +1,13 @@
+# Keeps the pinned GitHub Actions in deploy.yml current.
+# One grouped pull request per month at most; merging it redeploys the site.
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    groups:
+      actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: "deps"
