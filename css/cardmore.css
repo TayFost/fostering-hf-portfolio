@@ -15,3 +15,8 @@
 .card .vh, .vh{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
 @media (prefers-reduced-motion: reduce){ .card details.more > summary::after{ transition:none; } }
 .card:has(> details.more:not([open])) > .links{ display:none; }   /* links stay folded until Learn more (Taylor 2026-11-10) */
+
+/* Case-study marker (Taylor 2026-11-17): the "Case study" segment of a card's category line gets the site's four-pointed star and a larger size, in Thematic and Grid views. The script in grid.html and index.html marks the segment at load. */
+.card .lbl .cs{ display:inline-flex; align-items:center; gap:7px; font-size:15px; color:var(--icon,var(--accent)); vertical-align:baseline; }
+.card .lbl .cs::before{ content:""; flex:none; width:11px; height:11px; background:currentColor; -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2L14.2 9.8L22 12L14.2 14.2L12 22L9.8 14.2L2 12L9.8 9.8Z'/%3E%3C/svg%3E") center/contain no-repeat; mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2L14.2 9.8L22 12L14.2 14.2L12 22L9.8 14.2L2 12L9.8 9.8Z'/%3E%3C/svg%3E") center/contain no-repeat; }
+@media (forced-colors:active){ .card .lbl .cs{ color:CanvasText; } .card .lbl .cs::before{ background:CanvasText; } }

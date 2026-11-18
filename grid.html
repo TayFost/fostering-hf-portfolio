@@ -318,5 +318,5 @@ document.addEventListener('click',function(e){
   else { enhance(); try{ window.dispatchEvent(new Event('resize')); }catch(e){} }
 })();
 </script>
-</body>
+<script>/* case-study marker (Taylor 2026-11-17) */(function(){var K='Case study';function mark(){var ls=document.querySelectorAll('.card .lbl');for(var i=0;i<ls.length;i++){var l=ls[i];if(l.querySelector('.cs'))continue;var f=l.firstChild;if(!f)continue;if(f.nodeType===1&&f.textContent.trim()===K){f.classList.add('cs');continue;}if(f.nodeType===3&&f.nodeValue.indexOf(K)===0){var s=document.createElement('span');s.className='cs';s.textContent=K;f.nodeValue=f.nodeValue.slice(K.length);l.insertBefore(s,f);}}}mark();try{new MutationObserver(mark).observe(document.body,{childList:true,subtree:true});}catch(e){}})();</script></body>
 </html>
