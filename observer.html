@@ -148,6 +148,15 @@ main .links a{ font-size:13px; display:inline-flex; align-items:flex-end; min-he
 @media (max-width:560px){ .beats caption{ display:block; } .beats table, .beats thead, .beats tbody, .beats tr, .beats th, .beats td{ display:block; } .beats thead{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
   .beats tbody tr{ padding:10px 14px; border-bottom:1px solid var(--hair); } .beats tbody tr:last-child{ border-bottom:0; }
   .beats tbody th, .beats tbody td{ padding:0; border:0; } .beats tbody th{ display:inline; } .beats .tm{ display:inline; margin-right:10px; } .beats tbody td:last-child{ margin-top:4px; } }
+
+/* references list, as on asrs.html (2026-11-19) */
+.refs ul{ list-style:none; margin:14px 0 0; padding:0; }
+.refs li{ margin:0 0 10px; padding-left:24px; text-indent:-24px; font-size:14px; line-height:1.5; color:var(--dim); overflow-wrap:anywhere; }
+.refs li a{ color:var(--dim); }
+/* robot audio on Figure 2 (2026-11-19): a small text button after each robot line; the line itself stays as text */
+.beats .play{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--text); background:none; border:1px solid var(--slate); border-radius:3px; padding:3px 8px; min-height:24px; margin-left:6px; cursor:pointer; vertical-align:baseline; }
+.beats .play:hover, .beats .play[aria-pressed="true"]{ border-color:var(--accent); }
+.beats .play:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 </style>
 <link rel="stylesheet" href="css/header.css">   <!-- header links on narrow phones (Taylor 2026-11-10) -->
 <link rel="stylesheet" href="css/light.css">   <!-- light mode accent: terracotta coral in place of amber (Taylor 2026-11-09); keep last in the head -->
@@ -175,15 +184,17 @@ main .links a{ font-size:13px; display:inline-flex; align-items:flex-end; min-he
 
   <section aria-labelledby="s1">
     <p class="lbl">01</p>
-    <h2 id="s1">The question</h2>
-    <p class="body">When a human-robot team completes a task, something decides what the robot may do and when. I wanted to know whether that arrangement, the decision-rights structure, changes how a naive observer judges the robot&#39;s trustworthiness. Observers watch a single video of the team and then rate the robot, so their judgment rests on behavior they can see.</p>
+    <h2 id="s1">The question and hypothesis</h2>
+    <p class="body">A human-robot team needs a way to determine who may authorize the robot&#39;s next action. I designed an observer study to examine whether that decision-rights structure changes how an outside observer judges the robot&#39;s trustworthiness. Participants are assigned one video of the team and evaluate the robot based on the behavior they observe.</p>
+    <p class="body">I hypothesized that observers would attribute higher trustworthiness to the robot under horizontal shared-execution authority than under vertical coordinator-gated authority. The prediction concerns how observable decision rights inform an initial mental model. A robot that acts without per-action approval may appear sufficiently capable and responsive to act on its own, while one that waits may appear more dependent on human oversight (Hancock et al., 2011; Lee &amp; See, 2004; Malle &amp; Ullman, 2021).</p>
+    <p class="body">A competing interpretation is also plausible. Explicit approval could make the team appear safer even if it lowers confidence in the robot itself. The secondary measures distinguish perceived robot capability, human oversight, and safety attributed to the robot or the team structure.</p>
   </section>
 
   <section aria-labelledby="s2">
     <p class="lbl">02</p>
-    <h2 id="s2">Two authority structures</h2>
-    <p class="body">The design contrasts two conditions. In the horizontal condition the team members share execution. In the vertical condition a coordinator approves the robot&#39;s actions before it acts. Authority is conveyed only through observable behavior, meaning who initiates, who approves, who executes, and whether anyone overrides.</p>
-
+    <h2 id="s2">Making authority observable</h2>
+    <p class="body">The proposed task has a Fetch mobile manipulator transfer blocks between a pickup table and destination baskets alongside two human teammates. Human A provides the block and task context; Human B checks that the destination is clear. In the horizontal condition, the robot begins the pick without waiting for approval. In the vertical condition, Human A serves as coordinator and authorizes execution. The survey is configured to assign each participant one of four planned video exemplars, with two exemplars per condition. The planned stimulus set crosses authority condition with two actor pairs, each filming both conditions in one session with order counterbalanced across pairs.</p>
+    <p class="body">In the closest studies I reviewed, decision authority and human-in-the-loop involvement were generally conveyed through descriptions or limited authorization cues (Lyons et al., 2021, 2024; Ullman et al., 2021). I instead operationalized authority through what the robot and human teammates say and do: initiation, approval, execution, and override behavior. Participants receive no on-screen authority label or explanatory caption, so recognizing the difference depends on the behavior itself.</p>
     <figure>
       <div class="fighd"><span class="lbl">Figure 1</span><span class="lbl">Filming environment</span></div>
       <div class="frame"><img src="img/obs_filming_layout.webp" width="1130" height="944" loading="lazy" alt="Top-down schematic of the filming room. Fetch starts at upper right. A black pickup table with Human A is at left. A folding table with an orange and a white basket and Human B is at lower right. The camera sits along the bottom edge."></div>
@@ -194,33 +205,79 @@ main .links a{ font-size:13px; display:inline-flex; align-items:flex-end; min-he
          around the decision moment as text, transcribed verbatim from the two storyboards, and the full pages stay behind the PDF link. -->
     <figure class="beats">
       <div class="fighd"><span class="lbl">Figure 2</span><span class="lbl">The decision moment</span></div>
-      <div class="btgrid"><div class="bt h"><table><caption><span class="lbl">2a. Horizontal condition</span></caption><thead><tr><th scope="col">Time</th><th scope="col">Actor</th><th scope="col">Verbatim line / action</th></tr></thead><tbody><tr><td class="tm">16-18 s</td><th scope="row">Robot</th><td>Arrives at pick location without a hold state. Audio: &quot;Ready.&quot;</td></tr><tr><td class="tm">18-19 s</td><th scope="row">Robot</th><td>Begins motion within about 0.5 s. Audio: &quot;Executing pick.&quot;</td></tr></tbody></table></div><div class="bt v"><table><caption><span class="lbl">2b. Vertical condition</span></caption><thead><tr><th scope="col">Time</th><th scope="col">Actor</th><th scope="col">Verbatim line / action</th></tr></thead><tbody><tr><td class="tm">16-18 s</td><th scope="row">Robot</th><td>Stops short in still waiting posture. Audio: &quot;Ready. Awaiting approval.&quot;</td></tr><tr><td class="tm">18-22 s</td><th scope="row">All</th><td>HOLD STATE (3-4 s). Robot stationary, no scanning or micro-adjustments. Human A observes from neutral position.</td></tr><tr><td class="tm">22-23 s</td><th scope="row">Human A</th><td>From neutral standing position, looks toward robot/workspace, gives explicit release cue: &quot;Approved.&quot;</td></tr><tr><td class="tm">23-24 s</td><th scope="row">Robot</th><td>Begins motion within about 0.5 s. Audio: &quot;Executing pick.&quot;</td></tr></tbody></table></div></div>
-      <figcaption>Beat-sheet rows from the behavior-only storyboards (portfolio Appendix A5 and A6), from the robot&#39;s arrival at the pick location to the start of the pick. In the horizontal condition the robot proceeds without approval. In the vertical condition it holds until Human A says &quot;Approved.&quot; <a class="figlink" href="https://drive.google.com/file/d/17IMyWMOvyXhKTLOyE1YGB6BwKKTR9S_h/view" target="_blank" rel="noopener">Full storyboards (PDF)<span class="vh"> (opens in a new tab)</span></a></figcaption>
+      <div class="btgrid"><div class="bt h"><table><caption><span class="lbl">2a. Horizontal condition</span></caption><thead><tr><th scope="col">Time</th><th scope="col">Actor</th><th scope="col">Verbatim line / action</th></tr></thead><tbody><tr><td class="tm">16-18 s</td><th scope="row">Robot</th><td>Arrives at pick location without a hold state. Audio: &quot;Ready.&quot; <button type="button" class="play" data-src="audio/observer_ready.mp3" aria-label="Play robot audio: Ready.">Play</button></td></tr><tr><td class="tm">18-19 s</td><th scope="row">Robot</th><td>Begins motion within about 0.5 s. Audio: &quot;Executing pick.&quot; <button type="button" class="play" data-src="audio/observer_executing_pick.mp3" aria-label="Play robot audio: Executing pick.">Play</button></td></tr></tbody></table></div><div class="bt v"><table><caption><span class="lbl">2b. Vertical condition</span></caption><thead><tr><th scope="col">Time</th><th scope="col">Actor</th><th scope="col">Verbatim line / action</th></tr></thead><tbody><tr><td class="tm">16-18 s</td><th scope="row">Robot</th><td>Stops short in still waiting posture. Audio: &quot;Ready. Awaiting approval.&quot; <button type="button" class="play" data-src="audio/observer_ready_awaiting.mp3" aria-label="Play robot audio: Ready. Awaiting approval.">Play</button></td></tr><tr><td class="tm">18-22 s</td><th scope="row">All</th><td>HOLD STATE (3-4 s). Robot stationary, no scanning or micro-adjustments. Human A observes from neutral position.</td></tr><tr><td class="tm">22-23 s</td><th scope="row">Human A</th><td>From neutral standing position, looks toward robot/workspace, gives explicit release cue: &quot;Approved.&quot;</td></tr><tr><td class="tm">23-24 s</td><th scope="row">Robot</th><td>Begins motion within about 0.5 s. Audio: &quot;Executing pick.&quot; <button type="button" class="play" data-src="audio/observer_executing_pick.mp3" aria-label="Play robot audio: Executing pick.">Play</button></td></tr></tbody></table></div></div>
+      <figcaption>Beat-sheet rows from the behavior-only storyboards (portfolio Appendix A5 and A6), from the robot&#39;s arrival at the pick location to the start of the pick. In the horizontal condition the robot proceeds without approval. In the vertical condition it holds until Human A says &quot;Approved.&quot; Select Play to hear the robot&#39;s lines. Robot speech generated with Piper TTS (<a href="https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_US/ryan/medium" target="_blank" rel="noopener">en_US-ryan-medium voice<span class="vh"> (opens in a new tab)</span></a>, trained on the RyanSpeech dataset, CC BY-NC-SA 4.0). <a class="figlink" href="https://drive.google.com/file/d/17IMyWMOvyXhKTLOyE1YGB6BwKKTR9S_h/view" target="_blank" rel="noopener">Full storyboards (PDF)<span class="vh"> (opens in a new tab)</span></a></figcaption>
     </figure>
+    <p class="body">An earlier design drew on Model Context Protocol-style tool authorization, treating robot actions as bounded capabilities. As I shifted from an in-person setup to online video observation, I removed that technical scaffold from the participant-facing material. This narrowed the manipulation to observable behavior and made post-outcome manipulation checks important for assessing whether observers recognized the authority distinction.</p>
   </section>
 
   <section aria-labelledby="s3">
     <p class="lbl">03</p>
-    <h2 id="s3">Design decisions I would defend</h2>
-    <p class="body">An early concept borrowed tool-access ideas from the Model Context Protocol, treating robot actions as bounded capabilities that require authorization. When the study moved from an in-person setup to an online observer-video paradigm, I removed that technical scaffold from what participants see. That put the burden of validity on behavioral legibility and on manipulation checks after the outcome measures, and it reduced reliance on explanatory framing.</p>
-    <p class="body">I specified the analysis plan before any data collection. The plan specifies p-values alongside effect sizes and confidence intervals and designates the all-participants estimate as the primary hypothesis test. Analyses limited to participants who encoded the manipulation are supplementary and read as sensitivity evidence.</p>
-    <p class="body">With two stimulus exemplars per condition, the video clip enters as a fixed covariate, because the data cannot support treating it as a random effect. I also specified a contrast within actor pairs in advance to check for actor-pair confounding.</p>
+    <h2 id="s3">What I measure and why</h2>
+    <p class="body">I chose the 12-item Trust in Automated Systems scale (Jian et al., 2000), using its native 1 to 7 response scale and framing the robot as a prospective teammate. After one video, observers can evaluate the robot&#39;s apparent trustworthiness, but they have little basis for predicting whether they would personally rely on it. An attitudinal measure therefore fits this research question better than a reliance-intention measure (Lee &amp; See, 2004; Lyons &amp; Guznov, 2019). I randomized the item order in response to the positive bias associated with the original ordering reported by Gutzwiller et al. (2019).</p>
+    <p class="body">Four secondary outcomes help distinguish the interpretations of a change in trustworthiness. The MDMT-v2 Competent subscale (Malle &amp; Ullman, 2023) indexes perceived robot capability. A two-item composite captures perceived human supervisory control and monitoring. Two single items distinguish robot-attributed safety (&quot;The robot itself behaved safely&quot;) from structure-attributed safety (&quot;Having the human teammate(s) involved made the situation safe&quot;). Explicit approval might improve perceived team safety without improving evaluations of the robot.</p>
+    <p class="body">I treat single-exposure ratings as initial observer judgments, not evidence of stable trust established through repeated interaction (Hancock et al., 2011; Malle &amp; Ullman, 2021).</p>
   </section>
 
   <section aria-labelledby="s4">
     <p class="lbl">04</p>
-    <h2 id="s4">Instrumentation</h2>
-    <p class="body">I built the survey flow in Qualtrics, with consent branching, random assignment across four exemplars, stimulus and outcome blocks, manipulation and attention checks, and a debrief. For the video stimuli I wrote ROS Python scripts for the Fetch robot. MoveIt plans the arm and torso motion, odometry feedback drives the base between tables, and a condition branch separates the horizontal and vertical conditions, holding the robot for approval in the vertical one.</p>
+    <h2 id="s4">Analysis strategy</h2>
+    <p class="body">Before data collection, I organized the analysis into three tiers. Tier 1 is the single confirmatory comparison: the Jian total, with horizontal predicted above vertical. Tier 2 examines whether condition differences vary between capability and oversight attributions (Condition × OutcomeType). Tier 3 describes where any effect appears across Jian items, the MDMT-v2 Reliable and Ethical subscales, safety attributions, and oversight. I selected Reliable and Ethical for this decomposition because Ullman et al. (2021) reported effects on these dimensions in a related observer study. Tiers 2 and 3 inform interpretation but cannot replace the confirmatory test.</p>
+    <p class="body">The plan calls for reporting the primary all-participants estimate with a p-value, effect size, and confidence interval. Analyses restricted to observers who correctly identify the authority manipulation remain supplementary sensitivity checks. With only two exemplars per condition, clips are treated as fixed rather than as a sampled random factor, so the confirmatory comparison applies to these four clips and does not establish generalization to other stimuli. A within-pair estimate of the condition effect serves as a planned sensitivity check.</p>
   </section>
 
   <section aria-labelledby="s5">
     <p class="lbl">05</p>
-    <h2 id="s5">Status and limits</h2>
-    <p class="body">The study reached a formal proposal milestone, but data collection has not begun. This case study documents the research design, measurement decisions, and instrumentation, not empirical findings. With only two video exemplars per condition, actor behavior and stimulus presentation may influence perceived trustworthiness. The planned actor-pair comparison and manipulation checks help examine these risks but cannot eliminate stimulus-level confounding.</p>
+    <h2 id="s5">Instrumentation</h2>
+    <p class="body">I built the Qualtrics survey flow with consent branching, random assignment to four planned exemplars, outcome measures, manipulation and attention checks, and a debrief. I also wrote ROS Python scripts for the Fetch robot. MoveIt supports arm and torso motion, odometry feedback drives the base between tables, and condition-specific logic holds execution until approval in the vertical condition.</p>
+    <p class="body">The storyboards specify matched camera position, lighting, wardrobe, block layout, and robot path across conditions. I generated robot speech through one text-to-speech pipeline, holding voice and processing settings constant. In the vertical script, the robot stops in a stationary hold until approval, making the decision gate visible.</p>
+  </section>
+
+  <section aria-labelledby="s6">
+    <p class="lbl">06</p>
+    <h2 id="s6">Status, limits, and implications</h2>
+    <p class="body">The study reached a formal proposal milestone, but data collection has not begun. This case study documents the research design, measurement decisions, survey flow, and robot-control implementation rather than empirical findings.</p>
+    <p class="body">The main internal-validity concern is response timing. In the storyboards, the vertical condition begins the pick about five seconds later and takes about six seconds longer to complete the cycle. The delay is part of the approval gate, but an observer might interpret it as hesitation or limited capability. A difference in Jian total could therefore reflect perceived decision authority, response latency, or both; the proposed contrast cannot separate their contributions. A delay-matched condition without an approval cue would provide a clearer test of the timing explanation.</p>
+    <p class="body">Only two video exemplars are planned per condition. Actor behavior and other stimulus-specific details could influence ratings even when the scripts are matched. Because each actor pair appears in both conditions, stable differences in a pair&#39;s presence or pacing cannot by themselves account for a condition difference. Condition-specific performance and clip features may still be confounded with the manipulation. The planned within-pair estimate and manipulation checks can probe these risks, but neither eliminates stimulus-level confounding.</p>
+    <p class="body">If approval gating reduces observer-attributed trustworthiness by signaling limited capability or responsiveness, designers may need to make oversight visible without inadvertently suggesting that the robot cannot act competently. That implication remains provisional because a single observed clip cannot establish how teammates would trust or rely on a robot during interaction.</p>
+  </section>
+
+  <section class="refs" aria-labelledby="s7">
+    <p class="lbl" id="s7">References</p>
+    <ul>
+      <li>Gutzwiller, R. S., Chiou, E. K., Craig, S. D., Lewis, C. M., Lematta, G. J., &amp; Hsiung, C.-P. (2019). Positive bias in the &#39;Trust in Automated Systems Survey&#39;? An examination of the Jian et al. (2000) scale. Proceedings of the Human Factors and Ergonomics Society Annual Meeting, 63(1), 217&ndash;221. <a href="https://doi.org/10.1177/1071181319631201" target="_blank" rel="noopener">https://doi.org/10.1177/1071181319631201</a></li>
+      <li>Hancock, P. A., Billings, D. R., Schaefer, K. E., Chen, J. Y. C., de Visser, E. J., &amp; Parasuraman, R. (2011). A meta-analysis of factors affecting trust in human-robot interaction. Human Factors, 53(5), 517&ndash;527. <a href="https://doi.org/10.1177/0018720811417254" target="_blank" rel="noopener">https://doi.org/10.1177/0018720811417254</a></li>
+      <li>Jian, J.-Y., Bisantz, A. M., &amp; Drury, C. G. (2000). Foundations for an empirically determined scale of trust in automated systems. International Journal of Cognitive Ergonomics, 4(1), 53&ndash;71. <a href="https://doi.org/10.1207/S15327566IJCE0401_04" target="_blank" rel="noopener">https://doi.org/10.1207/S15327566IJCE0401_04</a></li>
+      <li>Lee, J. D., &amp; See, K. A. (2004). Trust in automation: Designing for appropriate reliance. Human Factors, 46(1), 50&ndash;80. <a href="https://doi.org/10.1518/hfes.46.1.50_30392" target="_blank" rel="noopener">https://doi.org/10.1518/hfes.46.1.50_30392</a></li>
+      <li>Lyons, J. B., &amp; Guznov, S. Y. (2019). Individual differences in human&ndash;machine trust: A multi-study look at the perfect automation schema. Theoretical Issues in Ergonomics Science, 20(4), 440&ndash;458. <a href="https://doi.org/10.1080/1463922X.2018.1491071" target="_blank" rel="noopener">https://doi.org/10.1080/1463922X.2018.1491071</a></li>
+      <li>Lyons, J. B., Jessup, S. A., &amp; Vo, T. Q. (2024). The role of decision authority and stated social intent as predictors of trust in autonomous robots. Topics in Cognitive Science, 16(3), 430&ndash;449. <a href="https://doi.org/10.1111/tops.12601" target="_blank" rel="noopener">https://doi.org/10.1111/tops.12601</a></li>
+      <li>Lyons, J. B., Vo, T., Wynne, K. T., Mahoney, S., Nam, C. S., &amp; Gallimore, D. (2021). Trusting autonomous security robots: The role of reliability and stated social intent. Human Factors, 63(4), 603&ndash;618. <a href="https://doi.org/10.1177/0018720820901629" target="_blank" rel="noopener">https://doi.org/10.1177/0018720820901629</a></li>
+      <li>Malle, B. F., &amp; Ullman, D. (2021). A multi-dimensional conception and measure of human-robot trust. In C. S. Nam &amp; J. B. Lyons (Eds.), Trust in human-robot interaction: Research and applications (pp. 3&ndash;25). Academic Press. <a href="https://doi.org/10.1016/B978-0-12-819472-0.00001-0" target="_blank" rel="noopener">https://doi.org/10.1016/B978-0-12-819472-0.00001-0</a></li>
+      <li>Malle, B. F., &amp; Ullman, D. (2023). Measuring human-robot trust with the MDMT (Multi-Dimensional Measure of Trust). In SCRITA 2023 Workshop Proceedings, 32nd IEEE International Conference on Robot and Human Interactive Communication. <a href="https://arxiv.org/abs/2311.14887" target="_blank" rel="noopener">https://arxiv.org/abs/2311.14887</a></li>
+      <li>Ullman, D., Aladia, S., &amp; Malle, B. F. (2021). Challenges and opportunities for replication science in HRI: A case study in human-robot trust. In Proceedings of the 2021 ACM/IEEE International Conference on Human-Robot Interaction (pp. 110&ndash;118). ACM. <a href="https://doi.org/10.1145/3434073.3444652" target="_blank" rel="noopener">https://doi.org/10.1145/3434073.3444652</a></li>
+    </ul>
   </section>
 
   <div class="end"><a class="back" href="grid.html">Projects</a><a class="back" href="crisiscourier.html" aria-label="Next case study: CrisisCourier UAS operator displays">Next case study</a></div>
 </main>
+<script>
+/* robot audio on Figure 2 (2026-11-19): one clip at a time, loaded only when Play is pressed */
+(function(){
+  var cur=null, curBtn=null;
+  function reset(){ if(curBtn){ curBtn.setAttribute('aria-pressed','false'); curBtn.textContent='Play'; } }
+  document.querySelectorAll('.beats .play').forEach(function(b){
+    b.setAttribute('aria-pressed','false');
+    b.addEventListener('click',function(){
+      if(cur){ cur.pause(); cur.currentTime=0; }
+      if(curBtn===b){ reset(); cur=null; curBtn=null; return; }
+      reset(); cur=new Audio(b.getAttribute('data-src')); curBtn=b;
+      b.setAttribute('aria-pressed','true'); b.textContent='Stop';
+      cur.addEventListener('ended',function(){ reset(); cur=null; curBtn=null; });
+      cur.play().catch(function(){ reset(); cur=null; curBtn=null; });
+    });
+  });
+})();
+</script>
 <script>
 /* light and dark mode toggle (Taylor 2026-11-03). aria-pressed reports light mode; the choice is kept in localStorage when the browser allows it. */
 (function(){
