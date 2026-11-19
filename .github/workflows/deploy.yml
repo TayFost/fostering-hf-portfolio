@@ -30,7 +30,7 @@ jobs:
         run: |
           mkdir -p _site/fonts
           cp *.html CNAME _site/
-          cp -r css docs img _site/
+          cp -r css docs img audio _site/
 
       - name: Decrypt Medium.otf into the artifact
         env:
